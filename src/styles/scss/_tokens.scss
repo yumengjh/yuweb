@@ -1,0 +1,73 @@
+// 这一层是模板的全局颜色 token 入口。
+//
+// 命名约定：
+// - `--hue-base`：整套颜色系统的基础色相
+// - `--c-*`：通用颜色 token
+// - `--ld-*`：面向布局/卡片等场景的语义别名
+//
+// 建议：
+// - 组件优先消费这里的变量，不要散落硬编码色值
+// - 如果后续要扩展 spacing / radius / shadow，可以继续在 styles/scss 中加新 token 文件
+
+:root,
+.light {
+  --hue-base: 220deg;
+  --c-ink-strong: #1c1917;
+  --c-ink-soft: #78716c;
+  --c-surface-paper: #fafaf9;
+  --c-surface-paper-a70: rgb(250 250 249 / 70%);
+  --c-text: hsl(var(--hue-base) 0% 0%);
+  --c-text-1: hsl(var(--hue-base) 0% 20%);
+  --c-text-2: hsl(var(--hue-base) 0% 40%);
+  --c-text-3: hsl(var(--hue-base) 0% 70%);
+  --c-bg: hsl(var(--hue-base) 0% 100%);
+  --c-bg-1: hsl(var(--hue-base) 20% 98%);
+  --c-bg-2: hsl(var(--hue-base) 10% 95%);
+  --c-bg-3: hsl(var(--hue-base) 10% 92%);
+  --c-bg-soft: hsl(var(--hue-base) 20% 20% / 10%);
+  --c-border: hsl(var(--hue-base) 10% 91%);
+  --c-bg-a50: hsl(var(--hue-base) 20% 100% / 50%);
+  --c-bg-a80: hsl(var(--hue-base) 20% 100% / 80%);
+  --c-primary: hsl(var(--hue-base) 100% 55%);
+  --c-primary-soft: hsl(var(--hue-base) 100% 60% / 15%);
+  --c-accent: hsl(180deg 70% 60%);
+  --ld-bg-blur: var(--c-bg-a80);
+  --ld-bg-card: var(--c-bg);
+  --ld-bg-active: var(--c-bg);
+  --ld-shadow: var(--c-bg-soft);
+
+  color-scheme: light dark;
+}
+
+// 暗色主题集中收敛为一个 mixin，便于后续扩展更多主题变体。
+@mixin dark-theme {
+  --c-ink-strong: #f5f5f4;
+  --c-ink-soft: #d6d3d1;
+  --c-surface-paper: #1c1917;
+  --c-surface-paper-a70: rgb(28 25 23 / 78%);
+  --c-text: hsl(var(--hue-base) 0% 100%);
+  --c-text-1: hsl(var(--hue-base) 0% 90%);
+  --c-text-2: hsl(var(--hue-base) 0% 70%);
+  --c-text-3: hsl(var(--hue-base) 0% 50%);
+  --c-bg: hsl(var(--hue-base) 0% 7%);
+  --c-bg-1: hsl(var(--hue-base) 10% 10%);
+  --c-bg-2: hsl(var(--hue-base) 10% 14%);
+  --c-bg-3: hsl(var(--hue-base) 10% 18%);
+  --c-bg-soft: hsl(var(--hue-base) 100% 95% / 15%);
+  --c-border: hsl(var(--hue-base) 10% 20%);
+  --c-bg-a50: hsl(var(--hue-base) 10% 7% / 50%);
+  --c-bg-a80: hsl(var(--hue-base) 10% 7% / 80%);
+  --c-primary: hsl(var(--hue-base) 100% 70%);
+  --c-primary-soft: hsl(var(--hue-base) 100% 60% / 20%);
+  --ld-bg-blur: var(--c-bg-a80);
+  --ld-bg-card: var(--c-bg-3);
+  --ld-bg-active: var(--c-primary-soft);
+  --ld-shadow: var(--c-bg-a50);
+}
+
+// 目前模板只预留 `.dark` 类切换能力，不内置 JS 主题切换逻辑。
+.dark {
+  @include dark-theme;
+
+  color-scheme: dark;
+}

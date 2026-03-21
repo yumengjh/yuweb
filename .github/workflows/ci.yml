@@ -1,0 +1,67 @@
+name: CI 检查
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 20
+
+jobs:
+  ci:
+    name: 质量检查与构建
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6
+
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: 解析产物目录
+        run: echo "BUILD_OUTPUT_DIR=${BUILD_OUTPUT_DIR:-out}" >> "$GITHUB_ENV"
+        env:
+          BUILD_OUTPUT_DIR: ${{ vars.BUILD_OUTPUT_DIR }}
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: ESLint 检查
+        run: pnpm lint
+
+      - name: Prettier 检查
+        run: pnpm format:check
+
+      - name: TypeScript 检查
+        run: pnpm typecheck
+
+      - name: CSpell 检查
+        run: pnpm spellcheck
+
+      - name: 单元测试
+        run: pnpm test
+
+      - name: 生产构建
+        run: pnpm build
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-build
+          path: ${{ env.BUILD_OUTPUT_DIR }}/
+          if-no-files-found: error
+          retention-days: 7

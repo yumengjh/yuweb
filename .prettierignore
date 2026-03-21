@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+coverage
+.pnpm-store
+.husky/_
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

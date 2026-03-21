@@ -1,0 +1,58 @@
+name: CD 部署（SFTP）
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-sftp-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 20
+
+jobs:
+  deploy-sftp:
+    name: 部署到 SFTP
+    runs-on: ubuntu-latest
+    environment: production-sftp
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6
+
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: 解析产物目录
+        run: echo "BUILD_OUTPUT_DIR=${BUILD_OUTPUT_DIR:-out}" >> "$GITHUB_ENV"
+        env:
+          BUILD_OUTPUT_DIR: ${{ vars.BUILD_OUTPUT_DIR }}
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 生产构建
+        run: pnpm build
+
+      - name: 上传到 SFTP 服务器
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          key: ${{ secrets.SFTP_KEY }}
+          port: ${{ secrets.SFTP_PORT || 22 }}
+          fingerprint: ${{ secrets.SFTP_FINGERPRINT }}
+          source: ${{ env.BUILD_OUTPUT_DIR }}/*
+          target: ${{ secrets.SFTP_TARGET_DIR }}
