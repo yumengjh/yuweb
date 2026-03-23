@@ -1,0 +1,9 @@
+.fixedOffset {
+  height: 84px;
+}
+
+@media (max-width: 720px) {
+  .fixedOffset {
+    height: 76px;
+  }
+}

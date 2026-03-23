@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { siteConfig } from "@/lib/site";
+import { AppShell } from "@/components/app-shell/AppShell";
+import { siteConfig } from "@/lib/site-config";
 
 import "./globals.scss";
 
-/**
- * 这里集中声明全局字体变量，方便在 `globals.scss` 和组件样式中复用。
- *
- * 建议：
- * - 模板级字体只在 layout 入口维护
- * - 业务组件不要重复在局部引入全局字体
- */
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,34 +16,37 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-/**
- * 模板的基础元信息统一来自 `siteConfig`。
- *
- * 建议：
- * 后续如果要接入更完整的 SEO 配置，也优先从 `src/lib/site.ts` 扩展，
- * 不要在多个页面里手写重复标题和描述。
- */
 export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
 };
 
-/**
- * App Router 的全局根布局。
- *
- * 作用：
- * - 挂载全局样式入口
- * - 注入全局字体变量
- * - 提供整个站点的根 HTML 结构
- */
+const themeInitScript = `
+  (() => {
+    const key = "site-theme-mode";
+    const root = document.documentElement;
+    const saved = window.localStorage.getItem(key);
+    const mode = saved === "light" || saved === "dark" || saved === "auto" ? saved : "auto";
+    const prefersDark =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const resolved = mode === "auto" ? (prefersDark ? "dark" : "light") : mode;
+    root.dataset.theme = mode;
+    root.classList.toggle("dark", resolved === "dark");
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+    <html lang="zh-CN" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <AppShell>{children}</AppShell>
+      </body>
     </html>
   );
 }
