@@ -1,7 +1,5 @@
 ﻿"use client";
 
-/* cspell:ignore Yumengjh */
-
 import Link from "next/link";
 import {
   ComponentType,
@@ -73,56 +71,44 @@ export type NavigationItem = {
   label: string;
   /** Top-level href used when the user clicks the nav trigger as a link (optional). */
   href?: string;
-  /** Menu content for dropdown navigation. If omitted, the item renders as a direct link. */
-  menu?: MenuContent;
-  mobileMenu?: MenuGroup[];
+  menu: MenuContent;
 };
 
 // ─── Default navigation data ──────────────────────────────────────────────────
 
 const navigationItems: NavigationItem[] = [
   {
-    key: "blog",
-    label: "博客",
-    href: "/blog",
-  },
-  {
-    key: "旅程",
-    label: "旅程",
-    href: "/journey",
-  },
-  {
     key: "about",
-    label: "关于",
+    label: "About",
     href: "/about",
     menu: {
       kind: "groups",
       groups: [
         {
-          label: "概览",
+          label: "Site",
           entries: [
             {
-              title: "起源",
-              description: "从空间感与数字建筑的角度，了解这套页面语言最初的来源。",
+              title: "Origin Story",
+              description: "了解这个站点从哪里开始，以及它为什么会被做出来。",
               href: "/about#origin",
             },
             {
-              title: "表达方式",
-              description: "查看我如何把克制、结构与节奏感压缩成统一的表达方式。",
+              title: "Voice & Tone",
+              description: "查看我偏好的叙事方式、审美方向与表达节奏。",
               href: "/about#voice",
             },
           ],
         },
         {
-          label: "动态",
+          label: "Now",
           entries: [
             {
-              title: "当前关注",
-              description: "快速了解正在推进的页面系统、导航交互和长期内容结构。",
+              title: "What's Current",
+              description: "快速了解现在正在推进的主题、页面与内容侧重点。",
               href: "/about#current",
             },
             {
-              title: "查看关于页",
+              title: "Open About Page",
               description: "沿着关于页继续进入更完整的个人与项目介绍。",
               href: "/about",
             },
@@ -133,28 +119,28 @@ const navigationItems: NavigationItem[] = [
   },
   {
     key: "stack",
-    label: "技术栈",
+    label: "Stack",
     href: "/stack",
     menu: {
       kind: "entries",
       entries: [
         {
-          title: "前端基础",
+          title: "Frontend Base",
           description: "前端框架、类型系统与构建方式如何组合在一起。",
           href: "/stack#frontend",
         },
         {
-          title: "设计系统",
+          title: "Design System",
           description: "样式、设计 token 与组件拆分的工程组织方式。",
           href: "/stack#design",
         },
         {
-          title: "交互规则",
+          title: "Interaction Rules",
           description: "动效、交互细节与可维护性的取舍原则。",
           href: "/stack#interaction",
         },
         {
-          title: "查看技术栈",
+          title: "Open Stack Page",
           description: "继续查看完整的技术栈与项目实现细节。",
           href: "/stack",
         },
@@ -163,29 +149,29 @@ const navigationItems: NavigationItem[] = [
   },
   {
     key: "curations",
-    label: "精选",
+    label: "Curations",
     href: "/curations",
     menu: {
       kind: "entries",
       entries: [
         {
-          title: "精选作品",
-          description: "查看当前被保留下来的代表性项目与它们各自的结构特征。",
-          href: "/curations#selected-work",
+          title: "Reading Notes",
+          description: "收集值得反复阅读、保存与回看的文本内容。",
+          href: "/curations#reading",
         },
         {
-          title: "素材库",
-          description: "了解项目如何沉淀为后续可继续调用的视觉与内容样本。",
-          href: "/curations#material-library",
+          title: "Visual Picks",
+          description: "归档具有参考价值的视觉、版式与界面案例。",
+          href: "/curations#visual",
         },
         {
-          title: "参考体系",
-          description: "把参考、归档和作品展示串成一套持续扩展的整理方式。",
-          href: "/curations#reference-system",
+          title: "Reference Shelf",
+          description: "沉淀灵感来源，保留会持续影响表达的资料。",
+          href: "/curations#reference",
         },
         {
-          title: "查看精选",
-          description: "进入精选页面查看整理中的全部内容。",
+          title: "Open Curations",
+          description: "进入 Curations 页面查看整理中的全部内容。",
           href: "/curations",
         },
       ],
@@ -193,7 +179,7 @@ const navigationItems: NavigationItem[] = [
   },
   {
     key: "journey",
-    label: "旅程",
+    label: "Journey",
     href: "/journey",
     menu: {
       // Demo: custom component slot
@@ -203,12 +189,12 @@ const navigationItems: NavigationItem[] = [
           <div style={{ display: "flex", gap: 48 }}>
             <div>
               <p style={{ margin: "0 0 6px", fontSize: 12, letterSpacing: "0.1em", opacity: 0.5 }}>
-                章节
+                CHAPTERS
               </p>
               {[
-                { title: "阶段节点", href: "/journey#milestones" },
-                { title: "进行中", href: "/journey#in-progress" },
-                { title: "时间线视图", href: "/journey#timeline" },
+                { title: "Milestones", href: "/journey#milestones" },
+                { title: "In Progress", href: "/journey#in-progress" },
+                { title: "Timeline View", href: "/journey#timeline" },
               ].map((item) => (
                 <Link
                   key={item.href}
@@ -228,10 +214,10 @@ const navigationItems: NavigationItem[] = [
             <div style={{ width: 1, background: "var(--c-border)", alignSelf: "stretch" }} />
             <div style={{ maxWidth: 260 }}>
               <p style={{ margin: "0 0 8px", fontSize: 12, letterSpacing: "0.1em", opacity: 0.5 }}>
-                最近
+                LATEST
               </p>
               <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, opacity: 0.72 }}>
-                时间线里保留的不只是履历，还有正在形成的判断、结构和页面系统。
+                记录仍在发生的过程，而不是只保留最终结果。用时间线视角整理项目、想法与行动。
               </p>
               <Link
                 href="/journey"
@@ -244,24 +230,13 @@ const navigationItems: NavigationItem[] = [
                   textUnderlineOffset: 3,
                 }}
               >
-                查看旅程 →
+                Open Journey →
               </Link>
             </div>
           </div>
         );
       },
     },
-    mobileMenu: [
-      {
-        label: "章节",
-        entries: [
-          { title: "阶段节点", href: "/journey#milestones" },
-          { title: "进行中", href: "/journey#in-progress" },
-          { title: "时间线视图", href: "/journey#timeline" },
-          { title: "查看旅程", href: "/journey" },
-        ],
-      },
-    ],
   },
 ];
 
@@ -269,26 +244,6 @@ const navigationItems: NavigationItem[] = [
 
 function isExternalHref(href: string): boolean {
   return /^https?:\/\//i.test(href) || href.startsWith("//");
-}
-
-function getMobileMenuGroups(item: NavigationItem): MenuGroup[] {
-  if (item.mobileMenu) {
-    return item.mobileMenu;
-  }
-
-  if (!item.menu) {
-    return item.href ? [{ entries: [{ title: `查看${item.label}`, href: item.href }] }] : [];
-  }
-
-  if (item.menu.kind === "groups") {
-    return item.menu.groups;
-  }
-
-  if (item.menu.kind === "entries") {
-    return [{ entries: item.menu.entries }];
-  }
-
-  return item.href ? [{ entries: [{ title: `查看${item.label}`, href: item.href }] }] : [];
 }
 
 // ─── MenuEntryLink ────────────────────────────────────────────────────────────
@@ -341,7 +296,14 @@ function MenuEntryLink({
 
 // ─── MenuContentRenderer ──────────────────────────────────────────────────────
 
-function MenuContentRenderer({ content, onClose }: { content: MenuContent; onClose: () => void }) {
+function MenuContentRenderer({
+  content,
+  onClose,
+}: {
+  content: MenuContent;
+  isSwitching: boolean;
+  onClose: () => void;
+}) {
   if (content.kind === "component") {
     const Comp = content.component;
     return <Comp />;
@@ -378,20 +340,12 @@ function MenuContentRenderer({ content, onClose }: { content: MenuContent; onClo
 type TopNavigationBarProps = {
   activeKey?: NavigationKey;
   items?: NavigationItem[];
-  fixed?: boolean;
-  closeOnScroll?: boolean;
 };
 
-export function TopNavigationBar({
-  activeKey,
-  items = navigationItems,
-  fixed = false,
-  closeOnScroll = true,
-}: TopNavigationBarProps) {
+export function TopNavigationBar({ activeKey, items = navigationItems }: TopNavigationBarProps) {
   const [openKey, setOpenKey] = useState<NavigationKey | null>(null);
   const [displayKey, setDisplayKey] = useState<NavigationKey | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [mobileOpenKey, setMobileOpenKey] = useState<NavigationKey | null>(null);
   const [headerHeight, setHeaderHeight] = useState(84);
 
   const navRootRef = useRef<HTMLElement | null>(null);
@@ -400,9 +354,6 @@ export function TopNavigationBar({
   const shellRef = useRef<HTMLDivElement | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const openFrameRef = useRef<number | null>(null);
-  const dropdownReadyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const dropdownScrollReadyRef = useRef(false);
-  const dropdownWheelDeltaRef = useRef(0);
   const measureRefs = useRef<Record<string, HTMLDivElement | null>>({});
   // Keep panelHeights in a ref too so imperative code can read the latest value
   // without stale closures.
@@ -435,24 +386,14 @@ export function TopNavigationBar({
     }
   }, []);
 
-  const clearDropdownReadyTimer = useCallback(() => {
-    if (dropdownReadyTimerRef.current) {
-      clearTimeout(dropdownReadyTimerRef.current);
-      dropdownReadyTimerRef.current = null;
-    }
-  }, []);
-
   // ── Open / close ────────────────────────────────────────────────────────────
 
   const openMenu = useCallback(
     (key: NavigationKey) => {
       clearCloseTimer();
       clearOpenFrame();
-      clearDropdownReadyTimer();
-      dropdownWheelDeltaRef.current = 0;
 
       if (openKey !== null) {
-        dropdownScrollReadyRef.current = true;
         // Switching between already-open menus should snap immediately without
         // any height or content interpolation.
         if (shellRef.current) {
@@ -480,7 +421,6 @@ export function TopNavigationBar({
       }
 
       // ── Fresh open ───────────────────────────────────────────────────────────
-      dropdownScrollReadyRef.current = false;
       setDisplayKey(key);
       // Start from 0 so the CSS transition animates open.
       setShellHeight(0);
@@ -491,31 +431,21 @@ export function TopNavigationBar({
         openFrameRef.current = null;
       });
     },
-    [clearCloseTimer, clearDropdownReadyTimer, clearOpenFrame, openKey, setShellHeight],
+    [clearCloseTimer, clearOpenFrame, openKey, setShellHeight],
   );
 
   const closeMenu = useCallback(() => {
     if (openKey === null && displayKey === null) return;
     clearCloseTimer();
     clearOpenFrame();
-    clearDropdownReadyTimer();
-    dropdownScrollReadyRef.current = false;
-    dropdownWheelDeltaRef.current = 0;
-    // Collapse shell height with animation, then remove content after animation ends.
-    setOpenKey(null);
+    // Animate height to 0 imperatively, then let CSS transition handle it.
     setShellHeight(0);
+    setOpenKey(null);
     closeTimerRef.current = setTimeout(() => {
       setDisplayKey(null);
       closeTimerRef.current = null;
     }, DESKTOP_DROPDOWN_CLOSE_DURATION_MS);
-  }, [
-    clearCloseTimer,
-    clearDropdownReadyTimer,
-    clearOpenFrame,
-    displayKey,
-    openKey,
-    setShellHeight,
-  ]);
+  }, [clearCloseTimer, clearOpenFrame, displayKey, openKey, setShellHeight]);
 
   const toggleMenu = (key: NavigationKey) => {
     if (openKey === key) {
@@ -525,11 +455,10 @@ export function TopNavigationBar({
     openMenu(key);
   };
 
-  const closeAll = useCallback(() => {
+  const closeAll = () => {
     setIsMenuOpen(false);
-    setMobileOpenKey(null);
     closeMenu();
-  }, [closeMenu]);
+  };
 
   // ── Effects ─────────────────────────────────────────────────────────────────
 
@@ -560,45 +489,6 @@ export function TopNavigationBar({
     window.addEventListener("pointerdown", onPointer);
     return () => window.removeEventListener("pointerdown", onPointer);
   }, [closeMenu, isDropdownOpen]);
-
-  useEffect(() => {
-    if (!isDropdownOpen) return;
-
-    clearDropdownReadyTimer();
-    dropdownScrollReadyRef.current = false;
-    dropdownWheelDeltaRef.current = 0;
-    dropdownReadyTimerRef.current = setTimeout(() => {
-      dropdownScrollReadyRef.current = true;
-      dropdownReadyTimerRef.current = null;
-    }, DESKTOP_DROPDOWN_CLOSE_DURATION_MS);
-
-    return () => {
-      clearDropdownReadyTimer();
-      dropdownScrollReadyRef.current = false;
-      dropdownWheelDeltaRef.current = 0;
-    };
-  }, [clearDropdownReadyTimer, isDropdownOpen]);
-
-  useEffect(() => {
-    if (!isDropdownOpen || !closeOnScroll) return;
-
-    const onWheel = (event: WheelEvent) => {
-      if (!dropdownScrollReadyRef.current) return;
-      if (event.deltaY < 0) {
-        dropdownWheelDeltaRef.current = 0;
-        return;
-      }
-
-      dropdownWheelDeltaRef.current += event.deltaY;
-
-      if (dropdownWheelDeltaRef.current < 48) return;
-
-      closeMenu();
-    };
-
-    window.addEventListener("wheel", onWheel, { passive: true });
-    return () => window.removeEventListener("wheel", onWheel);
-  }, [closeMenu, closeOnScroll, isDropdownOpen]);
 
   // Measure panel heights from hidden layer — written to ref only (imperative height control)
   useLayoutEffect(() => {
@@ -633,10 +523,9 @@ export function TopNavigationBar({
   useEffect(
     () => () => {
       clearCloseTimer();
-      clearDropdownReadyTimer();
       clearOpenFrame();
     },
-    [clearCloseTimer, clearDropdownReadyTimer, clearOpenFrame],
+    [clearCloseTimer, clearOpenFrame],
   );
 
   // ── Render ──────────────────────────────────────────────────────────────────
@@ -646,11 +535,7 @@ export function TopNavigationBar({
       {/* ── Header bar ───────────────────────────────────────────────── */}
       <header
         ref={navRootRef}
-        className={cn(
-          styles.bar,
-          fixed && styles.barFixed,
-          isDropdownVisible && styles.barDropdownOpen,
-        )}
+        className={cn(styles.bar, isDropdownVisible && styles.barDropdownOpen)}
         data-name="Top Navigation Bar"
       >
         <div className={styles.barInner}>
@@ -660,42 +545,10 @@ export function TopNavigationBar({
           </Link>
 
           {/* Desktop nav triggers */}
-          <nav aria-label="主导航" className={styles.nav}>
+          <nav aria-label="Primary" className={styles.nav}>
             {items.map((item) => {
               const isActive = item.key === activeKey;
               const isOpen = item.key === openKey;
-
-              // Direct link (no dropdown menu)
-              if (!item.menu) {
-                const href = item.href ?? "#";
-                const isExternal = isExternalHref(href);
-                const linkClassName = cn(styles.navLink, isActive && styles.navLinkActive);
-
-                if (isExternal) {
-                  return (
-                    <div key={item.key} className={styles.navItem}>
-                      <a
-                        className={linkClassName}
-                        href={href}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        {item.label}
-                      </a>
-                    </div>
-                  );
-                }
-
-                return (
-                  <div key={item.key} className={styles.navItem}>
-                    <Link className={linkClassName} href={href} onClick={closeAll}>
-                      {item.label}
-                    </Link>
-                  </div>
-                );
-              }
-
-              // Dropdown menu
               return (
                 <div key={item.key} className={styles.navItem}>
                   <button
@@ -703,7 +556,7 @@ export function TopNavigationBar({
                     aria-expanded={isOpen}
                     className={cn(
                       styles.navTrigger,
-                      isActive && !isOpen && styles.navTriggerActive,
+                      (isActive || isOpen) && styles.navTriggerActive,
                       isOpen && styles.navTriggerOpen,
                     )}
                     type="button"
@@ -736,7 +589,7 @@ export function TopNavigationBar({
           {/* Mobile hamburger */}
           <button
             aria-expanded={isMenuOpen}
-            aria-label={isMenuOpen ? "关闭导航菜单" : "打开导航菜单"}
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             className={cn(styles.menuButton, isMenuOpen && styles.menuButtonOpen)}
             type="button"
             onClick={() => {
@@ -754,7 +607,7 @@ export function TopNavigationBar({
         <div
           ref={shellRef}
           aria-hidden={!isDropdownOpen}
-          aria-label="桌面导航菜单"
+          aria-label="Desktop navigation menu"
           className={cn(
             styles.desktopDropdownShell,
             isDropdownOpen && styles.desktopDropdownShellOpen,
@@ -762,7 +615,7 @@ export function TopNavigationBar({
           id={desktopMenuId}
           role="region"
         >
-          {activeItem && activeItem.menu && (
+          {activeItem && (
             <div key={activeItem.key} className={styles.desktopDropdownViewport}>
               <div
                 className={cn(
@@ -771,7 +624,11 @@ export function TopNavigationBar({
                 )}
               >
                 <div className={styles.desktopDropdownContent}>
-                  <MenuContentRenderer content={activeItem.menu} onClose={closeMenu} />
+                  <MenuContentRenderer
+                    content={activeItem.menu}
+                    isSwitching={false}
+                    onClose={closeMenu}
+                  />
                 </div>
               </div>
             </div>
@@ -791,207 +648,46 @@ export function TopNavigationBar({
 
       {/* ── Hidden measure layer ─────────────────────────────────────── */}
       <div aria-hidden="true" className={styles.desktopDropdownMeasureLayer}>
-        {items.map((item) =>
-          item.menu ? (
-            <div
-              key={item.key}
-              ref={(node) => {
-                measureRefs.current[item.key] = node;
-              }}
-              className={styles.desktopDropdownMeasurePanel}
-            >
-              <div className={styles.desktopDropdownContent}>
-                <MenuContentRenderer content={item.menu} onClose={() => {}} />
-              </div>
+        {items.map((item) => (
+          <div
+            key={item.key}
+            ref={(node) => {
+              measureRefs.current[item.key] = node;
+            }}
+            className={styles.desktopDropdownMeasurePanel}
+          >
+            <div className={styles.desktopDropdownContent}>
+              <MenuContentRenderer content={item.menu} isSwitching={false} onClose={() => {}} />
             </div>
-          ) : null,
-        )}
+          </div>
+        ))}
       </div>
 
       {/* ── Mobile overlay ───────────────────────────────────────────── */}
       <div
         aria-hidden={!isMenuOpen}
         className={cn(styles.mobileMenuOverlay, isMenuOpen && styles.mobileMenuOverlayOpen)}
-        style={{ top: `${headerHeight}px` }}
-        onClick={closeAll}
+        onClick={() => setIsMenuOpen(false)}
       >
         <div className={styles.mobileMenuPanel} onClick={(e) => e.stopPropagation()}>
-          <nav aria-label="移动端主导航" className={styles.mobileNav}>
+          <nav aria-label="Mobile Primary" className={styles.mobileNav}>
             {items.map((item, index) => {
               const isActive = item.key === activeKey;
-              const isExpanded = item.key === mobileOpenKey;
-              const mobileGroups = getMobileMenuGroups(item);
-
-              // Direct link (no dropdown menu)
-              if (!item.menu) {
-                const href = item.href ?? "#";
-                const isExternal = isExternalHref(href);
-                const linkClassName = cn(
-                  styles.mobileNavLink,
-                  isActive && styles.mobileNavLinkActive,
-                );
-
-                return (
-                  <div
-                    key={item.key}
-                    className={styles.mobileNavItem}
-                    style={{ transitionDelay: isMenuOpen ? `${90 + index * 45}ms` : "0ms" }}
-                  >
-                    {isExternal ? (
-                      <a
-                        className={linkClassName}
-                        href={href}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        onClick={closeAll}
-                      >
-                        <span className={styles.mobileNavLabel}>{item.label}</span>
-                      </a>
-                    ) : (
-                      <Link className={linkClassName} href={href} onClick={closeAll}>
-                        <span className={styles.mobileNavLabel}>{item.label}</span>
-                      </Link>
-                    )}
-                  </div>
-                );
-              }
-
-              // Dropdown menu
               return (
-                <div
+                <Link
                   key={item.key}
-                  className={cn(styles.mobileNavItem, isExpanded && styles.mobileNavItemExpanded)}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(styles.mobileNavLink, isActive && styles.mobileNavLinkActive)}
+                  href={item.href ?? "#"}
                   style={{ transitionDelay: isMenuOpen ? `${90 + index * 45}ms` : "0ms" }}
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <button
-                    aria-controls={`mobile-panel-${item.key}`}
-                    aria-expanded={isExpanded}
-                    className={cn(
-                      styles.mobileNavTrigger,
-                      isActive && styles.mobileNavTriggerActive,
-                      isExpanded && styles.mobileNavTriggerExpanded,
-                    )}
-                    type="button"
-                    onClick={() =>
-                      setMobileOpenKey((current) => (current === item.key ? null : item.key))
-                    }
-                  >
-                    <span className={styles.mobileNavLabel}>{item.label}</span>
-                    <span aria-hidden="true" className={styles.mobileNavIcon}>
-                      <span />
-                      <span />
-                    </span>
-                  </button>
-
-                  <div
-                    aria-hidden={!isExpanded}
-                    className={cn(styles.mobileSubmenu, isExpanded && styles.mobileSubmenuExpanded)}
-                    id={`mobile-panel-${item.key}`}
-                  >
-                    <div className={styles.mobileSubmenuInner}>
-                      {mobileGroups.map((group, groupIndex) => (
-                        <div
-                          key={`${item.key}-${groupIndex}`}
-                          className={styles.mobileSubmenuGroup}
-                        >
-                          {group.label && (
-                            <p className={styles.mobileSubmenuLabel}>{group.label}</p>
-                          )}
-                          <div className={styles.mobileSubmenuEntries}>
-                            {group.entries.map((entry, entryIndex) => {
-                              const external = isExternalHref(entry.href);
-                              const target = entry.target ?? (external ? "_blank" : "_self");
-                              const rel = external ? "noopener noreferrer" : undefined;
-                              const linkProps = {
-                                className: styles.mobileSubmenuLink,
-                                onClick: closeAll,
-                              };
-
-                              if (external) {
-                                return (
-                                  <a
-                                    key={`${item.key}-${groupIndex}-${entryIndex}-${entry.href}`}
-                                    {...linkProps}
-                                    href={entry.href}
-                                    rel={rel}
-                                    target={target}
-                                  >
-                                    <span className={styles.mobileSubmenuLinkTitle}>
-                                      {entry.title}
-                                    </span>
-                                    {entry.description && (
-                                      <span className={styles.mobileSubmenuLinkDescription}>
-                                        {entry.description}
-                                      </span>
-                                    )}
-                                  </a>
-                                );
-                              }
-
-                              return (
-                                <Link
-                                  key={`${item.key}-${groupIndex}-${entryIndex}-${entry.href}`}
-                                  {...linkProps}
-                                  href={entry.href}
-                                  target={target}
-                                >
-                                  <span className={styles.mobileSubmenuLinkTitle}>
-                                    {entry.title}
-                                  </span>
-                                  {entry.description && (
-                                    <span className={styles.mobileSubmenuLinkDescription}>
-                                      {entry.description}
-                                    </span>
-                                  )}
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                  <span className={styles.mobileNavIndex}>0{index + 1}</span>
+                  <span>{item.label}</span>
+                </Link>
               );
             })}
           </nav>
-
-          <div className={styles.mobileMenuFooter}>
-            <div className={styles.mobileFooterRule} />
-            <div className={styles.mobileFooterMetaRow}>
-              <p className={styles.mobileFooterMeta}>
-                数字策展
-                <br />
-                导航层
-                <br />
-                2024 年 / 移动视图
-              </p>
-              <div aria-hidden="true" className={styles.mobileFooterIcons}>
-                <span className={styles.mobileFooterIcon}>
-                  <svg fill="none" viewBox="0 0 14 15" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M11.666 10.833a1.667 1.667 0 1 0-1.519-.981L4.74 6.982a1.67 1.67 0 0 0 0-1.964l5.406-2.87A1.666 1.666 0 1 0 9.625 1.5a1.66 1.66 0 0 0 .17.737L4.39 5.107a1.667 1.667 0 1 0 0 4.786l5.406 2.87a1.664 1.664 0 0 0-.17.737 1.667 1.667 0 1 0 2.041-1.667Z"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1"
-                    />
-                  </svg>
-                </span>
-                <span className={styles.mobileFooterIcon}>
-                  <svg fill="none" viewBox="0 0 15 12" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M1.25 2.083 7.5 6.667l6.25-4.584M2.75.833h9.5A1.5 1.5 0 0 1 13.75 2.333v7.334a1.5 1.5 0 0 1-1.5 1.5h-9.5a1.5 1.5 0 0 1-1.5-1.5V2.333a1.5 1.5 0 0 1 1.5-1.5Z"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </>
