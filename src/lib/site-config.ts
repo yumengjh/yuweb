@@ -44,8 +44,8 @@ export const appRoutes: AppRouteConfig[] = [
     layout: {
       showNavigation: true,
       showFooter: true,
-      fixedNavigation: false,
-      closeNavigationOnScroll: true,
+      fixedNavigation: true,
+      closeNavigationOnScroll: false,
       activeNavigationKey: "home",
     },
   },
