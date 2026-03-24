@@ -2,6 +2,35 @@
 
 export type AppRouteId = "home" | "about" | "stack" | "curations" | "journey" | "blog";
 
+export type SiteFooterDomainRule = {
+  exact?: string[];
+  suffix?: string[];
+};
+
+export type SiteFooterMetaItem = {
+  id: string;
+  label?: string;
+  text: string;
+  href?: string;
+  domains?: SiteFooterDomainRule;
+};
+
+export type SiteFooterLink = {
+  href: string;
+  label: string;
+};
+
+export type SiteConfig = {
+  name: string;
+  brandLatin: string;
+  description: string;
+  footer: {
+    summary: string;
+    links: SiteFooterLink[];
+    metaItems: SiteFooterMetaItem[];
+  };
+};
+
 export type AppRouteLayoutConfig = {
   showNavigation: boolean;
   showFooter: boolean;
@@ -19,7 +48,7 @@ export type AppRouteConfig = {
   layout: AppRouteLayoutConfig;
 };
 
-export const siteConfig = {
+export const siteConfig: SiteConfig = {
   name: "鱼梦江湖",
   brandLatin: "YUMENGJH",
   description:
@@ -33,8 +62,46 @@ export const siteConfig = {
       { href: "/collections", label: "收藏" },
       { href: "/journey", label: "旅程" },
     ],
+    metaItems: [
+      {
+        id: "email",
+        label: "邮箱",
+        text: "hi@yumgjs.com",
+        href: "mailto:hi@yumgjs.com",
+      },
+      {
+        id: "github",
+        label: "GitHub",
+        text: "访问我的 GitHub 主页",
+        href: "https://github.com/yumengjh",
+      },
+      {
+        id: "copyright",
+        label: "版权",
+        text: "© 2026 鱼梦江湖 ( @yumengjh ) 版权所有",
+        href: "#",
+      },
+      {
+        id: "icp",
+        label: "备案号",
+        text: "鄂ICP备2026009056号",
+        href: "https://beian.miit.gov.cn/",
+        domains: {
+          suffix: ["localhost", "yumg.cn"],
+        },
+      },
+      // {
+      //   id: "police",
+      //   label: "公安备案",
+      //   text: "沪公网安备12345678901234号",
+      //   href: "https://beian.mps.gov.cn/#/query/webSearch",
+      //   domains: {
+      //     suffix: ["localhost", "yumg.cn"],
+      //   },
+      // },
+    ],
   },
-} as const;
+};
 
 export const appRoutes: AppRouteConfig[] = [
   {
@@ -123,6 +190,43 @@ export const appRoutes: AppRouteConfig[] = [
 ] as const;
 
 const fallbackRoute = appRoutes[0];
+
+export function normalizeHostname(hostname?: string | null): string {
+  if (!hostname) {
+    return "";
+  }
+
+  return hostname.trim().toLowerCase().replace(/:\d+$/, "");
+}
+
+export function matchesDomainRule(
+  hostname: string | null | undefined,
+  domains?: SiteFooterDomainRule,
+): boolean {
+  if (!domains) {
+    return true;
+  }
+
+  const normalizedHostname = normalizeHostname(hostname);
+
+  if (!normalizedHostname) {
+    return false;
+  }
+
+  const exactMatches = domains.exact?.map(normalizeHostname).filter(Boolean) ?? [];
+  if (exactMatches.includes(normalizedHostname)) {
+    return true;
+  }
+
+  const suffixMatches = domains.suffix?.map(normalizeHostname).filter(Boolean) ?? [];
+  return suffixMatches.some(
+    (suffix) => normalizedHostname === suffix || normalizedHostname.endsWith(`.${suffix}`),
+  );
+}
+
+export function getVisibleFooterMetaItems(hostname?: string | null): SiteFooterMetaItem[] {
+  return siteConfig.footer.metaItems.filter((item) => matchesDomainRule(hostname, item.domains));
+}
 
 export function getRouteConfigById(id: AppRouteId): AppRouteConfig {
   return appRoutes.find((route) => route.id === id) ?? fallbackRoute;
