@@ -1,7 +1,5 @@
 "use client";
 
-/* cspell:ignore Yumengjh */
-
 import Link from "next/link";
 import {
   ComponentType,
@@ -22,43 +20,20 @@ import styles from "./TopNavigationBar.module.scss";
 // ─── Duration constants ───────────────────────────────────────────────────────
 
 const DESKTOP_DROPDOWN_CLOSE_DURATION_MS = 520;
-
 // ─── Menu content types ───────────────────────────────────────────────────────
 
-/** A single clickable menu entry with an optional link. */
 export type MenuEntry = {
-  /** Short heading shown in bold. */
   title: string;
-  /** Longer description shown below the title. */
   description?: string;
-  /**
-   * Where this entry links to.
-   * - Relative paths (`/about`, `#section`) use Next.js <Link> (SPA navigation).
-   * - Absolute URLs (`https://…`) render a plain <a>.
-   */
   href: string;
-  /**
-   * How to open the link — same values as the HTML `target` attribute.
-   * Defaults to `"_self"`.
-   */
   target?: "_self" | "_blank" | "_parent" | "_top";
 };
 
-/** A named group of entries separated by a divider from other groups. */
 export type MenuGroup = {
-  /** Optional label rendered above the group (purely decorative / a11y). */
   label?: string;
   entries: MenuEntry[];
 };
 
-/**
- * What to render inside a nav item's dropdown.
- *
- * Three flavours:
- *  - `entries`  — flat list of `MenuEntry` objects
- *  - `groups`   — grouped entries separated by dividers
- *  - `component`— any React component / JSX; you own the markup entirely
- */
 export type MenuContent =
   | { kind: "entries"; entries: MenuEntry[] }
   | { kind: "groups"; groups: MenuGroup[] }
@@ -71,9 +46,7 @@ export type NavigationKey = string;
 export type NavigationItem = {
   key: NavigationKey;
   label: string;
-  /** Top-level href used when the user clicks the nav trigger as a link (optional). */
   href?: string;
-  /** Menu content for dropdown navigation. If omitted, the item renders as a direct link. */
   menu?: MenuContent;
   mobileMenu?: MenuGroup[];
 };
@@ -389,29 +362,18 @@ const navigationItems: NavigationItem[] = [
   },
 ];
 
-// ─── Helper: is a URL external? ──────────────────────────────────────────────
+// ─── Helper ───────────────────────────────────────────────────────────────────
 
 function isExternalHref(href: string): boolean {
   return /^https?:\/\//i.test(href) || href.startsWith("//");
 }
 
 function getMobileMenuGroups(item: NavigationItem): MenuGroup[] {
-  if (item.mobileMenu) {
-    return item.mobileMenu;
-  }
-
-  if (!item.menu) {
+  if (item.mobileMenu) return item.mobileMenu;
+  if (!item.menu)
     return item.href ? [{ entries: [{ title: `查看${item.label}`, href: item.href }] }] : [];
-  }
-
-  if (item.menu.kind === "groups") {
-    return item.menu.groups;
-  }
-
-  if (item.menu.kind === "entries") {
-    return [{ entries: item.menu.entries }];
-  }
-
+  if (item.menu.kind === "groups") return item.menu.groups;
+  if (item.menu.kind === "entries") return [{ entries: item.menu.entries }];
   return item.href ? [{ entries: [{ title: `查看${item.label}`, href: item.href }] }] : [];
 }
 
@@ -471,7 +433,6 @@ function MenuContentRenderer({ content, onClose }: { content: MenuContent; onClo
     return <Comp />;
   }
 
-  // Flatten groups → entries for rendering
   const groups: MenuGroup[] =
     content.kind === "groups" ? content.groups : [{ entries: content.entries }];
 
@@ -516,20 +477,20 @@ export function TopNavigationBar({
   const [displayKey, setDisplayKey] = useState<NavigationKey | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mobileOpenKey, setMobileOpenKey] = useState<NavigationKey | null>(null);
-  const [headerHeight, setHeaderHeight] = useState(84);
+  // Mobile drawer shell state (mirrors desktop logic)
+
+  const [headerHeight, setHeaderHeight] = useState(72);
 
   const navRootRef = useRef<HTMLElement | null>(null);
-  // Shell ref — we set style.height imperatively so the browser always
-  // sees a valid from→to pair for CSS transition (no React batching surprises).
   const shellRef = useRef<HTMLDivElement | null>(null);
+
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const openFrameRef = useRef<number | null>(null);
   const dropdownReadyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dropdownScrollReadyRef = useRef(false);
   const dropdownWheelDeltaRef = useRef(0);
   const measureRefs = useRef<Record<string, HTMLDivElement | null>>({});
-  // Keep panelHeights in a ref too so imperative code can read the latest value
-  // without stale closures.
   const panelHeightsRef = useRef<Record<string, number>>({});
   const desktopMenuId = useId();
 
@@ -537,13 +498,9 @@ export function TopNavigationBar({
   const isDropdownOpen = openKey !== null;
   const isDropdownVisible = activeItem !== null;
 
-  // ── Imperative shell height helper ──────────────────────────────────────────
-
   const setShellHeight = useCallback((px: number) => {
     if (shellRef.current) shellRef.current.style.height = `${px}px`;
   }, []);
-
-  // ── Timers ──────────────────────────────────────────────────────────────────
 
   const clearCloseTimer = useCallback(() => {
     if (closeTimerRef.current) {
@@ -566,8 +523,6 @@ export function TopNavigationBar({
     }
   }, []);
 
-  // ── Open / close ────────────────────────────────────────────────────────────
-
   const openMenu = useCallback(
     (key: NavigationKey) => {
       clearCloseTimer();
@@ -577,36 +532,22 @@ export function TopNavigationBar({
 
       if (openKey !== null) {
         dropdownScrollReadyRef.current = true;
-        // Switching between already-open menus should snap immediately without
-        // any height or content interpolation.
-        if (shellRef.current) {
-          shellRef.current.style.transition = "none";
-        }
-
+        if (shellRef.current) shellRef.current.style.transition = "none";
         flushSync(() => {
           setDisplayKey(key);
           setOpenKey(key);
         });
-
         const newH = panelHeightsRef.current[key] ?? 0;
         setShellHeight(newH);
-
-        if (shellRef.current) {
-          void shellRef.current.offsetHeight;
-        }
-
+        if (shellRef.current) void shellRef.current.offsetHeight;
         requestAnimationFrame(() => {
-          if (shellRef.current) {
-            shellRef.current.style.transition = "";
-          }
+          if (shellRef.current) shellRef.current.style.transition = "";
         });
         return;
       }
 
-      // ── Fresh open ───────────────────────────────────────────────────────────
       dropdownScrollReadyRef.current = false;
       setDisplayKey(key);
-      // Start from 0 so the CSS transition animates open.
       setShellHeight(0);
       openFrameRef.current = requestAnimationFrame(() => {
         const h = panelHeightsRef.current[key] ?? 0;
@@ -625,7 +566,6 @@ export function TopNavigationBar({
     clearDropdownReadyTimer();
     dropdownScrollReadyRef.current = false;
     dropdownWheelDeltaRef.current = 0;
-    // Collapse shell height with animation, then remove content after animation ends.
     setOpenKey(null);
     setShellHeight(0);
     closeTimerRef.current = setTimeout(() => {
@@ -649,13 +589,18 @@ export function TopNavigationBar({
     openMenu(key);
   };
 
+  const toggleMobileMenu = useCallback(() => {
+    setIsMenuOpen((v) => !v);
+    if (isMenuOpen) setMobileOpenKey(null);
+  }, [isMenuOpen]);
+
   const closeAll = useCallback(() => {
     setIsMenuOpen(false);
     setMobileOpenKey(null);
     closeMenu();
   }, [closeMenu]);
 
-  // ── Effects ─────────────────────────────────────────────────────────────────
+  // ── Body overflow lock ──────────────────────────────────────────────────────
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -664,17 +609,22 @@ export function TopNavigationBar({
     };
   }, [isMenuOpen]);
 
+  // ── Keyboard esc ───────────────────────────────────────────────────────────
+
   useEffect(() => {
     if (!isMenuOpen && !isDropdownOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsMenuOpen(false);
+        setMobileOpenKey(null);
         closeMenu();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [closeMenu, isDropdownOpen, isMenuOpen]);
+
+  // ── Click outside ──────────────────────────────────────────────────────────
 
   useEffect(() => {
     if (!isDropdownOpen) return;
@@ -685,9 +635,10 @@ export function TopNavigationBar({
     return () => window.removeEventListener("pointerdown", onPointer);
   }, [closeMenu, isDropdownOpen]);
 
+  // ── Scroll-to-close (desktop) ─────────────────────────────────────────────
+
   useEffect(() => {
     if (!isDropdownOpen) return;
-
     clearDropdownReadyTimer();
     dropdownScrollReadyRef.current = false;
     dropdownWheelDeltaRef.current = 0;
@@ -695,7 +646,6 @@ export function TopNavigationBar({
       dropdownScrollReadyRef.current = true;
       dropdownReadyTimerRef.current = null;
     }, DESKTOP_DROPDOWN_CLOSE_DURATION_MS);
-
     return () => {
       clearDropdownReadyTimer();
       dropdownScrollReadyRef.current = false;
@@ -705,26 +655,22 @@ export function TopNavigationBar({
 
   useEffect(() => {
     if (!isDropdownOpen || !closeOnScroll) return;
-
     const onWheel = (event: WheelEvent) => {
       if (!dropdownScrollReadyRef.current) return;
       if (event.deltaY < 0) {
         dropdownWheelDeltaRef.current = 0;
         return;
       }
-
       dropdownWheelDeltaRef.current += event.deltaY;
-
       if (dropdownWheelDeltaRef.current < 48) return;
-
       closeMenu();
     };
-
     window.addEventListener("wheel", onWheel, { passive: true });
     return () => window.removeEventListener("wheel", onWheel);
   }, [closeMenu, closeOnScroll, isDropdownOpen]);
 
-  // Measure panel heights from hidden layer — written to ref only (imperative height control)
+  // ── Measure panels ─────────────────────────────────────────────────────────
+
   useLayoutEffect(() => {
     const update = () => {
       const next: Record<string, number> = {};
@@ -742,7 +688,8 @@ export function TopNavigationBar({
     return () => ro.disconnect();
   }, []);
 
-  // Measure header height
+  // ── Header height ──────────────────────────────────────────────────────────
+
   useLayoutEffect(() => {
     const node = navRootRef.current;
     if (!node) return;
@@ -754,6 +701,8 @@ export function TopNavigationBar({
     return () => ro.disconnect();
   }, []);
 
+  // ── Cleanup ────────────────────────────────────────────────────────────────
+
   useEffect(
     () => () => {
       clearCloseTimer();
@@ -763,11 +712,8 @@ export function TopNavigationBar({
     [clearCloseTimer, clearDropdownReadyTimer, clearOpenFrame],
   );
 
-  // ── Render ──────────────────────────────────────────────────────────────────
-
   return (
     <>
-      {/* ── Header bar ───────────────────────────────────────────────── */}
       <header
         ref={navRootRef}
         className={cn(
@@ -778,23 +724,19 @@ export function TopNavigationBar({
         data-name="Top Navigation Bar"
       >
         <div className={styles.barInner}>
-          {/* Brand */}
           <Link className={styles.brand} href="/" onClick={closeAll}>
-            鱼梦江湖
+            YUMENGJH
           </Link>
 
-          {/* Desktop nav triggers */}
           <nav aria-label="主导航" className={styles.nav}>
             {items.map((item) => {
               const isActive = item.key === activeKey;
               const isOpen = item.key === openKey;
 
-              // Direct link (no dropdown menu)
               if (!item.menu) {
                 const href = item.href ?? "#";
                 const isExternal = isExternalHref(href);
                 const linkClassName = cn(styles.navLink, isActive && styles.navLinkActive);
-
                 if (isExternal) {
                   return (
                     <div key={item.key} className={styles.navItem}>
@@ -809,7 +751,6 @@ export function TopNavigationBar({
                     </div>
                   );
                 }
-
                 return (
                   <div key={item.key} className={styles.navItem}>
                     <Link className={linkClassName} href={href} onClick={closeAll}>
@@ -819,7 +760,6 @@ export function TopNavigationBar({
                 );
               }
 
-              // Dropdown menu
               return (
                 <div key={item.key} className={styles.navItem}>
                   <button
@@ -851,30 +791,45 @@ export function TopNavigationBar({
             })}
           </nav>
 
-          {/* Diamond icon (decorative) */}
           <div aria-hidden="true" className={styles.desktopIcon}>
             <span />
             <span />
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            aria-expanded={isMenuOpen}
+          {/* Hamburger button — SVG path animation */}
+          <label
             aria-label={isMenuOpen ? "关闭导航菜单" : "打开导航菜单"}
             className={cn(styles.menuButton, isMenuOpen && styles.menuButtonOpen)}
-            type="button"
-            onClick={() => {
-              closeMenu();
-              setIsMenuOpen((v) => !v);
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggleMobileMenu();
+              }
             }}
           >
-            <span />
-            <span />
-            <span />
-          </button>
+            <input
+              type="checkbox"
+              checked={isMenuOpen}
+              className={styles.menuButtonInput}
+              readOnly
+              onClick={(e) => {
+                e.preventDefault();
+                toggleMobileMenu();
+              }}
+            />
+            <svg viewBox="0 0 32 32" className={styles.menuButtonSvg}>
+              <path
+                d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+                className={cn(styles.menuLine, styles.menuLineTopBottom)}
+              />
+              <path d="M7 16 27 16" className={styles.menuLine} />
+            </svg>
+          </label>
         </div>
 
-        {/* ── Desktop dropdown shell ──────────────────────────────────── */}
+        {/* ── Desktop dropdown shell ── */}
         <div
           ref={shellRef}
           aria-hidden={!isDropdownOpen}
@@ -903,7 +858,7 @@ export function TopNavigationBar({
         </div>
       </header>
 
-      {/* ── Backdrop overlay ─────────────────────────────────────────── */}
+      {/* ── Desktop overlay ── */}
       <div className={styles.desktopMenuOverlayWrap}>
         <div
           aria-hidden={!isDropdownOpen}
@@ -913,7 +868,7 @@ export function TopNavigationBar({
         />
       </div>
 
-      {/* ── Hidden measure layer ─────────────────────────────────────── */}
+      {/* ── Desktop measure layer ── */}
       <div aria-hidden="true" className={styles.desktopDropdownMeasureLayer}>
         {items.map((item) =>
           item.menu ? (
@@ -932,7 +887,7 @@ export function TopNavigationBar({
         )}
       </div>
 
-      {/* ── Mobile overlay ───────────────────────────────────────────── */}
+      {/* Mobile overlay */}
       <div
         aria-hidden={!isMenuOpen}
         className={cn(styles.mobileMenuOverlay, isMenuOpen && styles.mobileMenuOverlayOpen)}
@@ -941,12 +896,11 @@ export function TopNavigationBar({
       >
         <div className={styles.mobileMenuPanel} onClick={(e) => e.stopPropagation()}>
           <nav aria-label="移动端主导航" className={styles.mobileNav}>
-            {items.map((item, index) => {
+            {items.map((item) => {
               const isActive = item.key === activeKey;
               const isExpanded = item.key === mobileOpenKey;
               const mobileGroups = getMobileMenuGroups(item);
 
-              // Direct link (no dropdown menu)
               if (!item.menu) {
                 const href = item.href ?? "#";
                 const isExternal = isExternalHref(href);
@@ -956,11 +910,7 @@ export function TopNavigationBar({
                 );
 
                 return (
-                  <div
-                    key={item.key}
-                    className={styles.mobileNavItem}
-                    style={{ transitionDelay: isMenuOpen ? `${90 + index * 45}ms` : "0ms" }}
-                  >
+                  <div key={item.key} className={styles.mobileNavItem}>
                     {isExternal ? (
                       <a
                         className={linkClassName}
@@ -980,12 +930,10 @@ export function TopNavigationBar({
                 );
               }
 
-              // Dropdown menu
               return (
                 <div
                   key={item.key}
                   className={cn(styles.mobileNavItem, isExpanded && styles.mobileNavItemExpanded)}
-                  style={{ transitionDelay: isMenuOpen ? `${90 + index * 45}ms` : "0ms" }}
                 >
                   <button
                     aria-controls={`mobile-panel-${item.key}`}
@@ -1001,10 +949,13 @@ export function TopNavigationBar({
                     }
                   >
                     <span className={styles.mobileNavLabel}>{item.label}</span>
-                    <span aria-hidden="true" className={styles.mobileNavIcon}>
-                      <span />
-                      <span />
-                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        styles.mobileNavIcon,
+                        isExpanded && styles.mobileNavIconExpanded,
+                      )}
+                    />
                   </button>
 
                   <div
@@ -1086,20 +1037,29 @@ export function TopNavigationBar({
               <p className={styles.mobileFooterMeta}>
                 数字策展
                 <br />
-                导航层
+                公开的思考与记录
                 <br />
-                2024 年 / 移动视图
+                2026 年 / DESIGN & CODE
               </p>
               <div aria-hidden="true" className={styles.mobileFooterIcons}>
                 <span className={styles.mobileFooterIcon}>
-                  <svg fill="none" viewBox="0 0 14 15" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="4928"
+                  >
                     <path
-                      d="M11.666 10.833a1.667 1.667 0 1 0-1.519-.981L4.74 6.982a1.67 1.67 0 0 0 0-1.964l5.406-2.87A1.666 1.666 0 1 0 9.625 1.5a1.66 1.66 0 0 0 .17.737L4.39 5.107a1.667 1.667 0 1 0 0 4.786l5.406 2.87a1.664 1.664 0 0 0-.17.737 1.667 1.667 0 1 0 2.041-1.667Z"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1"
-                    />
+                      d="M0 0h1024v1024H0z"
+                      fill="currentColor"
+                      opacity=".01"
+                      p-id="4929"
+                    ></path>
+                    <path
+                      d="M682.666667 238.933333a102.4 102.4 0 1 1 204.8 0 102.4 102.4 0 0 1-204.8 0z m102.4-170.666666a170.666667 170.666667 0 0 0-164.864 214.9376l-246.954667 123.4944a170.666667 170.666667 0 1 0 0 210.602666l246.954667 123.4944A170.871467 170.871467 0 0 0 785.066667 955.733333a170.666667 170.666667 0 1 0-134.314667-275.968l-246.954667-123.4944a170.871467 170.871467 0 0 0 0-88.541866l246.954667-123.4944A170.666667 170.666667 0 1 0 785.066667 68.266667zM136.533333 512a102.4 102.4 0 1 1 204.8 0 102.4 102.4 0 0 1-204.8 0z m546.133334 273.066667a102.4 102.4 0 1 1 204.8 0 102.4 102.4 0 0 1-204.8 0z"
+                      fill="currentColor"
+                      p-id="4930"
+                    ></path>
                   </svg>
                 </span>
                 <span className={styles.mobileFooterIcon}>
