@@ -1,0 +1,271 @@
+/* =========================================
+   BASE & TYPOGRAPHY
+   ========================================= */
+.page {
+  min-height: 100vh;
+  background-color: var(--c-bg);
+  color: var(--c-ink-strong);
+  font-family: var(--font-geist-sans), sans-serif;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+}
+
+.frame {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 4vh 4vw 6vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Monospace 工具类 */
+.heroTop,
+.heroMeta,
+.actionLink {
+  font-family: var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--c-ink-soft);
+}
+
+/* =========================================
+   HERO: 大字报排版
+   ========================================= */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1; /* 让内容在纵向上有呼吸感 */
+  padding: 8vh 0;
+  border-bottom: 1px solid var(--c-border-soft);
+}
+
+.heroTop {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.heroTitle {
+  margin: 8vh 0;
+  font-size: clamp(6rem, 16vw, 15rem); /* 比首页更大的字号，极具压迫感 */
+  font-weight: 300;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--c-ink-strong);
+
+  .heroTitleIndent {
+    display: block;
+    padding-left: 15vw; /* 错位感 */
+  }
+}
+
+.heroBottom {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2vw;
+  align-items: end;
+}
+
+.heroMeta {
+  grid-column: 1 / 5;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  p {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--c-border-soft);
+    padding-bottom: 6px;
+
+    span {
+      color: var(--c-ink-strong);
+      font-family: var(--font-geist-sans), sans-serif;
+    }
+  }
+}
+
+.heroSummaryWrap {
+  grid-column: 8 / 13;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.heroSummary {
+  margin: 0;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: 1.8;
+  font-weight: 400;
+  color: var(--c-ink-strong);
+}
+
+.actionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--c-ink-strong);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid var(--c-ink-strong);
+  padding-bottom: 4px;
+  transition: opacity 0.3s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.6;
+      .iconArrow {
+        transform: translateX(-4px); /* 向左滑动的返回暗示 */
+      }
+    }
+  }
+
+  .iconArrow {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+}
+
+/* =========================================
+   VISUAL SECTION (纯 CSS 坐标系丢失艺术)
+   ========================================= */
+.visualSection {
+  padding: 6vh 0 0;
+}
+
+.errorVisual {
+  width: 100%;
+  height: 240px; /* 扁长的画幅，像监控面板 */
+  background: var(--c-surface-paper);
+  border: 1px solid var(--c-border-soft);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 破裂的网格 */
+.artGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--c-border-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-border-soft) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.4;
+  mask-image: radial-gradient(circle at center, transparent 10%, black 60%);
+  -webkit-mask-image: radial-gradient(circle at center, transparent 10%, black 60%);
+}
+
+/* 寻址十字线 */
+.artCrosshair {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background: var(--c-ink-soft);
+    opacity: 0.3;
+  }
+
+  &::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+  }
+
+  &::after {
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+  }
+}
+
+/* 闪烁的空缺坐标点 */
+.artCirclePulse {
+  width: 60px;
+  height: 60px;
+  border: 1px dashed var(--c-ink-strong);
+  border-radius: 50%;
+  position: relative;
+  animation: pulseRotate 8s linear infinite;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background: var(--c-ink-strong);
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulseRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* =========================================
+   RESPONSIVE (适配移动端 & 平板)
+   ========================================= */
+@media (max-width: 1024px) {
+  .heroBottom {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .heroMeta {
+    grid-column: 1 / -1;
+  }
+
+  .heroSummaryWrap {
+    grid-column: 1 / -1;
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    .heroTitleIndent {
+      padding-left: 0;
+    }
+  }
+
+  .errorVisual {
+    height: 180px;
+  }
+}
