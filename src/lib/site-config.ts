@@ -22,14 +22,16 @@ export type AppRouteConfig = {
 export const siteConfig = {
   name: "鱼梦江湖",
   brandLatin: "YUMENGJH",
-  description: "聚焦数字空间、系统感与前端构筑方式的个人作品站。",
+  description:
+    "我是鱼梦江湖（@yumengjh），一名持续在数字空间中构筑结构与表达的开发者。这个网站不是传统意义上的博客，而是一处逐步展开的个人空间：在这里记录正在形成的思考，整理学习与笔记，构筑阶段性的页面与系统，并将收藏与选择沉淀为可被浏览的结构。项目、记录、素材与路径在此交织，它更像一座不断扩展的私人空间或长期展览，而非一个被一次性完成的作品。",
   footer: {
-    summary: "A restrained portfolio focused on digital space, systems, and front-end craft.",
+    summary: "一个持续生长的个人空间，用来记录、构筑与整理，让思考、项目与收藏在结构中慢慢成形。",
     links: [
-      { href: "/about", label: "About" },
-      { href: "/stack", label: "Stack" },
-      { href: "/curations", label: "Curations" },
-      { href: "/journey", label: "Journey" },
+      { href: "/about", label: "关于" },
+      { href: "/notes", label: "笔记" },
+      { href: "/projects", label: "项目" },
+      { href: "/collections", label: "收藏" },
+      { href: "/journey", label: "旅程" },
     ],
   },
 } as const;
@@ -45,7 +47,7 @@ export const appRoutes: AppRouteConfig[] = [
       showNavigation: true,
       showFooter: true,
       fixedNavigation: true,
-      closeNavigationOnScroll: false,
+      closeNavigationOnScroll: true,
       activeNavigationKey: "home",
     },
   },
@@ -59,7 +61,7 @@ export const appRoutes: AppRouteConfig[] = [
       showNavigation: true,
       showFooter: true,
       fixedNavigation: false,
-      closeNavigationOnScroll: true,
+      closeNavigationOnScroll: false,
       activeNavigationKey: "about",
     },
   },
