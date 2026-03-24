@@ -189,7 +189,7 @@ export default function HomePage() {
         <section className={styles.hero}>
           <header className={styles.heroTop}>
             <span>INDEX / FULL INVENTORY</span>
-            <span>SHANGHAI, CN</span>
+            <span>GUANGZHOU, CN</span>
           </header>
 
           <h1 className={styles.heroTitle}>
