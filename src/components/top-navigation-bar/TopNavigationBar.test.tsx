@@ -17,7 +17,7 @@ describe("TopNavigationBar", () => {
     render(<TopNavigationBar activeKey="about" />);
 
     const aboutButton = screen.getByRole("button", { name: /关于/ });
-    const stackButton = screen.getByRole("button", { name: /技术栈/ });
+    const notesButton = screen.getByRole("button", { name: /笔记/ });
     const panelId = aboutButton.getAttribute("aria-controls");
     const panel = panelId ? document.getElementById(panelId) : null;
 
@@ -30,20 +30,20 @@ describe("TopNavigationBar", () => {
     await waitFor(() => {
       expect(aboutButton).toHaveAttribute("aria-expanded", "true");
       expect(panel).toHaveAttribute("aria-hidden", "false");
-      expect(within(panel as HTMLElement).getByText("起源")).toBeInTheDocument();
+      expect(within(panel as HTMLElement).getByText("从这里开始")).toBeInTheDocument();
     });
 
-    await user.click(stackButton);
+    await user.click(notesButton);
 
     await waitFor(() => {
       expect(aboutButton).toHaveAttribute("aria-expanded", "false");
-      expect(stackButton).toHaveAttribute("aria-expanded", "true");
-      expect(within(panel as HTMLElement).getByText("前端基础")).toBeInTheDocument();
+      expect(notesButton).toHaveAttribute("aria-expanded", "true");
+      expect(within(panel as HTMLElement).getByText("最近更新")).toBeInTheDocument();
     });
 
     await user.click(document.body);
 
-    expect(stackButton).toHaveAttribute("aria-expanded", "false");
+    expect(notesButton).toHaveAttribute("aria-expanded", "false");
     expect(panel).toHaveAttribute("aria-hidden", "true");
   });
 
