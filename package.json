@@ -15,7 +15,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "check": "pnpm lint && pnpm typecheck && pnpm spellcheck && pnpm test",
+    "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm spellcheck && pnpm test",
     "prepare": "husky",
     "commit": "node ./scripts/commit.mjs",
     "lint-staged": "lint-staged"
