@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 /* cspell:ignore Yumengjh */
 
@@ -82,16 +82,6 @@ export type NavigationItem = {
 
 const navigationItems: NavigationItem[] = [
   {
-    key: "blog",
-    label: "博客",
-    href: "/blog",
-  },
-  {
-    key: "旅程",
-    label: "旅程",
-    href: "/journey",
-  },
-  {
     key: "about",
     label: "关于",
     href: "/about",
@@ -99,31 +89,51 @@ const navigationItems: NavigationItem[] = [
       kind: "groups",
       groups: [
         {
-          label: "概览",
+          label: "开始",
           entries: [
             {
-              title: "起源",
-              description: "从空间感与数字建筑的角度，了解这套页面语言最初的来源。",
-              href: "/about#origin",
+              title: "从这里开始",
+              description: "第一次来到这里，可以先从几个入口快速了解这个网站。",
+              href: "/about#start",
             },
             {
-              title: "表达方式",
-              description: "查看我如何把克制、结构与节奏感压缩成统一的表达方式。",
-              href: "/about#voice",
+              title: "这个网站",
+              description: "为什么会有这个网站，它想承载什么，又会如何继续生长。",
+              href: "/about#site",
             },
           ],
         },
         {
-          label: "动态",
+          label: "关于我",
           entries: [
             {
-              title: "当前关注",
-              description: "快速了解正在推进的页面系统、导航交互和长期内容结构。",
-              href: "/about#current",
+              title: "当前状态",
+              description: "我正在关注什么、推进什么，以及最近停留的问题。",
+              href: "/about#now",
+            },
+            {
+              title: "学习方式",
+              description: "我如何学习、记录、整理，并逐步形成自己的方法。",
+              href: "/about#learning",
+            },
+            {
+              title: "关注领域",
+              description: "长期关心的技术、设计、结构和表达方向。",
+              href: "/about#fields",
+            },
+          ],
+        },
+        {
+          label: "延伸",
+          entries: [
+            {
+              title: "技术栈",
+              description: "查看目前使用的工具、框架与页面系统组织方式。",
+              href: "/about#stack",
             },
             {
               title: "查看关于页",
-              description: "沿着关于页继续进入更完整的个人与项目介绍。",
+              description: "进入完整的自我介绍与站点说明页面。",
               href: "/about",
             },
           ],
@@ -131,80 +141,171 @@ const navigationItems: NavigationItem[] = [
       ],
     },
   },
+
   {
-    key: "stack",
-    label: "技术栈",
-    href: "/stack",
+    key: "notes",
+    label: "笔记",
+    href: "/notes",
     menu: {
       kind: "entries",
       entries: [
         {
-          title: "前端基础",
-          description: "前端框架、类型系统与构建方式如何组合在一起。",
-          href: "/stack#frontend",
+          title: "最近更新",
+          description: "最近记下的内容、正在延展的问题和新的观察。",
+          href: "/notes#recent",
         },
         {
-          title: "设计系统",
-          description: "样式、设计 token 与组件拆分的工程组织方式。",
-          href: "/stack#design",
+          title: "技术笔记",
+          description: "围绕框架、工程、交互与实现细节展开的个人记录。",
+          href: "/notes#tech",
         },
         {
-          title: "交互规则",
-          description: "动效、交互细节与可维护性的取舍原则。",
-          href: "/stack#interaction",
+          title: "学习记录",
+          description: "正在学习的内容、阶段性理解与路径整理。",
+          href: "/notes#learning",
         },
         {
-          title: "查看技术栈",
-          description: "继续查看完整的技术栈与项目实现细节。",
-          href: "/stack",
+          title: "灵感碎片",
+          description: "一些还没长成文章的判断、想法和短促记录。",
+          href: "/notes#fragments",
+        },
+        {
+          title: "问题与答案",
+          description: "把遇到的问题、拆解过程与暂时答案保留下来。",
+          href: "/notes#qa",
+        },
+        {
+          title: "查看笔记",
+          description: "进入全部公开笔记与记录。",
+          href: "/notes",
         },
       ],
     },
   },
+
   {
-    key: "curations",
-    label: "精选",
-    href: "/curations",
+    key: "projects",
+    label: "项目",
+    href: "/projects",
+    menu: {
+      kind: "groups",
+      groups: [
+        {
+          label: "进行中",
+          entries: [
+            {
+              title: "正在做的事",
+              description: "查看目前仍在推进、迭代或打磨中的项目与页面。",
+              href: "/projects#in-progress",
+            },
+            {
+              title: "页面实验",
+              description: "一些围绕布局、交互和结构进行的持续实验。",
+              href: "/projects#experiments",
+            },
+          ],
+        },
+        {
+          label: "归档",
+          entries: [
+            {
+              title: "代表作品",
+              description: "当前阶段最能代表判断、表达和实现方式的项目。",
+              href: "/projects#featured",
+            },
+            {
+              title: "开源项目",
+              description: "已公开的仓库、工具与可以继续查看的实现记录。",
+              href: "/projects#opensource",
+            },
+          ],
+        },
+        {
+          label: "中止 / 未完成",
+          entries: [
+            {
+              title: "停止的想法",
+              description: "那些曾经认真开始、后来停下来的方向与设想。",
+              href: "/projects#abandoned-ideas",
+            },
+            {
+              title: "失败记录",
+              description: "做坏的页面、走偏的方案和最终放弃的项目尝试。",
+              href: "/projects#failures",
+            },
+            {
+              title: "查看项目页",
+              description: "进入完整的项目、实验与归档内容。",
+              href: "/projects",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  {
+    key: "collections",
+    label: "收藏",
+    href: "/collections",
     menu: {
       kind: "entries",
       entries: [
         {
-          title: "精选作品",
-          description: "查看当前被保留下来的代表性项目与它们各自的结构特征。",
-          href: "/curations#selected-work",
+          title: "书籍",
+          description: "留下来的书、反复翻看的部分，以及它们为何重要。",
+          href: "/collections#books",
+        },
+        {
+          title: "文章",
+          description: "收藏的博客文章、写作者与值得反复阅读的内容。",
+          href: "/collections#articles",
         },
         {
           title: "素材库",
-          description: "了解项目如何沉淀为后续可继续调用的视觉与内容样本。",
-          href: "/curations#material-library",
+          description: "为项目和页面长期保留的视觉、文字与结构样本。",
+          href: "/collections#material-library",
         },
         {
           title: "参考体系",
-          description: "把参考、归档和作品展示串成一套持续扩展的整理方式。",
-          href: "/curations#reference-system",
+          description: "如何整理参考、归档链接，并形成自己的留存方式。",
+          href: "/collections#reference-system",
         },
         {
-          title: "查看精选",
-          description: "进入精选页面查看整理中的全部内容。",
-          href: "/curations",
+          title: "工具箱",
+          description: "日常使用或阶段性偏爱的工具、站点与工作辅助材料。",
+          href: "/collections#toolkit",
+        },
+        {
+          title: "查看收藏",
+          description: "进入完整的收藏与个人留存内容。",
+          href: "/collections",
         },
       ],
     },
   },
+
   {
     key: "journey",
     label: "旅程",
     href: "/journey",
     menu: {
-      // Demo: custom component slot
       kind: "component",
       component: function JourneyMenu() {
         return (
           <div style={{ display: "flex", gap: 48 }}>
             <div>
-              <p style={{ margin: "0 0 6px", fontSize: 12, letterSpacing: "0.1em", opacity: 0.5 }}>
-                章节
+              <p
+                style={{
+                  margin: "0 0 6px",
+                  fontSize: 12,
+                  letterSpacing: "0.1em",
+                  opacity: 0.5,
+                }}
+              >
+                节点
               </p>
+
               {[
                 { title: "阶段节点", href: "/journey#milestones" },
                 { title: "进行中", href: "/journey#in-progress" },
@@ -225,14 +326,37 @@ const navigationItems: NavigationItem[] = [
                 </Link>
               ))}
             </div>
-            <div style={{ width: 1, background: "var(--c-border)", alignSelf: "stretch" }} />
+
+            <div
+              style={{
+                width: 1,
+                background: "var(--c-border)",
+                alignSelf: "stretch",
+              }}
+            />
+
             <div style={{ maxWidth: 260 }}>
-              <p style={{ margin: "0 0 8px", fontSize: 12, letterSpacing: "0.1em", opacity: 0.5 }}>
+              <p
+                style={{
+                  margin: "0 0 8px",
+                  fontSize: 12,
+                  letterSpacing: "0.1em",
+                  opacity: 0.5,
+                }}
+              >
                 最近
               </p>
-              <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, opacity: 0.72 }}>
-                时间线里保留的不只是履历，还有正在形成的判断、结构和页面系统。
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 15,
+                  lineHeight: 1.6,
+                  opacity: 0.72,
+                }}
+              >
+                这里保留的不只是经历，还有那些逐渐形成、又不断被修正的判断。
               </p>
+
               <Link
                 href="/journey"
                 style={{
@@ -253,7 +377,7 @@ const navigationItems: NavigationItem[] = [
     },
     mobileMenu: [
       {
-        label: "章节",
+        label: "旅程",
         entries: [
           { title: "阶段节点", href: "/journey#milestones" },
           { title: "进行中", href: "/journey#in-progress" },
