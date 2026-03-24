@@ -1,4 +1,5 @@
 # 项目概述
+
 - 项目目标：基于 `E:\workspace\myweb\nextjs-template` 这个长期复用的 Next.js 模板，按 Figma 设计稿逐页实现站点。
 - 当前设计来源：Figma 文件 `oF9jWxrRzOseVudC0YjpeN`，当前已读取并实现的节点是 `3:608`，即顶部导航栏。
 - 当前进度：
@@ -9,6 +10,7 @@
 - 提交未完成：代码检查已通过，但 `git commit` 被仓库缺少 `user.name` / `user.email` 阻塞
 
 # 技术栈
+
 - 前端框架：Next.js 16.1.6，React 19.2.3，TypeScript，App Router
 - 样式方案：SCSS Modules + `src/styles/scss/_tokens.scss` 全局 token
 - 已安装但当前未作为主要实现方式：Tailwind CSS v4
@@ -17,6 +19,7 @@
 - 构建特征：`next.config.ts` 中启用 `reactCompiler: true`，`output: "export"`，`trailingSlash: true`，`images.unoptimized = true`
 
 # 设计来源
+
 - 使用 Figma MCP
 - 当前已实现设计节点：`Top Navigation Bar`（node `3:608`）
 - 当前视觉关键词：
@@ -27,6 +30,7 @@
 - 移动端菜单全屏覆盖，向下展开，动画柔和
 
 # 关键实现约束（非常重要）
+
 - 组件规范：
 - 优先做可复用组件，不把结构直接堆在页面文件里
 - 当前已抽出的核心组件：
@@ -54,6 +58,7 @@
 - token 放 `src/styles/scss`
 
 # 当前代码结构（如果有）
+
 - 主要目录：
 - `src/app`：路由页面
 - `src/components/top-navigation-bar`：导航组件与样式
@@ -77,6 +82,7 @@
 - 目前所有页面都使用这个组件占位
 
 # 未完成任务（TODO）
+
 - 第一优先级：
 - 按 Figma 继续实现 `about` 页实际内容，而不是占位标题
 - 第二优先级：
@@ -87,6 +93,7 @@
 - 提交当前代码；在提交前补齐 git 本地身份信息
 
 # 当前问题 / 卡点
+
 - `git commit` 失败原因：
 - 仓库没有配置 `user.name` 和 `user.email`
 - 之前已尝试提交，提交信息拟定为：`feat(app): scaffold placeholder pages and responsive navigation`
@@ -102,6 +109,7 @@
 - `pnpm.cmd typecheck`
 
 # Codex 行为指令（非常关键）
+
 - 必须先沿用现有模板约束，不要临时切换到另一套技术方案
 - 必须优先复用现有组件和 token
 - 不要把页面快速糊成单文件；继续拆成可复用区块
@@ -116,6 +124,7 @@
 - 不要覆盖或回退用户现有改动
 
 # 恢复指令（给未来的 Codex）
+
 - 先读取本文件，再从以下文件恢复上下文：
 - `src/components/top-navigation-bar/TopNavigationBar.tsx`
 - `src/components/top-navigation-bar/TopNavigationBar.module.scss`
