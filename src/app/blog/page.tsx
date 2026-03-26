@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 
-import { getRouteConfigById, siteConfig } from "@/lib/site-config";
+import { createTranslator } from "@/lib/i18n";
+import { siteConfig } from "@/lib/site-config";
 
 import styles from "./page.module.scss";
 
-const route = getRouteConfigById("blog");
+const t = createTranslator("zh-CN");
 
 export const metadata: Metadata = {
-  title: `${route.title} | ${siteConfig.name}`,
-  description: route.description,
+  title: `${t(siteConfig.routeMeta.blog.title)} | ${t(siteConfig.identity.name)}`,
+  description: t(siteConfig.routeMeta.blog.description),
 };
 
 export default function BlogPage() {

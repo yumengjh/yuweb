@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 
-import { getRouteConfigById, siteConfig } from "@/lib/site-config";
+import { createTranslator } from "@/lib/i18n";
+import { siteConfig } from "@/lib/site-config";
 
 import styles from "./page.module.scss";
 
-const route = getRouteConfigById("curations");
+const t = createTranslator("zh-CN");
 
 const projects = [
   {
@@ -34,8 +35,8 @@ const projects = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: `${route.title} | ${siteConfig.name}`,
-  description: route.description,
+  title: `${t(siteConfig.routeMeta.curations.title)} | ${t(siteConfig.identity.name)}`,
+  description: t(siteConfig.routeMeta.curations.description),
 };
 
 export default function CurationsPage() {

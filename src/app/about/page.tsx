@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 
-import { getRouteConfigById, siteConfig } from "@/lib/site-config";
+import { createTranslator } from "@/lib/i18n";
+import { siteConfig } from "@/lib/site-config";
 
 import styles from "./page.module.scss";
 
-const route = getRouteConfigById("about");
+const t = createTranslator("zh-CN");
 
 const principles = [
   {
@@ -28,8 +29,8 @@ const currentFocus = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: `${route.title} | ${siteConfig.name}`,
-  description: route.description,
+  title: `${t(siteConfig.routeMeta.about.title)} | ${t(siteConfig.identity.name)}`,
+  description: t(siteConfig.routeMeta.about.description),
 };
 
 export default function AboutPage() {
