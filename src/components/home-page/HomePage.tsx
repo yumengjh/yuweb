@@ -120,13 +120,29 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
+            <span className={styles.sectionTitle}>{t(homePage.sectionTitles.philosophy)}</span>
+            <div className={styles.sectionLine}></div>
+          </div>
+          <div className={styles.philosophyContent}>
+            <h2 className={styles.statementTitle}>{t(homePage.philosophy.title)}</h2>
+            <div className={styles.statementText}>
+              {homePage.philosophy.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{t(paragraph)}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
             <span className={styles.sectionTitle}>{t(homePage.sectionTitles.capabilities)}</span>
             <div className={styles.sectionLine}></div>
           </div>
-          <div className={styles.capGrid}>
-            {homePage.capabilities.map((item) => (
+          <div className={styles.capGridFull}>
+            {homePage.capabilities.map((item, index) => (
               <article key={`${item.title}-${item.icon}`} className={styles.capCard}>
                 <div className={styles.capTop}>
+                  <div className={styles.capIndex}>{(index + 1).toString().padStart(2, "0")}</div>
                   <div className={styles.capIcon}>
                     <CapabilityIcon kind={item.icon} />
                   </div>
