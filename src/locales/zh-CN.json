@@ -1,0 +1,405 @@
+{
+  "site": {
+    "identity": {
+      "name": "鱼梦江湖",
+      "description": "鱼梦江湖（YUMENGJH）的个人数字空间，用于记录、整理并持续打磨界面系统、项目与长期笔记。"
+    }
+  },
+  "route": {
+    "home": {
+      "title": "鱼梦江湖",
+      "description": "首页，串联关于、技术栈、精选项目与旅程。"
+    },
+    "about": {
+      "title": "关于",
+      "description": "关于鱼梦江湖的空间感、表达方式与当前关注。"
+    },
+    "stack": {
+      "title": "技术栈",
+      "description": "围绕 Next.js、TypeScript 与系统化前端实践展开的技术栈页面。"
+    },
+    "curations": {
+      "title": "精选项目",
+      "description": "精选项目与持续归档的参考体系。"
+    },
+    "journey": {
+      "title": "旅程",
+      "description": "按时间线整理的经历、阶段与仍在推进中的工作。"
+    },
+    "blog": {
+      "title": "博客",
+      "description": "关于数字设计、前端工程与个人思考的记录。"
+    },
+    "notes": {
+      "title": "笔记",
+      "description": "公开笔记、学习记录与零散思考的持续整理。"
+    },
+    "projects": {
+      "title": "项目",
+      "description": "对正在推进、已归档、未完成之物的结构化整理。"
+    },
+    "collections": {
+      "title": "收藏",
+      "description": "书籍、文章、素材与参考体系的长期留存。"
+    }
+  },
+  "nav": {
+    "aria": {
+      "primary": "主导航",
+      "desktopMenu": "桌面导航菜单",
+      "openMenu": "打开导航菜单",
+      "closeMenu": "关闭导航菜单"
+    },
+    "mobileFooter": {
+      "line1": "数字策展",
+      "line2": "公开思考与记录",
+      "line3": "2026 / DESIGN & CODE"
+    },
+    "about": {
+      "label": "关于",
+      "group": {
+        "start": "开始",
+        "aboutMe": "关于我",
+        "explore": "延伸"
+      },
+      "startFromHere": {
+        "title": "从这里开始",
+        "description": "第一次来到这里，可以先从几个入口快速了解这个网站。"
+      },
+      "thisSite": {
+        "title": "这个网站",
+        "description": "为什么会有这个网站，它想承载什么，又会如何继续生长。"
+      },
+      "current": {
+        "title": "当前状态",
+        "description": "我正在关注什么、推进什么，以及最近停留的问题。"
+      },
+      "learning": {
+        "title": "学习方式",
+        "description": "我如何学习、记录、整理，并逐步形成自己的方法。"
+      },
+      "fields": {
+        "title": "关注领域",
+        "description": "长期关心的技术、设计、结构和表达方向。"
+      },
+      "stack": {
+        "title": "技术栈",
+        "description": "查看目前使用的工具、框架与页面系统组织方式。"
+      },
+      "viewPage": {
+        "title": "查看关于页",
+        "description": "进入完整的自我介绍与站点说明页面。"
+      }
+    },
+    "notes": {
+      "label": "笔记",
+      "recent": {
+        "title": "最近更新",
+        "description": "最近记下的内容、正在延展的问题和新的观察。"
+      },
+      "tech": {
+        "title": "技术笔记",
+        "description": "围绕框架、工程、交互与实现细节展开的个人记录。"
+      },
+      "learning": {
+        "title": "学习记录",
+        "description": "正在学习的内容、阶段性理解与路径整理。"
+      },
+      "fragments": {
+        "title": "灵感碎片",
+        "description": "一些还没长成文章的判断、想法和短促记录。"
+      },
+      "qa": {
+        "title": "问题与答案",
+        "description": "把遇到的问题、拆解过程与暂时答案保留下来。"
+      },
+      "viewPage": {
+        "title": "查看笔记",
+        "description": "进入全部公开笔记与记录。"
+      }
+    },
+    "projects": {
+      "label": "项目",
+      "group": {
+        "inProgress": "进行中",
+        "archive": "归档",
+        "abandoned": "中止 / 未完成"
+      },
+      "inProgress": {
+        "title": "正在做的事",
+        "description": "查看目前仍在推进、迭代或打磨中的项目与页面。"
+      },
+      "experiments": {
+        "title": "页面实验",
+        "description": "一些围绕布局、交互和结构进行的持续实验。"
+      },
+      "featured": {
+        "title": "代表作品",
+        "description": "当前阶段最能代表判断、表达和实现方式的项目。"
+      },
+      "opensource": {
+        "title": "开源项目",
+        "description": "已公开的仓库、工具与可以继续查看的实现记录。"
+      },
+      "abandonedIdeas": {
+        "title": "停止的想法",
+        "description": "那些曾经认真开始，后来停下来的方向与设想。"
+      },
+      "failures": {
+        "title": "失败记录",
+        "description": "做坏的页面、走偏的方案和最终放弃的项目尝试。"
+      },
+      "viewPage": {
+        "title": "查看项目页",
+        "description": "进入完整的项目、实验与归档内容。"
+      }
+    },
+    "collections": {
+      "label": "收藏",
+      "books": {
+        "title": "书籍",
+        "description": "留下来的书、反复翻看的部分，以及它们为何重要。"
+      },
+      "articles": {
+        "title": "文章",
+        "description": "收藏的博客文章、写作者与值得反复阅读的内容。"
+      },
+      "materialLibrary": {
+        "title": "素材库",
+        "description": "为项目和页面长期保留的视觉、文字与结构样本。"
+      },
+      "referenceSystem": {
+        "title": "参考体系",
+        "description": "如何整理参考、归档链接，并形成自己的留存方式。"
+      },
+      "toolkit": {
+        "title": "工具箱",
+        "description": "日常使用或阶段性偏爱的工具、站点与工作辅助材料。"
+      },
+      "viewPage": {
+        "title": "查看收藏",
+        "description": "进入完整的收藏与个人留存内容。"
+      }
+    },
+    "journey": {
+      "label": "旅程",
+      "nodesLabel": "节点",
+      "recentLabel": "最近",
+      "recentSummary": "这里保留的不只是经历，还有那些逐渐形成、又不断被修正的判断。",
+      "viewPageLabel": "查看旅程 →",
+      "milestones": {
+        "title": "阶段节点",
+        "description": "查看经历中的关键节点。"
+      },
+      "inProgress": {
+        "title": "进行中",
+        "description": "还在继续推进的事情与方向。"
+      },
+      "timeline": {
+        "title": "时间线视图",
+        "description": "把过程重新整理为可阅读的轨迹。"
+      }
+    },
+    "stack": {
+      "label": "技术栈",
+      "frontend": {
+        "title": "前端系统",
+        "description": "框架、样式策略与工程边界。"
+      },
+      "design": {
+        "title": "设计方法",
+        "description": "视觉语言如何与系统思维结合。"
+      },
+      "interaction": {
+        "title": "交互原则",
+        "description": "动效、反馈与内容结构如何协同工作。"
+      }
+    },
+    "curations": {
+      "label": "精选项目",
+      "selectedWork": {
+        "title": "精选作品",
+        "description": "关键项目与具有代表性的阶段性成果。"
+      },
+      "materialLibrary": {
+        "title": "素材库",
+        "description": "围绕视觉、文字与结构长期积累的参考样本。"
+      },
+      "referenceSystem": {
+        "title": "参考体系",
+        "description": "项目如何被归档、筛选并再次调用。"
+      }
+    },
+    "blog": {
+      "label": "博客"
+    }
+  },
+  "footer": {
+    "summary": "一个持续生长的个人空间，用来记录、构建与整理，让思考、项目与收藏在结构中慢慢成形。",
+    "aria": {
+      "navigation": "页脚导航",
+      "metadata": "站点信息"
+    },
+    "meta": {
+      "email": {
+        "label": "邮箱",
+        "text": "hi@yumgjs.com"
+      },
+      "github": {
+        "label": "GitHub",
+        "text": "访问我的 GitHub 主页"
+      },
+      "copyright": {
+        "label": "版权",
+        "text": "© 2026 鱼梦江湖（@yumengjh）保留所有权利。"
+      },
+      "icp": {
+        "label": "备案号",
+        "text": "鄂 ICP 备 2026009056 号"
+      }
+    }
+  },
+  "home": {
+    "metadata": {
+      "title": "鱼梦江湖",
+      "description": "一个用于整理界面系统、项目与长期笔记的个人数字空间。"
+    },
+    "hero": {
+      "topLeft": "INDEX / FULL INVENTORY",
+      "topRight": "GUANGZHOU, CN",
+      "title": "鱼梦江湖",
+      "titleAccent": "YUMENGJH.",
+      "focusLabel": "FOCUS",
+      "focusValue": "界面系统 / UI Engineering",
+      "modeLabel": "MODE",
+      "modeValue": "设计与代码 / Design & Code",
+      "statusLabel": "STATUS",
+      "statusValue": "开放合作 / Available",
+      "summary": "我是一名数字建筑师。我把界面当作一种被精确构筑的结构空间来设计：逻辑先行，留白承重。拒绝无意义的装饰，让每一行代码和每一个像素都服务于秩序与稳定感。"
+    },
+    "section": {
+      "capabilities": "[02] CAPABILITIES",
+      "works": "[03] SELECTED WORKS",
+      "gears": "[04] PHYSICAL GEARS",
+      "archive": "[05] READING ARCHIVE",
+      "experience": "[06] EXPERIENCE",
+      "philosophy": "[01] PHILOSOPHY"
+    },
+    "link": {
+      "exploreCase": "EXPLORE CASE",
+      "hardwareInventory": "VIEW FULL HARDWARE INVENTORY",
+      "completeLibrary": "EXPLORE COMPLETE LIBRARY"
+    },
+    "table": {
+      "refId": "REF.ID",
+      "title": "TITLE",
+      "author": "AUTHOR",
+      "year": "YEAR"
+    },
+    "capability": {
+      "arch": {
+        "title": "前端架构",
+        "eyebrow": "Architecture",
+        "desc": "框架工程 / 样式系统 / 类型约束"
+      },
+      "logic": {
+        "title": "视觉逻辑",
+        "eyebrow": "Visual Logic",
+        "desc": "设计原则 / 字体编排 / 几何构图"
+      },
+      "server": {
+        "title": "服务集成",
+        "eyebrow": "Integration",
+        "desc": "运行环境 / 接口结构 / 云端部署"
+      },
+      "optimize": {
+        "title": "性能优化",
+        "eyebrow": "Optimization",
+        "desc": "性能体检 / 资源压缩 / 核心指标"
+      }
+    },
+    "work": {
+      "matrix": {
+        "title": "矩构系统",
+        "type": "桌面环境概念"
+      },
+      "grid": {
+        "title": "网格索引",
+        "type": "复杂元数据架构"
+      }
+    },
+    "gear": {
+      "compute": {
+        "desc": "核心演算节点与移动编译中心"
+      },
+      "display": {
+        "desc": "精准像素映射与色彩还原"
+      },
+      "input": {
+        "desc": "极简键位布局与线性敲击反馈"
+      },
+      "support": {
+        "desc": "人体工学基座与重力卸载"
+      }
+    },
+    "experience": {
+      "lead": {
+        "period": "2023 — PRES",
+        "title": "首席架构师",
+        "company": "鱼梦江湖数字工作室"
+      },
+      "senior": {
+        "period": "2021 — 2023",
+        "title": "高级界面工程师",
+        "company": "结构实验室"
+      },
+      "visual": {
+        "period": "2019 — 2021",
+        "title": "视觉开发工程师",
+        "company": "核心系统公司"
+      }
+    },
+    "philosophy": {
+      "title": "空间、逻辑与数字秩序。",
+      "paragraph1": "在“数字建筑师”的语境里，屏幕并不只是一个平面画布，而是一种可被组织、可被推演的物理环境。留白不是空缺，而是决定节奏与层级的承重材料。",
+      "paragraph2": "我信奉系统思维取代堆叠，追求用最少的 DOM 结构表达最清晰的信息层次。所有的美感都应建立在清晰、克制与绝对的几何对齐之上。"
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "titleAccent": "VOID.",
+    "heroTopLeft": "SYS.ERROR / 404",
+    "heroTopRight": "STATUS: ORPHANED NODE",
+    "targetLabel": "TARGET",
+    "targetValue": "未知坐标 / UNKNOWN",
+    "stateLabel": "STATE",
+    "stateValue": "结构缺失 / UNRESOLVED",
+    "summary": "你试图访问的数字结构已被移除，或从未存在于当前网格体系中。请验证路径，或返回根目录重新建立连接。",
+    "actionLabel": "RETURN TO ROOT"
+  },
+  "comingSoon": {
+    "description": "当前语言版本暂未开放。",
+    "note": "敬请期待。"
+  },
+  "theme": {
+    "label": "主题",
+    "mode": {
+      "auto": "自动",
+      "light": "浅色",
+      "dark": "深色"
+    },
+    "aria": "切换主题，当前模式 {mode}"
+  },
+  "language": {
+    "label": "语言",
+    "mode": {
+      "auto": "自动",
+      "zh-CN": "中文",
+      "en-US": "English"
+    },
+    "aria": {
+      "trigger": "打开语言菜单，当前模式 {mode}",
+      "menu": "语言选项"
+    }
+  }
+}

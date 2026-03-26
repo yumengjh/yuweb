@@ -1,0 +1,405 @@
+{
+  "site": {
+    "identity": {
+      "name": "鱼梦江湖",
+      "description": "YUMENGJH is a personal digital space for documenting, structuring, and continuously refining interface systems, projects, and long-term notes."
+    }
+  },
+  "route": {
+    "home": {
+      "title": "YUMENGJH",
+      "description": "The home page that connects profile, stack, selected work, and journey into one digital inventory."
+    },
+    "about": {
+      "title": "About",
+      "description": "The spatial sensibility, expression, and current focus behind YUMENGJH."
+    },
+    "stack": {
+      "title": "Stack",
+      "description": "A stack page built around Next.js, TypeScript, and systematic frontend practice."
+    },
+    "curations": {
+      "title": "Curations",
+      "description": "Selected work and a long-term reference system."
+    },
+    "journey": {
+      "title": "Journey",
+      "description": "A timeline of experience, phases, and work in progress."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Notes on digital design, frontend engineering, and personal thinking."
+    },
+    "notes": {
+      "title": "Notes",
+      "description": "A collection of public notes, learning records, and fragments."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "A structured page for active, archived, and unfinished projects."
+    },
+    "collections": {
+      "title": "Collections",
+      "description": "A long-term archive of books, articles, materials, and reference systems."
+    }
+  },
+  "nav": {
+    "aria": {
+      "primary": "Primary navigation",
+      "desktopMenu": "Desktop navigation menu",
+      "openMenu": "Open navigation menu",
+      "closeMenu": "Close navigation menu"
+    },
+    "mobileFooter": {
+      "line1": "Digital curation",
+      "line2": "Public thinking and records",
+      "line3": "2026 / DESIGN & CODE"
+    },
+    "about": {
+      "label": "About",
+      "group": {
+        "start": "Start",
+        "aboutMe": "About Me",
+        "explore": "Explore"
+      },
+      "startFromHere": {
+        "title": "Start Here",
+        "description": "If this is your first visit, begin with a few entry points to quickly understand the site."
+      },
+      "thisSite": {
+        "title": "This Site",
+        "description": "Why this site exists, what it wants to hold, and how it will keep growing."
+      },
+      "current": {
+        "title": "Current State",
+        "description": "What I am focusing on, moving forward, and the questions I have been staying with lately."
+      },
+      "learning": {
+        "title": "How I Learn",
+        "description": "How I learn, record, organize, and gradually form my own methods."
+      },
+      "fields": {
+        "title": "Fields of Interest",
+        "description": "The long-term directions in technology, design, structure, and expression that I care about."
+      },
+      "stack": {
+        "title": "Stack",
+        "description": "See the tools, frameworks, and page-system organization I currently use."
+      },
+      "viewPage": {
+        "title": "View About Page",
+        "description": "Enter the full introduction and site overview page."
+      }
+    },
+    "notes": {
+      "label": "Notes",
+      "recent": {
+        "title": "Recent Updates",
+        "description": "The content I recently wrote down, problems I am extending, and new observations."
+      },
+      "tech": {
+        "title": "Technical Notes",
+        "description": "Personal records around frameworks, engineering, interaction, and implementation details."
+      },
+      "learning": {
+        "title": "Learning Log",
+        "description": "What I am learning, stage-based understanding, and path organization."
+      },
+      "fragments": {
+        "title": "Fragments",
+        "description": "Judgments, ideas, and short notes that have not yet grown into articles."
+      },
+      "qa": {
+        "title": "Questions & Answers",
+        "description": "Preserve the problems I encountered, how I broke them down, and the temporary answers."
+      },
+      "viewPage": {
+        "title": "View Notes",
+        "description": "Enter all public notes and records."
+      }
+    },
+    "projects": {
+      "label": "Projects",
+      "group": {
+        "inProgress": "In Progress",
+        "archive": "Archive",
+        "abandoned": "Paused / Unfinished"
+      },
+      "inProgress": {
+        "title": "Doing Now",
+        "description": "See the projects and pages currently being pushed forward, iterated on, or refined."
+      },
+      "experiments": {
+        "title": "Page Experiments",
+        "description": "Ongoing experiments around layout, interaction, and structure."
+      },
+      "featured": {
+        "title": "Featured Work",
+        "description": "The projects that best represent my judgment, expression, and execution at this stage."
+      },
+      "opensource": {
+        "title": "Open Source",
+        "description": "Public repositories, tools, and implementation records worth revisiting."
+      },
+      "abandonedIdeas": {
+        "title": "Stopped Ideas",
+        "description": "Directions and concepts that were once seriously started and later paused."
+      },
+      "failures": {
+        "title": "Failure Log",
+        "description": "Broken pages, misguided solutions, and abandoned project attempts."
+      },
+      "viewPage": {
+        "title": "View Projects",
+        "description": "Enter the full projects, experiments, and archives page."
+      }
+    },
+    "collections": {
+      "label": "Collections",
+      "books": {
+        "title": "Books",
+        "description": "Books I kept, the parts I revisit, and why they matter."
+      },
+      "articles": {
+        "title": "Articles",
+        "description": "Saved blog posts, writers, and pieces worth rereading."
+      },
+      "materialLibrary": {
+        "title": "Material Library",
+        "description": "Visual, textual, and structural samples retained for projects and pages."
+      },
+      "referenceSystem": {
+        "title": "Reference System",
+        "description": "How I organize references, archive links, and form my own retention method."
+      },
+      "toolkit": {
+        "title": "Toolkit",
+        "description": "Tools, websites, and working aids I use daily or prefer for a period of time."
+      },
+      "viewPage": {
+        "title": "View Collections",
+        "description": "Enter the full collections and personal archive."
+      }
+    },
+    "journey": {
+      "label": "Journey",
+      "nodesLabel": "Nodes",
+      "recentLabel": "Recent",
+      "recentSummary": "What is preserved here is not only experience, but also the judgments that gradually formed and kept being revised.",
+      "viewPageLabel": "View Journey →",
+      "milestones": {
+        "title": "Milestones",
+        "description": "Key moments arranged in time."
+      },
+      "inProgress": {
+        "title": "In Progress",
+        "description": "Directions and tasks that are still being advanced."
+      },
+      "timeline": {
+        "title": "Timeline View",
+        "description": "The process reshaped into a readable narrative."
+      }
+    },
+    "stack": {
+      "label": "Stack",
+      "frontend": {
+        "title": "Frontend Systems",
+        "description": "Frameworks, styling strategies, and engineering boundaries."
+      },
+      "design": {
+        "title": "Design Method",
+        "description": "How visual language connects with systematic thinking."
+      },
+      "interaction": {
+        "title": "Interaction Principles",
+        "description": "How motion, feedback, and content structure work together."
+      }
+    },
+    "curations": {
+      "label": "Curations",
+      "selectedWork": {
+        "title": "Selected Work",
+        "description": "Key projects and representative stage outcomes."
+      },
+      "materialLibrary": {
+        "title": "Material Library",
+        "description": "Long-term references across visuals, text, and structure."
+      },
+      "referenceSystem": {
+        "title": "Reference System",
+        "description": "How projects are archived, filtered, and recalled."
+      }
+    },
+    "blog": {
+      "label": "Blog"
+    }
+  },
+  "footer": {
+    "summary": "A continuously evolving personal space for documenting, structuring, and organizing thoughts, projects, and collections.",
+    "aria": {
+      "navigation": "Footer navigation",
+      "metadata": "Site metadata"
+    },
+    "meta": {
+      "email": {
+        "label": "Email",
+        "text": "hi@yumgjs.com"
+      },
+      "github": {
+        "label": "GitHub",
+        "text": "Visit my GitHub profile"
+      },
+      "copyright": {
+        "label": "Copyright",
+        "text": "© 2026 YUMENGJH. All rights reserved."
+      },
+      "icp": {
+        "label": "ICP",
+        "text": "Hubei ICP Filing No. 2026009056"
+      }
+    }
+  },
+  "home": {
+    "metadata": {
+      "title": "YUMENGJH",
+      "description": "A personal digital space for structuring interface systems, projects, and long-term notes."
+    },
+    "hero": {
+      "topLeft": "INDEX / FULL INVENTORY",
+      "topRight": "GUANGZHOU, CN",
+      "title": "鱼梦江湖",
+      "titleAccent": "YUMENGJH.",
+      "focusLabel": "FOCUS",
+      "focusValue": "Interface Systems / UI Engineering",
+      "modeLabel": "MODE",
+      "modeValue": "Design & Code",
+      "statusLabel": "STATUS",
+      "statusValue": "Open for Collaboration",
+      "summary": "I design interfaces as deliberate digital architecture: logic first, whitespace load-bearing, and every line of code or pixel aligned to structure, rhythm, and stability."
+    },
+    "section": {
+      "capabilities": "[02] CAPABILITIES",
+      "works": "[03] SELECTED WORKS",
+      "gears": "[04] PHYSICAL GEARS",
+      "archive": "[05] READING ARCHIVE",
+      "experience": "[06] EXPERIENCE",
+      "philosophy": "[01] PHILOSOPHY"
+    },
+    "link": {
+      "exploreCase": "EXPLORE CASE",
+      "hardwareInventory": "VIEW FULL HARDWARE INVENTORY",
+      "completeLibrary": "EXPLORE COMPLETE LIBRARY"
+    },
+    "table": {
+      "refId": "REF.ID",
+      "title": "TITLE",
+      "author": "AUTHOR",
+      "year": "YEAR"
+    },
+    "capability": {
+      "arch": {
+        "title": "Frontend Architecture",
+        "eyebrow": "Architecture",
+        "desc": "Framework engineering / styling systems / type safety"
+      },
+      "logic": {
+        "title": "Visual Logic",
+        "eyebrow": "Visual Logic",
+        "desc": "Design principles / typography / geometric composition"
+      },
+      "server": {
+        "title": "Service Integration",
+        "eyebrow": "Integration",
+        "desc": "Runtime environments / API shapes / cloud deployment"
+      },
+      "optimize": {
+        "title": "Optimization",
+        "eyebrow": "Optimization",
+        "desc": "Performance audits / asset compression / core metrics"
+      }
+    },
+    "work": {
+      "matrix": {
+        "title": "Matrix System",
+        "type": "Desktop Environment Concept"
+      },
+      "grid": {
+        "title": "Grid Index",
+        "type": "Complex Metadata Architecture"
+      }
+    },
+    "gear": {
+      "compute": {
+        "desc": "Primary computation node and mobile build station"
+      },
+      "display": {
+        "desc": "Precise pixel mapping and reliable color fidelity"
+      },
+      "input": {
+        "desc": "Minimal key layout with clean tactile feedback"
+      },
+      "support": {
+        "desc": "An ergonomic base for long-form focused work"
+      }
+    },
+    "experience": {
+      "lead": {
+        "period": "2023 — Present",
+        "title": "Lead Architect",
+        "company": "YUMENGJH Digital Studio"
+      },
+      "senior": {
+        "period": "2021 — 2023",
+        "title": "Senior Interface Engineer",
+        "company": "Structure Lab"
+      },
+      "visual": {
+        "period": "2019 — 2021",
+        "title": "Visual Development Engineer",
+        "company": "Core Systems Co."
+      }
+    },
+    "philosophy": {
+      "title": "Space, Logic, and Digital Order.",
+      "paragraph1": "In the context of a digital architect, the screen is not merely a flat canvas but a physical environment that can be organized and reasoned about. Whitespace is not absence; it is a load-bearing material that defines rhythm and hierarchy.",
+      "paragraph2": "I prefer systems over stacking, and aim to express the clearest information hierarchy with the fewest possible DOM structures. Any sense of beauty should rest on clarity, restraint, and uncompromising geometric alignment."
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "titleAccent": "VOID.",
+    "heroTopLeft": "SYS.ERROR / 404",
+    "heroTopRight": "STATUS: ORPHANED NODE",
+    "targetLabel": "TARGET",
+    "targetValue": "UNKNOWN COORDINATE",
+    "stateLabel": "STATE",
+    "stateValue": "UNRESOLVED STRUCTURE",
+    "summary": "The digital structure you requested has been removed, or it never existed in the current grid. Verify the path, or return to the root and reconnect from there.",
+    "actionLabel": "RETURN TO ROOT"
+  },
+  "comingSoon": {
+    "description": "The English version of this page is not available yet.",
+    "note": "Coming soon."
+  },
+  "theme": {
+    "label": "Theme",
+    "mode": {
+      "auto": "Auto",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "aria": "Toggle theme, current mode {mode}"
+  },
+  "language": {
+    "label": "Language",
+    "mode": {
+      "auto": "Auto",
+      "zh-CN": "中文",
+      "en-US": "English"
+    },
+    "aria": {
+      "trigger": "Open language menu, current mode {mode}",
+      "menu": "Language options"
+    }
+  }
+}
