@@ -53,314 +53,314 @@ export type NavigationItem = {
 
 // ─── Default navigation data ──────────────────────────────────────────────────
 
-const navigationItems: NavigationItem[] = [
-  {
-    key: "about",
-    label: "关于",
-    href: "/about",
-    menu: {
-      kind: "groups",
-      groups: [
-        {
-          label: "开始",
-          entries: [
-            {
-              title: "从这里开始",
-              description: "第一次来到这里，可以先从几个入口快速了解这个网站。",
-              href: "/about#start",
-            },
-            {
-              title: "这个网站",
-              description: "为什么会有这个网站，它想承载什么，又会如何继续生长。",
-              href: "/about#site",
-            },
-          ],
-        },
-        {
-          label: "关于我",
-          entries: [
-            {
-              title: "当前状态",
-              description: "我正在关注什么、推进什么，以及最近停留的问题。",
-              href: "/about#now",
-            },
-            {
-              title: "学习方式",
-              description: "我如何学习、记录、整理，并逐步形成自己的方法。",
-              href: "/about#learning",
-            },
-            {
-              title: "关注领域",
-              description: "长期关心的技术、设计、结构和表达方向。",
-              href: "/about#fields",
-            },
-          ],
-        },
-        {
-          label: "延伸",
-          entries: [
-            {
-              title: "技术栈",
-              description: "查看目前使用的工具、框架与页面系统组织方式。",
-              href: "/about#stack",
-            },
-            {
-              title: "查看关于页",
-              description: "进入完整的自我介绍与站点说明页面。",
-              href: "/about",
-            },
-          ],
-        },
-      ],
-    },
-  },
+// const navigationItems: NavigationItem[] = [
+//   {
+//     key: "about",
+//     label: "关于",
+//     href: "/about",
+//     menu: {
+//       kind: "groups",
+//       groups: [
+//         {
+//           label: "开始",
+//           entries: [
+//             {
+//               title: "从这里开始",
+//               description: "第一次来到这里，可以先从几个入口快速了解这个网站。",
+//               href: "/about#start",
+//             },
+//             {
+//               title: "这个网站",
+//               description: "为什么会有这个网站，它想承载什么，又会如何继续生长。",
+//               href: "/about#site",
+//             },
+//           ],
+//         },
+//         {
+//           label: "关于我",
+//           entries: [
+//             {
+//               title: "当前状态",
+//               description: "我正在关注什么、推进什么，以及最近停留的问题。",
+//               href: "/about#now",
+//             },
+//             {
+//               title: "学习方式",
+//               description: "我如何学习、记录、整理，并逐步形成自己的方法。",
+//               href: "/about#learning",
+//             },
+//             {
+//               title: "关注领域",
+//               description: "长期关心的技术、设计、结构和表达方向。",
+//               href: "/about#fields",
+//             },
+//           ],
+//         },
+//         {
+//           label: "延伸",
+//           entries: [
+//             {
+//               title: "技术栈",
+//               description: "查看目前使用的工具、框架与页面系统组织方式。",
+//               href: "/about#stack",
+//             },
+//             {
+//               title: "查看关于页",
+//               description: "进入完整的自我介绍与站点说明页面。",
+//               href: "/about",
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   },
 
-  {
-    key: "notes",
-    label: "笔记",
-    href: "/notes",
-    menu: {
-      kind: "entries",
-      entries: [
-        {
-          title: "最近更新",
-          description: "最近记下的内容、正在延展的问题和新的观察。",
-          href: "/notes#recent",
-        },
-        {
-          title: "技术笔记",
-          description: "围绕框架、工程、交互与实现细节展开的个人记录。",
-          href: "/notes#tech",
-        },
-        {
-          title: "学习记录",
-          description: "正在学习的内容、阶段性理解与路径整理。",
-          href: "/notes#learning",
-        },
-        {
-          title: "灵感碎片",
-          description: "一些还没长成文章的判断、想法和短促记录。",
-          href: "/notes#fragments",
-        },
-        {
-          title: "问题与答案",
-          description: "把遇到的问题、拆解过程与暂时答案保留下来。",
-          href: "/notes#qa",
-        },
-        {
-          title: "查看笔记",
-          description: "进入全部公开笔记与记录。",
-          href: "/notes",
-        },
-      ],
-    },
-  },
+//   {
+//     key: "notes",
+//     label: "笔记",
+//     href: "/notes",
+//     menu: {
+//       kind: "entries",
+//       entries: [
+//         {
+//           title: "最近更新",
+//           description: "最近记下的内容、正在延展的问题和新的观察。",
+//           href: "/notes#recent",
+//         },
+//         {
+//           title: "技术笔记",
+//           description: "围绕框架、工程、交互与实现细节展开的个人记录。",
+//           href: "/notes#tech",
+//         },
+//         {
+//           title: "学习记录",
+//           description: "正在学习的内容、阶段性理解与路径整理。",
+//           href: "/notes#learning",
+//         },
+//         {
+//           title: "灵感碎片",
+//           description: "一些还没长成文章的判断、想法和短促记录。",
+//           href: "/notes#fragments",
+//         },
+//         {
+//           title: "问题与答案",
+//           description: "把遇到的问题、拆解过程与暂时答案保留下来。",
+//           href: "/notes#qa",
+//         },
+//         {
+//           title: "查看笔记",
+//           description: "进入全部公开笔记与记录。",
+//           href: "/notes",
+//         },
+//       ],
+//     },
+//   },
 
-  {
-    key: "projects",
-    label: "项目",
-    href: "/projects",
-    menu: {
-      kind: "groups",
-      groups: [
-        {
-          label: "进行中",
-          entries: [
-            {
-              title: "正在做的事",
-              description: "查看目前仍在推进、迭代或打磨中的项目与页面。",
-              href: "/projects#in-progress",
-            },
-            {
-              title: "页面实验",
-              description: "一些围绕布局、交互和结构进行的持续实验。",
-              href: "/projects#experiments",
-            },
-          ],
-        },
-        {
-          label: "归档",
-          entries: [
-            {
-              title: "代表作品",
-              description: "当前阶段最能代表判断、表达和实现方式的项目。",
-              href: "/projects#featured",
-            },
-            {
-              title: "开源项目",
-              description: "已公开的仓库、工具与可以继续查看的实现记录。",
-              href: "/projects#opensource",
-            },
-          ],
-        },
-        {
-          label: "中止 / 未完成",
-          entries: [
-            {
-              title: "停止的想法",
-              description: "那些曾经认真开始、后来停下来的方向与设想。",
-              href: "/projects#abandoned-ideas",
-            },
-            {
-              title: "失败记录",
-              description: "做坏的页面、走偏的方案和最终放弃的项目尝试。",
-              href: "/projects#failures",
-            },
-            {
-              title: "查看项目页",
-              description: "进入完整的项目、实验与归档内容。",
-              href: "/projects",
-            },
-          ],
-        },
-      ],
-    },
-  },
+//   {
+//     key: "projects",
+//     label: "项目",
+//     href: "/projects",
+//     menu: {
+//       kind: "groups",
+//       groups: [
+//         {
+//           label: "进行中",
+//           entries: [
+//             {
+//               title: "正在做的事",
+//               description: "查看目前仍在推进、迭代或打磨中的项目与页面。",
+//               href: "/projects#in-progress",
+//             },
+//             {
+//               title: "页面实验",
+//               description: "一些围绕布局、交互和结构进行的持续实验。",
+//               href: "/projects#experiments",
+//             },
+//           ],
+//         },
+//         {
+//           label: "归档",
+//           entries: [
+//             {
+//               title: "代表作品",
+//               description: "当前阶段最能代表判断、表达和实现方式的项目。",
+//               href: "/projects#featured",
+//             },
+//             {
+//               title: "开源项目",
+//               description: "已公开的仓库、工具与可以继续查看的实现记录。",
+//               href: "/projects#opensource",
+//             },
+//           ],
+//         },
+//         {
+//           label: "中止 / 未完成",
+//           entries: [
+//             {
+//               title: "停止的想法",
+//               description: "那些曾经认真开始、后来停下来的方向与设想。",
+//               href: "/projects#abandoned-ideas",
+//             },
+//             {
+//               title: "失败记录",
+//               description: "做坏的页面、走偏的方案和最终放弃的项目尝试。",
+//               href: "/projects#failures",
+//             },
+//             {
+//               title: "查看项目页",
+//               description: "进入完整的项目、实验与归档内容。",
+//               href: "/projects",
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   },
 
-  {
-    key: "collections",
-    label: "收藏",
-    href: "/collections",
-    menu: {
-      kind: "entries",
-      entries: [
-        {
-          title: "书籍",
-          description: "留下来的书、反复翻看的部分，以及它们为何重要。",
-          href: "/collections#books",
-        },
-        {
-          title: "文章",
-          description: "收藏的博客文章、写作者与值得反复阅读的内容。",
-          href: "/collections#articles",
-        },
-        {
-          title: "素材库",
-          description: "为项目和页面长期保留的视觉、文字与结构样本。",
-          href: "/collections#material-library",
-        },
-        {
-          title: "参考体系",
-          description: "如何整理参考、归档链接，并形成自己的留存方式。",
-          href: "/collections#reference-system",
-        },
-        {
-          title: "工具箱",
-          description: "日常使用或阶段性偏爱的工具、站点与工作辅助材料。",
-          href: "/collections#toolkit",
-        },
-        {
-          title: "查看收藏",
-          description: "进入完整的收藏与个人留存内容。",
-          href: "/collections",
-        },
-      ],
-    },
-  },
+//   {
+//     key: "collections",
+//     label: "收藏",
+//     href: "/collections",
+//     menu: {
+//       kind: "entries",
+//       entries: [
+//         {
+//           title: "书籍",
+//           description: "留下来的书、反复翻看的部分，以及它们为何重要。",
+//           href: "/collections#books",
+//         },
+//         {
+//           title: "文章",
+//           description: "收藏的博客文章、写作者与值得反复阅读的内容。",
+//           href: "/collections#articles",
+//         },
+//         {
+//           title: "素材库",
+//           description: "为项目和页面长期保留的视觉、文字与结构样本。",
+//           href: "/collections#material-library",
+//         },
+//         {
+//           title: "参考体系",
+//           description: "如何整理参考、归档链接，并形成自己的留存方式。",
+//           href: "/collections#reference-system",
+//         },
+//         {
+//           title: "工具箱",
+//           description: "日常使用或阶段性偏爱的工具、站点与工作辅助材料。",
+//           href: "/collections#toolkit",
+//         },
+//         {
+//           title: "查看收藏",
+//           description: "进入完整的收藏与个人留存内容。",
+//           href: "/collections",
+//         },
+//       ],
+//     },
+//   },
 
-  {
-    key: "journey",
-    label: "旅程",
-    href: "/journey",
-    menu: {
-      kind: "component",
-      component: function JourneyMenu() {
-        return (
-          <div style={{ display: "flex", gap: 48 }}>
-            <div>
-              <p
-                style={{
-                  margin: "0 0 6px",
-                  fontSize: 12,
-                  letterSpacing: "0.1em",
-                  opacity: 0.5,
-                }}
-              >
-                节点
-              </p>
+//   {
+//     key: "journey",
+//     label: "旅程",
+//     href: "/journey",
+//     menu: {
+//       kind: "component",
+//       component: function JourneyMenu() {
+//         return (
+//           <div style={{ display: "flex", gap: 48 }}>
+//             <div>
+//               <p
+//                 style={{
+//                   margin: "0 0 6px",
+//                   fontSize: 12,
+//                   letterSpacing: "0.1em",
+//                   opacity: 0.5,
+//                 }}
+//               >
+//                 节点
+//               </p>
 
-              {[
-                { title: "阶段节点", href: "/journey#milestones" },
-                { title: "进行中", href: "/journey#in-progress" },
-                { title: "时间线视图", href: "/journey#timeline" },
-              ].map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  style={{
-                    display: "block",
-                    padding: "8px 0",
-                    fontSize: 16,
-                    color: "var(--c-ink-strong)",
-                    textDecoration: "none",
-                  }}
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </div>
+//               {[
+//                 { title: "阶段节点", href: "/journey#milestones" },
+//                 { title: "进行中", href: "/journey#in-progress" },
+//                 { title: "时间线视图", href: "/journey#timeline" },
+//               ].map((item) => (
+//                 <Link
+//                   key={item.href}
+//                   href={item.href}
+//                   style={{
+//                     display: "block",
+//                     padding: "8px 0",
+//                     fontSize: 16,
+//                     color: "var(--c-ink-strong)",
+//                     textDecoration: "none",
+//                   }}
+//                 >
+//                   {item.title}
+//                 </Link>
+//               ))}
+//             </div>
 
-            <div
-              style={{
-                width: 1,
-                background: "var(--c-border)",
-                alignSelf: "stretch",
-              }}
-            />
+//             <div
+//               style={{
+//                 width: 1,
+//                 background: "var(--c-border)",
+//                 alignSelf: "stretch",
+//               }}
+//             />
 
-            <div style={{ maxWidth: 260 }}>
-              <p
-                style={{
-                  margin: "0 0 8px",
-                  fontSize: 12,
-                  letterSpacing: "0.1em",
-                  opacity: 0.5,
-                }}
-              >
-                最近
-              </p>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 15,
-                  lineHeight: 1.6,
-                  opacity: 0.72,
-                }}
-              >
-                这里保留的不只是经历，还有那些逐渐形成、又不断被修正的判断。
-              </p>
+//             <div style={{ maxWidth: 260 }}>
+//               <p
+//                 style={{
+//                   margin: "0 0 8px",
+//                   fontSize: 12,
+//                   letterSpacing: "0.1em",
+//                   opacity: 0.5,
+//                 }}
+//               >
+//                 最近
+//               </p>
+//               <p
+//                 style={{
+//                   margin: 0,
+//                   fontSize: 15,
+//                   lineHeight: 1.6,
+//                   opacity: 0.72,
+//                 }}
+//               >
+//                 这里保留的不只是经历，还有那些逐渐形成、又不断被修正的判断。
+//               </p>
 
-              <Link
-                href="/journey"
-                style={{
-                  display: "inline-block",
-                  marginTop: 14,
-                  fontSize: 13,
-                  color: "var(--c-ink-strong)",
-                  textDecoration: "underline",
-                  textUnderlineOffset: 3,
-                }}
-              >
-                查看旅程 →
-              </Link>
-            </div>
-          </div>
-        );
-      },
-    },
-    mobileMenu: [
-      {
-        label: "旅程",
-        entries: [
-          { title: "阶段节点", href: "/journey#milestones" },
-          { title: "进行中", href: "/journey#in-progress" },
-          { title: "时间线视图", href: "/journey#timeline" },
-          { title: "查看旅程", href: "/journey" },
-        ],
-      },
-    ],
-  },
-];
+//               <Link
+//                 href="/journey"
+//                 style={{
+//                   display: "inline-block",
+//                   marginTop: 14,
+//                   fontSize: 13,
+//                   color: "var(--c-ink-strong)",
+//                   textDecoration: "underline",
+//                   textUnderlineOffset: 3,
+//                 }}
+//               >
+//                 查看旅程 →
+//               </Link>
+//             </div>
+//           </div>
+//         );
+//       },
+//     },
+//     mobileMenu: [
+//       {
+//         label: "旅程",
+//         entries: [
+//           { title: "阶段节点", href: "/journey#milestones" },
+//           { title: "进行中", href: "/journey#in-progress" },
+//           { title: "时间线视图", href: "/journey#timeline" },
+//           { title: "查看旅程", href: "/journey" },
+//         ],
+//       },
+//     ],
+//   },
+// ];
 
 // ─── Helper ───────────────────────────────────────────────────────────────────
 
@@ -465,13 +465,31 @@ type TopNavigationBarProps = {
   items?: NavigationItem[];
   fixed?: boolean;
   closeOnScroll?: boolean;
+  brandHref?: string;
+  labels?: {
+    navAriaLabel: string;
+    desktopMenuAriaLabel: string;
+    openMenuLabel: string;
+    closeMenuLabel: string;
+  };
+  mobileFooterLines?: string[];
+};
+
+const defaultLabels = {
+  navAriaLabel: "Primary navigation",
+  desktopMenuAriaLabel: "Desktop navigation menu",
+  openMenuLabel: "Open navigation menu",
+  closeMenuLabel: "Close navigation menu",
 };
 
 export function TopNavigationBar({
   activeKey,
-  items = navigationItems,
+  items = [],
   fixed = false,
   closeOnScroll = true,
+  brandHref = "/",
+  labels = defaultLabels,
+  mobileFooterLines = [],
 }: TopNavigationBarProps) {
   const [openKey, setOpenKey] = useState<NavigationKey | null>(null);
   const [displayKey, setDisplayKey] = useState<NavigationKey | null>(null);
@@ -495,6 +513,7 @@ export function TopNavigationBar({
   const desktopMenuId = useId();
 
   const activeItem = items.find((i) => i.key === displayKey) ?? null;
+  const hasNavigationItems = items.length > 0;
   const isDropdownOpen = openKey !== null;
   const isDropdownVisible = activeItem !== null;
 
@@ -724,11 +743,11 @@ export function TopNavigationBar({
         data-name="Top Navigation Bar"
       >
         <div className={styles.barInner}>
-          <Link className={styles.brand} href="/" onClick={closeAll}>
+          <Link className={styles.brand} href={brandHref} onClick={closeAll}>
             YUMENGJH
           </Link>
 
-          <nav aria-label="主导航" className={styles.nav}>
+          <nav aria-label={labels.navAriaLabel} className={styles.nav}>
             {items.map((item) => {
               const isActive = item.key === activeKey;
               const isOpen = item.key === openKey;
@@ -798,7 +817,7 @@ export function TopNavigationBar({
 
           {/* Hamburger button — SVG path animation */}
           <label
-            aria-label={isMenuOpen ? "关闭导航菜单" : "打开导航菜单"}
+            aria-label={isMenuOpen ? labels.closeMenuLabel : labels.openMenuLabel}
             className={cn(styles.menuButton, isMenuOpen && styles.menuButtonOpen)}
             role="button"
             tabIndex={0}
@@ -833,7 +852,7 @@ export function TopNavigationBar({
         <div
           ref={shellRef}
           aria-hidden={!isDropdownOpen}
-          aria-label="桌面导航菜单"
+          aria-label={labels.desktopMenuAriaLabel}
           className={cn(
             styles.desktopDropdownShell,
             isDropdownOpen && styles.desktopDropdownShellOpen,
@@ -895,7 +914,7 @@ export function TopNavigationBar({
         onClick={closeAll}
       >
         <div className={styles.mobileMenuPanel} onClick={(e) => e.stopPropagation()}>
-          <nav aria-label="移动端主导航" className={styles.mobileNav}>
+          <nav aria-label={labels.navAriaLabel} className={styles.mobileNav}>
             {items.map((item) => {
               const isActive = item.key === activeKey;
               const isExpanded = item.key === mobileOpenKey;
@@ -1035,11 +1054,12 @@ export function TopNavigationBar({
             <div className={styles.mobileFooterRule} />
             <div className={styles.mobileFooterMetaRow}>
               <p className={styles.mobileFooterMeta}>
-                数字策展
-                <br />
-                公开的思考与记录
-                <br />
-                2026 年 / DESIGN & CODE
+                {mobileFooterLines.map((line, index) => (
+                  <span key={`${line}-${index}`}>
+                    {index > 0 && <br />}
+                    {line}
+                  </span>
+                ))}
               </p>
               <div aria-hidden="true" className={styles.mobileFooterIcons}>
                 <span className={styles.mobileFooterIcon}>

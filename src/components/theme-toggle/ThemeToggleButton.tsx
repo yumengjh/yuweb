@@ -2,17 +2,15 @@
 
 import { useEffect, useState } from "react";
 
+import { createTranslator, type SiteLocale } from "@/lib/i18n";
+import { siteConfig } from "@/lib/site-config";
+
 const THEME_STORAGE_KEY = "site-theme-mode";
 const SYSTEM_THEME_QUERY = "(prefers-color-scheme: dark)";
 
 type ThemeMode = "auto" | "light" | "dark";
 
 const themeModeOrder: ThemeMode[] = ["auto", "light", "dark"];
-const themeModeLabels: Record<ThemeMode, string> = {
-  auto: "Auto",
-  light: "Light",
-  dark: "Dark",
-};
 
 function getSystemThemeMatcher() {
   if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
@@ -52,8 +50,15 @@ function getNextThemeMode(mode: ThemeMode): ThemeMode {
   return themeModeOrder[(currentIndex + 1) % themeModeOrder.length];
 }
 
-export function ThemeToggleButton({ className }: { className?: string }) {
+export function ThemeToggleButton({
+  className,
+  locale,
+}: {
+  className?: string;
+  locale: SiteLocale;
+}) {
   const [themeMode, setThemeMode] = useState<ThemeMode>(() => getStoredThemeMode());
+  const t = createTranslator(locale);
 
   useEffect(() => {
     applyTheme(themeMode);
@@ -85,14 +90,16 @@ export function ThemeToggleButton({ className }: { className?: string }) {
     applyTheme(nextMode);
   };
 
+  const modeLabel = t(siteConfig.themeToggle.modeLabels[themeMode]);
+
   return (
     <button
-      aria-label={`Toggle theme, current mode ${themeModeLabels[themeMode]}`}
+      aria-label={t(siteConfig.themeToggle.ariaLabel, { mode: modeLabel })}
       className={className}
       type="button"
       onClick={handleToggle}
     >
-      <span>{`Theme / ${themeModeLabels[themeMode]}`}</span>
+      <span>{`${t(siteConfig.themeToggle.label)} / ${modeLabel}`}</span>
     </button>
   );
 }
