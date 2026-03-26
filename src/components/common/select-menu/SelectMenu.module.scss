@@ -1,0 +1,146 @@
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.triggerLabel {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.triggerChevron {
+  flex-shrink: 0;
+  color: var(--c-ink-soft);
+  font-size: 18px; /* 已经放大图标 */
+  line-height: 1;
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease;
+}
+
+.trigger[data-popup-open] .triggerChevron {
+  transform: rotate(180deg);
+}
+
+.positioner {
+  z-index: 80;
+}
+
+/* --- 动画关键帧 --- */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}
+
+.popup {
+  min-width: 220px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--c-border) 92%, transparent);
+  background: color-mix(in srgb, var(--c-surface-paper) 94%, white 6%);
+  box-shadow:
+    0 24px 56px color-mix(in srgb, var(--c-shadow-soft) 76%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--c-border) 40%, transparent);
+
+  /* 动画形变中心设在底部中心 */
+  transform-origin: bottom center;
+
+  /* 【修正】：默认直接应用进场动画 */
+  animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 【修正】：Base UI 专属的退场属性，触发收回动画 */
+.popup[data-ending-style] {
+  animation: popOut 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.viewport,
+.list {
+  display: grid;
+}
+
+.viewport {
+  padding: 8px;
+}
+
+.list {
+  gap: 6px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 12px;
+  color: var(--c-ink-strong);
+  font-size: 13px;
+  line-height: 1.45;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.itemContent {
+  display: grid;
+  gap: 2px;
+}
+
+.itemLabel {
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.itemDescription {
+  color: var(--c-ink-soft);
+  font-size: 12px;
+}
+
+.itemIndicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  color: var(--c-ink-strong);
+  opacity: 0;
+}
+
+.item[data-checked] .itemIndicator {
+  opacity: 1;
+}
+
+.item[data-highlighted] {
+  background: color-mix(in srgb, var(--c-surface-paper) 92%, var(--c-ink-strong) 8%);
+}
+
+.item[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+@media (hover: hover) {
+  .item:hover {
+    background: color-mix(in srgb, var(--c-surface-paper) 92%, var(--c-ink-strong) 8%);
+  }
+}
