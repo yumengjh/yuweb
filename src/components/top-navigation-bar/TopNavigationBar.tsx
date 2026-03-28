@@ -513,7 +513,6 @@ export function TopNavigationBar({
   const desktopMenuId = useId();
 
   const activeItem = items.find((i) => i.key === displayKey) ?? null;
-  const hasNavigationItems = items.length > 0;
   const isDropdownOpen = openKey !== null;
   const isDropdownVisible = activeItem !== null;
 
@@ -609,15 +608,18 @@ export function TopNavigationBar({
   };
 
   const toggleMobileMenu = useCallback(() => {
-    setIsMenuOpen((v) => !v);
-    if (isMenuOpen) setMobileOpenKey(null);
-  }, [isMenuOpen]);
+    setIsMenuOpen((prev) => {
+      const next = !prev;
+      if (!next) setMobileOpenKey(null);
+      return next;
+    });
+  }, [setMobileOpenKey]);
 
   const closeAll = useCallback(() => {
     setIsMenuOpen(false);
     setMobileOpenKey(null);
     closeMenu();
-  }, [closeMenu]);
+  }, [closeMenu, setMobileOpenKey]);
 
   // ── Body overflow lock ──────────────────────────────────────────────────────
 

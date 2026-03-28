@@ -76,7 +76,9 @@ describe("SiteFooter", () => {
     expect(
       screen.getByText(`${zhT(siteConfig.identity.name)} ${siteConfig.identity.brandLatin}`),
     ).toBeInTheDocument();
-    expect(screen.getByRole("navigation", { name: zhT(siteConfig.footer.navAriaLabel) })).toBeInTheDocument();
+    expect(
+      screen.getByRole("navigation", { name: zhT(siteConfig.footer.navAriaLabel) }),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("button", {
         name: zhT(siteConfig.themeToggle.ariaLabel, { mode: autoThemeLabel }),
@@ -98,11 +100,15 @@ describe("SiteFooter", () => {
 
     render(<SiteFooter locale="en-US" />);
 
-    expect(screen.getByRole("navigation", { name: enT(siteConfig.footer.navAriaLabel) })).toBeInTheDocument();
+    expect(
+      screen.getByRole("navigation", { name: enT(siteConfig.footer.navAriaLabel) }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Toggle theme/ })).toHaveTextContent("Theme / Auto");
     expect(
       screen.getByRole("button", {
-        name: enT(siteConfig.languageToggle.triggerAriaLabel, { mode: enT(siteConfig.languageToggle.modeLabels.auto) }),
+        name: enT(siteConfig.languageToggle.triggerAriaLabel, {
+          mode: enT(siteConfig.languageToggle.modeLabels.auto),
+        }),
       }),
     ).toHaveTextContent("Language / Auto");
     expect(screen.getByRole("link", { name: "About" })).toHaveAttribute("href", "/en/about");

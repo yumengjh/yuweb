@@ -1,9 +1,5 @@
 ﻿import { appRoutes, fallbackRoute } from "../data/app-routes.data";
-import type {
-  AppRouteConfig,
-  AppRouteId,
-  SiteFooterDomainRule,
-} from "../types/site-config.types";
+import type { AppRouteConfig, AppRouteId, SiteFooterDomainRule } from "../types/site-config.types";
 
 export function normalizeHostname(hostname?: string | null): string {
   if (!hostname) {

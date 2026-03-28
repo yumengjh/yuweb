@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 export default function EnglishPage() {
   return (
     <>
-  {/* <h1>{t(siteConfig.homePage.metadata.keywords)}</h1> */}
-    <HomePage locale="en-US" />
+      {/* <h1>{t(siteConfig.homePage.metadata.keywords)}</h1> */}
+      <HomePage locale="en-US" />
     </>
   );
 }

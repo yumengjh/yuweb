@@ -80,7 +80,9 @@ describe("LanguageToggleButton", () => {
     await user.click(button);
 
     expect(await screen.findByRole("menuitemradio", { name: englishLabel })).toBeInTheDocument();
-    expect(screen.queryByRole("menuitemradio", { name: enT(siteConfig.languageToggle.modeLabels.auto) })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("menuitemradio", { name: enT(siteConfig.languageToggle.modeLabels.auto) }),
+    ).not.toBeInTheDocument();
 
     await user.click(screen.getByRole("menuitemradio", { name: chineseLabel }));
 

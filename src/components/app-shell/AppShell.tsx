@@ -12,7 +12,12 @@ import {
   type MenuGroup,
   type NavigationItem,
 } from "@/components/top-navigation-bar/TopNavigationBar";
-import { createTranslator, getLocaleFromPathname, localizeHref, stripLocalePrefix } from "@/lib/i18n";
+import {
+  createTranslator,
+  getLocaleFromPathname,
+  localizeHref,
+  stripLocalePrefix,
+} from "@/lib/i18n";
 import {
   getRouteConfigByPathname,
   siteConfig,

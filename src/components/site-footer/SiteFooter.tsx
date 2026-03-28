@@ -29,7 +29,9 @@ export function SiteFooter({ locale }: { locale: SiteLocale }) {
     <footer className={styles.footer}>
       <div className={styles.footerInner}>
         <div className={styles.brand}>
-          <p className={styles.brandTitle}>{`${t(siteConfig.identity.name)} ${siteConfig.identity.brandLatin}`}</p>
+          <p
+            className={styles.brandTitle}
+          >{`${t(siteConfig.identity.name)} ${siteConfig.identity.brandLatin}`}</p>
           <p className={styles.brandSummary}>{t(siteConfig.footer.summary)}</p>
         </div>
 
@@ -57,9 +59,7 @@ export function SiteFooter({ locale }: { locale: SiteLocale }) {
             {metaItems.map((item) => {
               const contentNode = (
                 <>
-                  {item.label && (
-                    <span className={styles.metaLabel}>{`${t(item.label)}：`}</span>
-                  )}
+                  {item.label && <span className={styles.metaLabel}>{`${t(item.label)}：`}</span>}
                   <span className={styles.metaText}>{t(item.text)}</span>
                 </>
               );

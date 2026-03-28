@@ -115,19 +115,23 @@ export const localeCatalogs = {
 职责分别是：
 
 #### `token.helpers.ts`
+
 - 根据 `zh-CN.json` 构建 token tree
 - 提供 `getMessageToken()`
 - 提供 `keys`
 
 #### `catalog.helpers.ts`
+
 - 把嵌套 JSON flatten 成 `a.b.c` 结构
 - 提供 `flatLocaleCatalogs`
 
 #### `message.helpers.ts`
+
 - 处理 `formatMessage()`
 - 处理缺词 warning
 
 #### `path.helpers.ts`
+
 - 处理 locale 路径前缀
 - 处理 `localizeHref()`
 - 处理 `getLocaleFromPathname()`
@@ -170,7 +174,17 @@ import { createTranslator, localizeHref } from "@/lib/i18n";
 这里负责导出 token 对象：
 
 ```ts
-export const { site, route, nav, footer, home, notFound, comingSoon, theme, language } = keys;
+export const {
+  site,
+  route,
+  nav,
+  footer,
+  home,
+  notFound,
+  comingSoon,
+  theme,
+  language,
+} = keys;
 ```
 
 所以业务代码可以这样写：
@@ -752,7 +766,7 @@ languageToggle: {
 后续组件再通过：
 
 ```ts
-t(siteConfig.languageToggle.dialogTitle)
+t(siteConfig.languageToggle.dialogTitle);
 ```
 
 来读。

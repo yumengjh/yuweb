@@ -248,6 +248,7 @@ src/lib/i18n/
 ### 各部分职责
 
 #### `types/`
+
 放 i18n 的纯类型：
 
 - `MessageToken`
@@ -257,12 +258,14 @@ src/lib/i18n/
 - `TokenTree`
 
 #### `data/`
+
 放语言注册数据：
 
 - `localeCatalogs`
 - `supportedLocales`
 
 #### `helpers/`
+
 放纯逻辑 helper：
 
 - token 构建
@@ -271,6 +274,7 @@ src/lib/i18n/
 - 路径与 locale 解析
 
 #### `index.ts`
+
 作为主出口，向业务层提供：
 
 - `createTranslator()`
@@ -282,6 +286,7 @@ src/lib/i18n/
 - 等等
 
 #### `keys.ts`
+
 提供 token 对象：
 
 - `route`
@@ -292,6 +297,7 @@ src/lib/i18n/
 - 等
 
 #### `locale-registry.ts`
+
 提供 locale 类型和语言注册信息：
 
 - `SiteLocale`
@@ -347,6 +353,7 @@ src/lib/site-config/
 ### 职责
 
 #### `types/`
+
 放站点配置相关类型，例如：
 
 - `AppRouteId`
@@ -355,12 +362,14 @@ src/lib/site-config/
 - `SiteFooterMetaItemConfig`
 
 #### `data/`
+
 放静态结构配置，例如：
 
 - `appRoutes`
 - `siteConfig`
 
 #### `helpers/`
+
 放 helper，例如：
 
 - `getRouteConfigById()`
@@ -368,6 +377,7 @@ src/lib/site-config/
 - `matchesDomainRule()`
 
 #### `test/`
+
 放站点配置本身的测试。
 
 ---
@@ -414,13 +424,13 @@ routeMeta: {
 当前项目不推荐写：
 
 ```ts
-t("route.home.title")
+t("route.home.title");
 ```
 
 而推荐：
 
 ```ts
-t(route.home.title)
+t(route.home.title);
 ```
 
 原因是：
@@ -636,31 +646,45 @@ xxx/
 如果你想：
 
 ## 看页面入口
+
 去：
+
 - `F:/yuweb/src/app/`
 
 ## 看首页主体
+
 去：
+
 - `F:/yuweb/src/components/home-page/HomePage.tsx`
 
 ## 看多语言 JSON
+
 去：
+
 - `F:/yuweb/src/locales/`
 
 ## 看 i18n 核心
+
 去：
+
 - `F:/yuweb/src/lib/i18n/`
 
 ## 看站点结构配置
+
 去：
+
 - `F:/yuweb/src/lib/site-config/`
 
 ## 看测试基础设施
+
 去：
+
 - `F:/yuweb/src/test/`
 
 ## 看某个模块自己的测试
+
 去它自己的：
+
 - `test/` 子目录
 
 ---

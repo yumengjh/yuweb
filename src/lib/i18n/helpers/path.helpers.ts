@@ -119,7 +119,9 @@ export function resolvePreferredLocale(
 ): SiteLocale {
   const languages = navigatorLanguages ?? [];
   const supported = supportedLocales;
-  const segmentToLocale = new Map(supported.map((locale) => [getLocaleSegment(locale), locale] as const));
+  const segmentToLocale = new Map(
+    supported.map((locale) => [getLocaleSegment(locale), locale] as const),
+  );
 
   for (const language of languages) {
     const normalizedLanguage = language.trim().toLowerCase();

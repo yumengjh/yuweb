@@ -39,7 +39,11 @@ export function SelectMenu<T extends string>({
 }) {
   return (
     <Menu.Root>
-      <Menu.Trigger aria-label={triggerAriaLabel} className={cx(styles.trigger, className)} type="button">
+      <Menu.Trigger
+        aria-label={triggerAriaLabel}
+        className={cx(styles.trigger, className)}
+        type="button"
+      >
         <span className={styles.triggerLabel}>{triggerLabel}</span>
         <span aria-hidden="true" className={styles.triggerChevron}>
           ▾
@@ -47,12 +51,27 @@ export function SelectMenu<T extends string>({
       </Menu.Trigger>
 
       <Menu.Portal>
-        <Menu.Positioner align={align} className={styles.positioner} side={side} sideOffset={sideOffset}>
+        <Menu.Positioner
+          align={align}
+          className={styles.positioner}
+          side={side}
+          sideOffset={sideOffset}
+        >
           <Menu.Popup className={styles.popup}>
             <Menu.Viewport className={styles.viewport}>
-              <Menu.RadioGroup aria-label={menuAriaLabel} className={styles.list} value={value} onValueChange={(nextValue) => onValueChange(nextValue as T)}>
+              <Menu.RadioGroup
+                aria-label={menuAriaLabel}
+                className={styles.list}
+                value={value}
+                onValueChange={(nextValue) => onValueChange(nextValue as T)}
+              >
                 {options.map((option) => (
-                  <Menu.RadioItem key={option.value} className={styles.item} closeOnClick value={option.value}>
+                  <Menu.RadioItem
+                    key={option.value}
+                    className={styles.item}
+                    closeOnClick
+                    value={option.value}
+                  >
                     <span className={styles.itemContent}>
                       <span className={styles.itemLabel}>{option.label}</span>
                       {option.description ? (
