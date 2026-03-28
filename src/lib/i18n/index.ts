@@ -15,7 +15,7 @@ import {
   switchLocalePath,
 } from "./helpers/path.helpers";
 import type { LocaleMode, SiteLocale } from "./locale-registry";
-import { supportedLocales } from "./locale-registry";
+import { getLocaleCatalog, supportedLocales } from "./locale-registry";
 import type { MessageParams, MessageToken } from "./types/i18n.types";
 
 export type { LocaleMode, SiteLocale } from "./locale-registry";
@@ -49,9 +49,7 @@ export function getLocaleModeOrder(): LocaleMode[] {
     return [getDefaultLocale()];
   }
 
-  return siteConfig.i18n.autoDetect
-    ? ["auto", ...supportedLocales]
-    : [...supportedLocales];
+  return siteConfig.i18n.autoDetect ? ["auto", ...supportedLocales] : [...supportedLocales];
 }
 
 export function getLocaleModeFromStorage(pathname?: string): LocaleMode {
@@ -105,4 +103,19 @@ export function t(
 
 export function createTranslator(locale: SiteLocale) {
   return (token: MessageToken, params?: MessageParams) => t(token, locale, params);
+}
+
+export function getLocaleValue<T = unknown>(locale: SiteLocale, path: string): T | undefined {
+  const segments = path.split(".").filter(Boolean);
+  let current: unknown = siteConfig.i18n.enabled ? getLocaleCatalog(locale) : undefined;
+
+  for (const segment of segments) {
+    if (!current || typeof current !== "object" || !(segment in current)) {
+      return undefined;
+    }
+
+    current = (current as Record<string, unknown>)[segment];
+  }
+
+  return current as T;
 }

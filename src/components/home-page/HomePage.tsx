@@ -1,6 +1,7 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
-import { createTranslator, localizeHref, type SiteLocale } from "@/lib/i18n";
+import { Marquee, type MarqueeDirection } from "@/components/common/marquee/Marquee";
+import { createTranslator, getLocaleValue, localizeHref, type SiteLocale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site-config";
 
 import styles from "@/app/page.module.scss";
@@ -86,6 +87,20 @@ function CapabilityIcon({ kind }: { kind: string }) {
 export function HomePage({ locale }: { locale: SiteLocale }) {
   const t = createTranslator(locale);
   const homePage = siteConfig.homePage;
+  const renderMarquee = (config: (typeof homePage.marquees)[keyof typeof homePage.marquees]) => {
+    const items = getLocaleValue<string[]>(locale, config.itemsPath) ?? [];
+
+    return (
+      <Marquee
+        items={items}
+        separator={t(config.separator)}
+        speed={config.speed}
+        gap={config.gap}
+        direction={config.direction as MarqueeDirection}
+        pauseOnHover={config.pauseOnHover}
+      />
+    );
+  };
 
   return (
     <main className={styles.page}>
@@ -97,9 +112,8 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </header>
 
           <h1 className={styles.heroTitle}>
-            {t(homePage.hero.title)}
-            <br />
-            <span className={styles.heroTitleIndent}>{t(homePage.hero.titleAccent)}</span>
+            <span className={styles.heroTitlePrimary}>{t(homePage.hero.title)}</span>
+            <span className={styles.heroTitleAccent}>{t(homePage.hero.titleAccent)}</span>
           </h1>
 
           <div className={styles.heroBottom}>
@@ -118,6 +132,8 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
+        {renderMarquee(homePage.marquees.afterHero)}
+
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionTitle}>{t(homePage.sectionTitles.philosophy)}</span>
@@ -132,6 +148,8 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
             </div>
           </div>
         </section>
+
+        {renderMarquee(homePage.marquees.afterPhilosophy)}
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
@@ -156,6 +174,8 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
             ))}
           </div>
         </section>
+
+        {renderMarquee(homePage.marquees.afterCapabilities)}
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
@@ -198,6 +218,8 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
+        {renderMarquee(homePage.marquees.afterWorks)}
+
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
             <span className={styles.sectionTitle}>{t(homePage.sectionTitles.gears)}</span>
@@ -219,6 +241,8 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
             </Link>
           </div>
         </section>
+
+        {renderMarquee(homePage.marquees.afterGears)}
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
@@ -247,6 +271,8 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
             </Link>
           </div>
         </section>
+
+        {renderMarquee(homePage.marquees.afterArchive)}
 
         <section className={styles.section}>
           <div className={styles.sectionLabelFull}>{t(homePage.sectionTitles.experience)}</div>

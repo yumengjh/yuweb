@@ -10,7 +10,11 @@ export function flattenCatalog(catalog: NestedMessageCatalog, prefix = ""): Flat
       return [[nextPath, value] as const];
     }
 
-    return Object.entries(flattenCatalog(value, nextPath));
+    if (Array.isArray(value)) {
+      return [];
+    }
+
+    return Object.entries(flattenCatalog(value as NestedMessageCatalog, nextPath));
   });
 
   return Object.fromEntries(entries);

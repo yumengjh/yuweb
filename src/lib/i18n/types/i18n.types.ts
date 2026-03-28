@@ -7,13 +7,15 @@ export type MessageToken = string & {
 export type MessageParams = Record<string, string | number>;
 
 export interface NestedMessageCatalog {
-  [key: string]: string | NestedMessageCatalog;
+  [key: string]: string | readonly string[] | NestedMessageCatalog;
 }
 
 export type FlatMessageCatalog = Record<string, string>;
 
 export type TokenTree<T> = T extends string
   ? MessageToken
-  : {
-      readonly [K in keyof T]: TokenTree<T[K]>;
-    };
+  : T extends readonly unknown[]
+    ? MessageToken
+    : {
+        readonly [K in keyof T]: TokenTree<T[K]>;
+      };

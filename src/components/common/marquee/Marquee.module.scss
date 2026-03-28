@@ -1,0 +1,109 @@
+.marquee {
+  position: relative;
+  overflow: hidden;
+  margin: 0 calc(50% - 50vw);
+  padding: 16px 0;
+  border-top: 1px solid var(--c-border-soft);
+  border-bottom: 1px solid var(--c-border-soft);
+  background: var(--c-surface-paper);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    rgb(0 0 0 / 1) 8%,
+    rgb(0 0 0 / 1) 92%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    rgb(0 0 0 / 1) 8%,
+    rgb(0 0 0 / 1) 92%,
+    transparent
+  );
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  animation: marqueeScroll var(--marquee-duration, 36s) linear infinite;
+}
+
+.marquee[data-pause-on-hover="true"]:hover .marqueeTrack,
+.marquee[data-pause-on-hover="true"]:focus-within .marqueeTrack {
+  animation-play-state: paused;
+}
+
+.marqueeSequence {
+  display: flex;
+  align-items: center;
+  gap: var(--marquee-gap, 14px);
+  flex-shrink: 0;
+  min-width: max-content;
+  padding-inline-end: var(--marquee-gap, 14px);
+}
+
+.marqueeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--marquee-gap, 14px) * 0.5);
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  color: color-mix(in srgb, var(--c-ink-soft) 88%, var(--c-ink-strong));
+  text-transform: uppercase;
+  transition: color 220ms ease;
+}
+
+.marqueeItem:hover {
+  color: var(--c-ink-strong);
+}
+
+.marqueeSeparator {
+  opacity: 0.38;
+  transition:
+    opacity 220ms ease,
+    color 220ms ease;
+}
+
+.marqueeItem:hover .marqueeSeparator {
+  opacity: 0.58;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .marquee {
+    padding: 14px 0;
+  }
+
+  .marqueeItem {
+    font-size: 0.66rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .marqueeItem {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+  }
+}

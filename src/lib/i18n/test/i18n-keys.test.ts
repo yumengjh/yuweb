@@ -6,7 +6,7 @@ import zhCNMessages from "@/locales/zh-CN.json";
 import { footer, home, route } from "@/lib/i18n-keys";
 
 interface NestedCatalog {
-  [key: string]: string | NestedCatalog;
+  [key: string]: string | string[] | NestedCatalog;
 }
 
 function collectLeafPaths(catalog: NestedCatalog, prefix = ""): string[] {
@@ -14,6 +14,9 @@ function collectLeafPaths(catalog: NestedCatalog, prefix = ""): string[] {
     const nextPath = prefix ? `${prefix}.${key}` : key;
     if (typeof value === "string") {
       return [nextPath];
+    }
+    if (Array.isArray(value)) {
+      return [];
     }
     return collectLeafPaths(value, nextPath);
   });

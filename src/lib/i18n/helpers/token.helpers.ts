@@ -7,7 +7,11 @@ function buildTokenTree(input: unknown, path: string[] = []): unknown {
     return path.join(".") as MessageToken;
   }
 
-  if (input == null || typeof input !== "object" || Array.isArray(input)) {
+  if (Array.isArray(input)) {
+    return path.join(".") as MessageToken;
+  }
+
+  if (input == null || typeof input !== "object") {
     throw new Error(`Unsupported i18n schema at ${path.join(".") || "<root>"}`);
   }
 

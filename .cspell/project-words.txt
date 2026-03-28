@@ -37,3 +37,8 @@ fakeyumengjh
 myweb
 Yjpe
 yumg
+drei
+GLTF
+gsap
+hrefs
+lerp
