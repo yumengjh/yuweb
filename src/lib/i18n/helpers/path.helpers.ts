@@ -89,6 +89,16 @@ export function stripLocalePrefix(pathname: string | null | undefined): string {
   return normalizedPathname;
 }
 
+export function normalizePathnameForRedirect(pathname: string | null | undefined): string {
+  const normalizedPathname = pathname || "/";
+
+  if (normalizedPathname === "/") {
+    return "/";
+  }
+
+  return normalizedPathname.replace(/\/+$/, "") || "/";
+}
+
 export function localizeHref(href: string, locale: SiteLocale): string {
   if (!siteConfig.i18n.enabled || !href || !isInternalPath(href)) {
     return href;

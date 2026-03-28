@@ -14,6 +14,7 @@ import {
   switchLocalePath,
   t,
 } from "@/lib/i18n";
+import { normalizePathnameForRedirect } from "@/lib/i18n/helpers/path.helpers";
 import { siteConfig } from "@/lib/site-config";
 
 describe("i18n helpers", () => {
@@ -39,6 +40,13 @@ describe("i18n helpers", () => {
     expect(localizeHref("/en/journey", "zh-CN")).toBe("/journey");
     expect(localizeHref("mailto:test@example.com", "en-US")).toBe("mailto:test@example.com");
     expect(switchLocalePath("/en/journey?tab=1", "zh-CN")).toBe("/journey?tab=1");
+  });
+
+  it("normalizes trailing slashes before redirect comparison", () => {
+    expect(normalizePathnameForRedirect("/")).toBe("/");
+    expect(normalizePathnameForRedirect("/en/")).toBe("/en");
+    expect(normalizePathnameForRedirect("/en/about/")).toBe("/en/about");
+    expect(normalizePathnameForRedirect("/en/about")).toBe("/en/about");
   });
 
   it("resolves preferred locale from browser languages", () => {

@@ -72,6 +72,15 @@ function getBootScript() {
           }
           return pathname || "/";
         };
+        const normalizePathnameForRedirect = (pathname) => {
+          const normalizedPathname = pathname || "/";
+          if (normalizedPathname === "/") return "/";
+          let comparablePathname = normalizedPathname;
+          while (comparablePathname.length > 1 && comparablePathname.endsWith("/")) {
+            comparablePathname = comparablePathname.slice(0, -1);
+          }
+          return comparablePathname || "/";
+        };
         const localizePath = (pathname, locale) => {
           const normalizedPath = stripLocalePrefix(pathname || "/") || "/";
           const prefix = getLocalePrefix(locale);
@@ -123,8 +132,12 @@ function getBootScript() {
 
         const targetUrl = targetPath + window.location.search + window.location.hash;
         const currentUrl = currentPath + window.location.search + window.location.hash;
+        const normalizedTargetUrl =
+          normalizePathnameForRedirect(targetPath) + window.location.search + window.location.hash;
+        const normalizedCurrentUrl =
+          normalizePathnameForRedirect(currentPath) + window.location.search + window.location.hash;
 
-        if (targetUrl !== currentUrl) {
+        if (normalizedTargetUrl !== normalizedCurrentUrl) {
           window.location.replace(targetUrl);
         }
       };
