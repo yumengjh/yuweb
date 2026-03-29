@@ -8,7 +8,7 @@
  * 2. 【循环波纹模式】(pulse={true})：自动循环播放从中心向外扩散、再从中心向外消失的涟漪/波纹效果。
  *
  * ==========================================
- * 🌊 循环波纹 (Pulse) 模式的时间轴机制：
+ * Pulse 模式的时间轴机制：
  * ==========================================
  * 1. 触发 [Appear波纹] 开始从中心向外扩散。
  * 2. 等待 `pulseHoldMs` 毫秒。（此时外圈可能还在扩散，内圈已经完全展现）
@@ -550,7 +550,15 @@ export function PixelCard({
       animationCompleteCallbackRef.current = null;
       clearPulseTimers();
     };
-  }, [clearPulseTimers, handleAnimation, pulse, pulseGapMs, pulseHoldMs, pulseRestartMs]);
+  }, [
+    clearPulseTimers,
+    handleAnimation,
+    initialDelayMs,
+    pulse,
+    pulseGapMs,
+    pulseHoldMs,
+    pulseRestartMs,
+  ]);
 
   const handleEnter = useCallback(() => {
     if (!pulse) handleAnimation("appear");

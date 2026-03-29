@@ -1,11 +1,12 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
+
+import { RoutePlaceholderPage } from "@/components/route-placeholder/RoutePlaceholderPage";
+import { buildRouteMetadata } from "@/lib/seo/metadata";
 
 import { CollectionsPixelBackground } from "./CollectionsPixelBackground";
 import styles from "./page.module.scss";
 
-export const metadata: Metadata = {
-  title: "Collections | YUMENGJH",
-};
+export const metadata: Metadata = buildRouteMetadata("zh-CN", "collections");
 
 const collectionsBackgroundTuning = {
   variant: "default",
@@ -41,7 +42,9 @@ export default function CollectionsPage() {
           variant={collectionsBackgroundTuning.variant}
         />
       </div>
-      <div className={styles.content} />
+      <div className={styles.content}>
+        <RoutePlaceholderPage locale="zh-CN" routeId="collections" />
+      </div>
     </div>
   );
 }

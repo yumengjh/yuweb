@@ -390,10 +390,10 @@ export const siteConfig = {
       afterHero: {
         itemsPath: home.marquees.afterHero.items,
         separator: home.marquee.separator,
-        speed: 60,
+        speed: 100,
         gap: "14px",
         direction: "left",
-        pauseOnHover: true,
+        pauseOnHover: false,
       },
       afterPhilosophy: {
         itemsPath: home.marquees.afterPhilosophy.items,
