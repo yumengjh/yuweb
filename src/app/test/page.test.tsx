@@ -14,10 +14,18 @@ describe("app/page", () => {
     render(<HomePage />);
 
     expect(screen.getByText(/INDEX \/ FULL INVENTORY/)).toBeInTheDocument();
+    expect(
+      screen.getByText((_, element) => {
+        return (
+          element?.textContent === "YUMENGJH." && element.className.includes("text-pressure-title")
+        );
+      }),
+    ).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /EXPLORE CASE/ })[0]).toHaveAttribute(
       "href",
       "/curations",
     );
+    expect(screen.getAllByText("数字建筑师")[0]).toBeInTheDocument();
     expect(screen.getAllByText(/鱼梦江湖/)[0]).toBeInTheDocument();
   });
 
@@ -29,6 +37,7 @@ describe("app/page", () => {
       "href",
       "/en/curations",
     );
+    expect(screen.getAllByText("digital architect")[0]).toBeInTheDocument();
     expect(screen.getByText("Lead Architect")).toBeInTheDocument();
   });
 });

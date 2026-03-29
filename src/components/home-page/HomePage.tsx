@@ -1,10 +1,52 @@
 import Link from "next/link";
+// cspell:words Compressa
 
+import { HeroSummaryRotating } from "@/components/home-page/HeroSummaryRotating";
 import { Marquee, type MarqueeDirection } from "@/components/common/marquee/Marquee";
+import { TextPressure } from "@/components/common/text-pressure/TextPressure";
 import { createTranslator, getLocaleValue, localizeHref, type SiteLocale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site-config";
 
 import styles from "@/app/page.module.scss";
+
+const heroTitleAccentTuning = {
+  minFontSize: 48,
+  strokeWidth: 2.4,
+  widthRange: [78, 188] as const,
+  weightRange: [820, 900] as const,
+  italicRange: [0.02, 0.8] as const,
+  smoothing: 11,
+} as const;
+
+const heroSummaryRotatingCopy = {
+  "zh-CN": {
+    prefix: "我是一名",
+    roles: ["数字建筑师", "程序员", "前端工程师", "全栈工程师", "界面系统设计师", "视觉开发工程师"],
+    suffix:
+      "。我把界面当作一种被精确构筑的结构空间来设计：逻辑先行，留白承重。拒绝无意义的装饰，让每一行代码和每一个像素都服务于秩序与稳定感。",
+  },
+  "en-US": {
+    prefix: "I work as a ",
+    roles: [
+      "digital architect",
+      "frontend engineer",
+      "interface systems designer",
+      "visual developer",
+    ],
+    suffix:
+      ". I design interfaces as deliberate digital architecture: logic first, whitespace load-bearing, and every line of code or pixel aligned to structure, rhythm, and stability.",
+  },
+} as const;
+
+const heroSummaryRotatingTuning = {
+  rotationInterval: 2600,
+  staggerDuration: 0.03,
+  staggerFrom: "center" as const,
+  initial: { y: "100%", opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  exit: { y: "-120%", opacity: 0 },
+  transition: { type: "spring", damping: 30, stiffness: 400 } as const,
+};
 
 function ArrowIcon() {
   return (
@@ -87,6 +129,7 @@ function CapabilityIcon({ kind }: { kind: string }) {
 export function HomePage({ locale }: { locale: SiteLocale }) {
   const t = createTranslator(locale);
   const homePage = siteConfig.homePage;
+  const heroSummaryCopy = heroSummaryRotatingCopy[locale] ?? heroSummaryRotatingCopy["en-US"];
   const renderMarquee = (config: (typeof homePage.marquees)[keyof typeof homePage.marquees]) => {
     const items = getLocaleValue<string[]>(locale, config.itemsPath) ?? [];
 
@@ -111,10 +154,21 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
             <span>{t(homePage.hero.topRight)}</span>
           </header>
 
-          <h1 className={styles.heroTitle}>
-            <span className={styles.heroTitlePrimary}>{t(homePage.hero.title)}</span>
-            <span className={styles.heroTitleAccent}>{t(homePage.hero.titleAccent)}</span>
-          </h1>
+          <div className={styles.heroTitle}>
+            <h1 className={styles.heroTitlePrimary}>{t(homePage.hero.title)}</h1>
+            <div className={styles.heroTitleAccentWrap}>
+              <TextPressure
+                text={t(homePage.hero.titleAccent)}
+                className={styles.heroTitleAccent}
+                fontUrl="/fonts/CompressaPRO-GX.woff2"
+                stroke
+                textColor="transparent"
+                strokeColor="var(--c-ink-strong)"
+                renderTitleAs="div"
+                {...heroTitleAccentTuning}
+              />
+            </div>
+          </div>
 
           <div className={styles.heroBottom}>
             <div className={styles.heroMeta}>
@@ -128,7 +182,17 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
                 {t(homePage.hero.statusLabel)} <span>{t(homePage.hero.statusValue)}</span>
               </p>
             </div>
-            <p className={styles.heroSummary}>{t(homePage.hero.summary)}</p>
+            <HeroSummaryRotating
+              className={styles.heroSummary}
+              prefix={heroSummaryCopy.prefix}
+              suffix={heroSummaryCopy.suffix}
+              texts={heroSummaryCopy.roles}
+              segmenterLocale={locale}
+              rotatingClassName={styles.heroSummaryRotating}
+              rotatingSplitClassName={styles.heroSummaryRotatingSplit}
+              rotatingElementClassName={styles.heroSummaryRotatingElement}
+              {...heroSummaryRotatingTuning}
+            />
           </div>
         </section>
 
@@ -149,7 +213,7 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
-        {renderMarquee(homePage.marquees.afterPhilosophy)}
+        {/* {renderMarquee(homePage.marquees.afterPhilosophy)} */}
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
@@ -175,7 +239,7 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
-        {renderMarquee(homePage.marquees.afterCapabilities)}
+        {/* {renderMarquee(homePage.marquees.afterCapabilities)} */}
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
@@ -218,7 +282,7 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
-        {renderMarquee(homePage.marquees.afterWorks)}
+        {/* {renderMarquee(homePage.marquees.afterWorks)} */}
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
@@ -242,7 +306,7 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
-        {renderMarquee(homePage.marquees.afterGears)}
+        {/* {renderMarquee(homePage.marquees.afterGears)} */}
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
@@ -272,7 +336,7 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
-        {renderMarquee(homePage.marquees.afterArchive)}
+        {/* {renderMarquee(homePage.marquees.afterArchive)} */}
 
         <section className={styles.section}>
           <div className={styles.sectionLabelFull}>{t(homePage.sectionTitles.experience)}</div>
