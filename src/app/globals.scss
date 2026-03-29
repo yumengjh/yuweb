@@ -1,5 +1,5 @@
 @use "../styles/scss/tokens";
-@import "tailwindcss";
+@import url("tailwindcss");
 
 // 将全局 CSS 变量映射给 Tailwind v4 的主题层，方便在 utility class 中复用。
 @theme inline {
