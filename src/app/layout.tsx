@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { AppShell } from "@/components/app-shell/AppShell";
 import { createTranslator, LOCALE_STORAGE_KEY } from "@/lib/i18n";
+import { getOgImage, siteHandle, siteUrl } from "@/lib/seo/metadata";
 import { siteConfig } from "@/lib/site-config";
 
 import "./globals.scss";
@@ -19,11 +20,86 @@ const geistMono = Geist_Mono({
 
 const defaultLocale = siteConfig.i18n.defaultLocale;
 const t = createTranslator(defaultLocale);
+const defaultOgImage = getOgImage(defaultLocale);
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: t(siteConfig.identity.name),
   description: t(siteConfig.identity.description),
+  applicationName: siteConfig.identity.brandLatin,
+  authors: [
+    {
+      name: t(siteConfig.identity.name),
+      url: siteUrl,
+    },
+  ],
+  creator: siteHandle,
+  publisher: siteConfig.identity.brandLatin,
+  referrer: "origin-when-cross-origin",
+  alternates: {
+    languages: {
+      "zh-CN": "/",
+      "en-US": "/en/",
+      "x-default": "/",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: siteConfig.identity.brandLatin,
+    title: t(siteConfig.identity.name),
+    description: t(siteConfig.identity.description),
+    locale: "zh_CN",
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: siteHandle,
+    title: t(siteConfig.identity.name),
+    description: t(siteConfig.identity.description),
+    images: [defaultOgImage.url],
+  },
 };
+
+function getStructuredData() {
+  const siteName = t(siteConfig.identity.name);
+  const description = t(siteConfig.identity.description);
+
+  return JSON.stringify([
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: siteName,
+      url: siteUrl.toString(),
+      description,
+      inLanguage: siteConfig.i18n.supportedLocales,
+      publisher: {
+        "@type": "Person",
+        name: siteName,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: siteName,
+      url: siteUrl.toString(),
+      description,
+      sameAs: ["https://github.com/yumengjh"],
+      email: "mailto:hi@yumgjs.com",
+    },
+  ]);
+}
 
 function getBootScript() {
   const i18nConfig = JSON.stringify(siteConfig.i18n);
@@ -156,6 +232,12 @@ export default function RootLayout({
   return (
     <html lang={defaultLocale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: getStructuredData(),
+          }}
+          type="application/ld+json"
+        />
         <script dangerouslySetInnerHTML={{ __html: getBootScript() }} />
         <AppShell>{children}</AppShell>
       </body>

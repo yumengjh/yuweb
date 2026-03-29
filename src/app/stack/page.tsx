@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 
-import { createTranslator } from "@/lib/i18n";
-import { siteConfig } from "@/lib/site-config";
+import { buildRouteMetadata } from "@/lib/seo/metadata";
 
 import styles from "./page.module.scss";
-
-const t = createTranslator("zh-CN");
 
 const stackItems = [
   {
@@ -40,10 +37,7 @@ const stackItems = [
   },
 ] as const;
 
-export const metadata: Metadata = {
-  title: `${t(siteConfig.routeMeta.stack.title)} | ${t(siteConfig.identity.name)}`,
-  description: t(siteConfig.routeMeta.stack.description),
-};
+export const metadata: Metadata = buildRouteMetadata("zh-CN", "stack");
 
 export default function StackPage() {
   const [frontend, design, interaction, ...rest] = stackItems;

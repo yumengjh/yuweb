@@ -1,15 +1,9 @@
 ﻿import type { Metadata } from "next";
 
+import { buildRouteMetadata } from "@/lib/seo/metadata";
 import { RoutePlaceholderPage } from "@/components/route-placeholder/RoutePlaceholderPage";
-import { createTranslator } from "@/lib/i18n";
-import { siteConfig } from "@/lib/site-config";
 
-const t = createTranslator("en-US");
-
-export const metadata: Metadata = {
-  title: `${t(siteConfig.routeMeta.stack.title)} | ${siteConfig.identity.brandLatin}`,
-  description: t(siteConfig.routeMeta.stack.description),
-};
+export const metadata: Metadata = buildRouteMetadata("en-US", "stack");
 
 export default function EnglishStackPage() {
   return <RoutePlaceholderPage locale="en-US" routeId="stack" />;

@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 
-import { createTranslator } from "@/lib/i18n";
-import { siteConfig } from "@/lib/site-config";
+import { buildRouteMetadata } from "@/lib/seo/metadata";
 
 import styles from "./page.module.scss";
-
-const t = createTranslator("zh-CN");
 
 const timelineItems = [
   {
@@ -32,10 +29,7 @@ const currentItems = [
   "迭代可复用的内容模型，让页面更新不依赖一次性重写。",
 ] as const;
 
-export const metadata: Metadata = {
-  title: `${t(siteConfig.routeMeta.journey.title)} | ${t(siteConfig.identity.name)}`,
-  description: t(siteConfig.routeMeta.journey.description),
-};
+export const metadata: Metadata = buildRouteMetadata("zh-CN", "journey");
 
 export default function JourneyPage() {
   return (

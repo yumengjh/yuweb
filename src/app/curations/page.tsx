@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 
-import { createTranslator } from "@/lib/i18n";
-import { siteConfig } from "@/lib/site-config";
+import { buildRouteMetadata } from "@/lib/seo/metadata";
 
 import styles from "./page.module.scss";
-
-const t = createTranslator("zh-CN");
 
 const projects = [
   {
@@ -34,10 +31,7 @@ const projects = [
   },
 ] as const;
 
-export const metadata: Metadata = {
-  title: `${t(siteConfig.routeMeta.curations.title)} | ${t(siteConfig.identity.name)}`,
-  description: t(siteConfig.routeMeta.curations.description),
-};
+export const metadata: Metadata = buildRouteMetadata("zh-CN", "curations");
 
 export default function CurationsPage() {
   const [first, second, third] = projects;
