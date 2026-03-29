@@ -1,0 +1,71 @@
+.pageShell {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.backgroundLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  // padding: clamp(16px, 3vw, 32px);
+  pointer-events: none;
+}
+
+.backgroundLayer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0), var(--c-bg-a50) 84%);
+}
+
+.backgroundFrame {
+  width: 100%;
+  min-height: calc(100vh - clamp(32px, 6vw, 64px));
+  opacity: 0.82;
+  --pixel-card-radius: 32px;
+  --pixel-card-canvas-opacity: 0.86;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.content :global(main) {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  padding-top: clamp(92px, 11vw, 132px);
+  padding-bottom: clamp(48px, 7vw, 88px);
+}
+
+.content :global(main > div) {
+  position: relative;
+  padding: clamp(28px, 4vw, 44px);
+  border: 1px solid var(--c-border);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0)), var(--c-bg-a50);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--c-shadow-soft);
+}
+
+@media (max-width: 640px) {
+  // .backgroundLayer {
+  //   padding: 12px;
+  // }
+
+  .backgroundFrame {
+    min-height: calc(100vh - 24px);
+    --pixel-card-radius: 24px;
+  }
+
+  .content :global(main > div) {
+    padding: 28px 22px;
+    border-radius: 24px;
+  }
+}
