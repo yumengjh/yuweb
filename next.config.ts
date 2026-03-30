@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  assetPrefix: process.env.NEXT_PUBLIC_CDN_URL || undefined,
 };
 
 export default nextConfig;

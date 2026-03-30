@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
+    "build:prod": "cross-env NEXT_PUBLIC_CDN_URL=https://cdnless.yumg.cn/yumgjs-com next build",
     "start": "next start",
     "lint": "eslint . --cache --cache-strategy content",
     "lint:fix": "eslint . --fix --cache --cache-strategy content",
@@ -54,6 +55,7 @@
     "@vitest/coverage-v8": "^4.0.18",
     "babel-plugin-react-compiler": "1.0.0",
     "commitizen": "^4.3.1",
+    "cross-env": "^10.1.0",
     "cspell": "^9.7.0",
     "cz-git": "^1.12.0",
     "eslint": "^9",
