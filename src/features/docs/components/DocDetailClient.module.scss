@@ -1,0 +1,126 @@
+﻿.shell {
+  --doc-main-max-width: var(--doc-reader-content-width, 800px);
+  --doc-main-side-padding: 8px;
+  width: 100%;
+}
+
+.container {
+  width: min(var(--doc-main-max-width), 100%);
+  margin: 0 auto;
+  padding: 0 var(--doc-main-side-padding) 24px;
+}
+
+.headerContainer {
+  padding-top: 18px;
+}
+
+.header {
+  margin: 18px 0 10px;
+  padding: 0 20px;
+}
+
+.title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--c-text-1);
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  line-height: 1.24;
+  font-weight: 700;
+}
+
+.titleIcon {
+  flex: 0 0 auto;
+  line-height: 1;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: 14px;
+}
+
+.submeta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  color: var(--c-text-2);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.submetaItem {
+  white-space: nowrap;
+}
+
+.tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--c-border);
+  background: color-mix(in srgb, var(--c-primary) 6%, var(--c-bg));
+  color: var(--c-text-2);
+  font-size: 0.76rem;
+  line-height: 1.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metaSticky {
+  position: sticky;
+  top: 0;
+  z-index: 12;
+  width: 100%;
+  background: color-mix(in srgb, var(--c-primary) 10%, var(--c-bg));
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+  backdrop-filter: blur(16px);
+}
+
+.metaInner {
+  width: min(var(--doc-main-max-width), 100%);
+  margin: 0 auto;
+  padding: 8px var(--doc-main-side-padding);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  color: var(--c-text-2);
+  font-size: 0.75rem;
+}
+
+.metaInner > span::before {
+  content: "?";
+  margin-right: 6px;
+  color: color-mix(in srgb, var(--c-primary) 72%, white);
+}
+
+.metaInner > span:first-child::before {
+  content: "";
+  margin-right: 0;
+}
+
+@media (max-width: 768px) {
+  .shell {
+    --doc-main-side-padding: 4px;
+  }
+
+  .header {
+    padding: 0 8px;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+}

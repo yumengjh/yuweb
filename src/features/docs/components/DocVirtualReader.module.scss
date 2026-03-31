@@ -1,0 +1,291 @@
+.shell {
+  width: 100%;
+}
+
+.topAlert {
+  margin-bottom: 14px;
+}
+
+.host {
+  width: 100%;
+}
+
+.inner {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px 0;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+}
+
+.rowContent {
+  --doc-text-color: var(--c-text-1);
+  --doc-muted-color: var(--c-text-2);
+  --doc-code-bg: color-mix(in srgb, var(--c-bg-2) 88%, transparent);
+  --doc-code-border: var(--c-border);
+  --doc-inline-code-bg: color-mix(in srgb, var(--c-bg-3) 92%, transparent);
+  --doc-inline-code-color: var(--c-text-1);
+  --doc-link-color: var(--c-primary);
+  --doc-link-hover-color: color-mix(in srgb, var(--c-primary) 80%, white);
+  font-family:
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  font-size: var(--doc-reader-font-size, 16px);
+  line-height: 1.75;
+  color: var(--doc-text-color);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rowContent > :first-child {
+  margin-top: 0;
+}
+
+.rowContent > :last-child {
+  margin-bottom: 0;
+}
+
+.rowContent :where(p) {
+  margin: 0 0 12px;
+}
+
+.rowContent :where(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 10px;
+  font-weight: 650;
+  color: var(--c-text-1);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.rowContent :where(h1) {
+  margin-top: 24px;
+  font-size: 28px;
+}
+
+.rowContent :where(h2) {
+  margin-top: 22px;
+  font-size: 24px;
+}
+
+.rowContent :where(h3) {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.rowContent :where(h4) {
+  margin-top: 18px;
+  font-size: 18px;
+}
+
+.rowContent :where(h5) {
+  margin-top: 16px;
+  font-size: 16px;
+}
+
+.rowContent :where(h6) {
+  margin-top: 16px;
+  font-size: 15px;
+  color: var(--doc-muted-color);
+}
+
+.rowContent :where(ul, ol) {
+  margin: 0 0 var(--doc-list-spacing, 0px);
+  padding-left: 1.65em;
+}
+
+.rowContent :where(li) {
+  margin: 0 0 var(--doc-list-spacing, 0px);
+}
+
+.rowContent :where(ul ul, ul ol, ol ul, ol ol) {
+  margin: 0;
+}
+
+.rowContent :where(table) {
+  width: 100%;
+  margin: 14px 0 16px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--c-border);
+  font-size: 0.95em;
+}
+
+.rowContent :where(th, td) {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--c-border);
+  border-right: 1px solid var(--c-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.rowContent :where(th) {
+  font-weight: 600;
+  color: var(--c-text-1);
+  background: color-mix(in srgb, var(--c-bg-2) 85%, transparent);
+}
+
+.rowContent :where(tr:last-child td) {
+  border-bottom: 0;
+}
+
+.rowContent :where(th:last-child, td:last-child) {
+  border-right: 0;
+}
+
+.rowContent :where(pre) {
+  margin: 14px 0 16px;
+  overflow: auto;
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-family: var(
+    --doc-code-font-family,
+    SFMono-Regular,
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    Courier,
+    monospace
+  ) !important;
+  font-size: 13.5px;
+  line-height: 1.65;
+  border: 1px solid var(--doc-code-border);
+  background: var(--doc-code-bg);
+  color: var(--c-text-1);
+}
+
+.rowContent :where(pre code) {
+  display: block;
+  background: transparent !important;
+  color: inherit;
+  font-family: var(
+    --doc-code-font-family,
+    SFMono-Regular,
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    Courier,
+    monospace
+  ) !important;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  white-space: pre;
+  tab-size: 2;
+}
+
+.rowContent :where(code:not(pre code)) {
+  font-family: var(
+    --doc-code-font-family,
+    SFMono-Regular,
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    Courier,
+    monospace
+  );
+  font-size: 0.88em;
+  color: var(--doc-inline-code-color);
+  background: var(--doc-inline-code-bg);
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  padding: 0.08em 0.42em;
+}
+
+.rowContent :where(blockquote) {
+  margin: 14px 0;
+  padding: 8px 0 8px 12px;
+  border-left: 3px solid color-mix(in srgb, var(--c-primary) 24%, var(--c-border));
+  color: var(--c-text-2);
+  background: color-mix(in srgb, var(--c-primary) 5%, var(--c-bg));
+  border-radius: 0 12px 12px 0;
+}
+
+.rowContent :where(a) {
+  color: var(--doc-link-color);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--c-primary) 45%, transparent);
+  text-underline-offset: 2px;
+}
+
+.rowContent :where(a:hover) {
+  color: var(--doc-link-hover-color);
+}
+
+.rowContent :where(mark) {
+  background-color: #fde68a;
+  color: #713f12;
+  border-radius: 4px;
+  padding: 0 0.15em;
+}
+
+.rowContent :where(u) {
+  text-decoration: underline;
+  text-decoration-color: var(--c-text-2);
+  text-decoration-thickness: 1px;
+}
+
+.bottomStatus {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px 0 8px;
+  min-height: 30px;
+  color: var(--c-text-2);
+  font-size: 0.82rem;
+}
+
+.bottomLoading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--c-primary);
+}
+
+.bottomMeta {
+  color: var(--c-text-3);
+  white-space: nowrap;
+}
+
+.retryButton {
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--c-text-1);
+  background: var(--c-bg);
+  transition:
+    border-color 0.16s ease,
+    color 0.16s ease,
+    background-color 0.16s ease;
+}
+
+.retryButton:hover {
+  border-color: color-mix(in srgb, var(--c-primary) 30%, var(--c-border));
+  color: var(--c-primary);
+  background: color-mix(in srgb, var(--c-primary) 6%, var(--c-bg));
+}
+
+.loadMoreSentinel {
+  width: 100%;
+  height: 1px;
+}
+
+.footerMeta {
+  margin-top: 8px;
+  color: var(--c-text-3);
+  font-size: 0.78rem;
+  text-align: center;
+}

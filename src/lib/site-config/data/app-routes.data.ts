@@ -80,7 +80,7 @@ export const appRoutes: AppRouteConfig[] = [
     layout: {
       showNavigation: true,
       showFooter: true,
-      fixedNavigation: false,
+      fixedNavigation: true,
       closeNavigationOnScroll: true,
       activeNavigationKey: "notes",
     },
