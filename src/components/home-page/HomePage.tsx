@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { HeroSummaryRotating } from "@/components/home-page/HeroSummaryRotating";
 import { Marquee, type MarqueeDirection } from "@/components/common/marquee/Marquee";
+import { TechLogoLoop } from "@/components/home-page/TechLogoLoop";
 import { TextPressure } from "@/components/common/text-pressure/TextPressure";
 import { createTranslator, getLocaleValue, localizeHref, type SiteLocale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site-config";
@@ -144,6 +145,7 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
       />
     );
   };
+  void renderMarquee;
 
   return (
     <main className={styles.page}>
@@ -196,7 +198,8 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
-        {renderMarquee(homePage.marquees.afterHero)}
+        {/* {renderMarquee(homePage.marquees.afterHero)} */}
+        <TechLogoLoop />
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>

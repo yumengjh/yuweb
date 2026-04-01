@@ -14,6 +14,20 @@ describe("app/page", () => {
     render(<HomePage />);
 
     expect(screen.getByText(/INDEX \/ FULL INVENTORY/)).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "Our tech stack" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "React" })).toHaveAttribute(
+      "href",
+      "https://react.dev/",
+    );
+    expect(screen.getByRole("link", { name: "Vue" })).toHaveAttribute("href", "https://vuejs.org/");
+    expect(screen.getByRole("link", { name: "OpenAI" })).toHaveAttribute(
+      "href",
+      "https://openai.com/",
+    );
+    expect(screen.getByRole("link", { name: "VS Code" })).toHaveAttribute(
+      "href",
+      "https://code.visualstudio.com/",
+    );
     expect(
       screen.getByText((_, element) => {
         return (
