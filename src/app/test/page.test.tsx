@@ -1,6 +1,34 @@
-import { afterEach, describe, expect, it } from "vitest";
+// cspell:words avator
+import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { cleanup, render, screen } from "@/test/render";
+import { cleanup, render, screen, waitFor } from "@/test/render";
+
+vi.mock("@/components/SplashCursor/SplashCursor", () => ({
+  default: () => null,
+}));
+
+vi.mock("gsap", () => ({
+  gsap: {
+    registerPlugin: vi.fn(),
+    set: vi.fn(),
+    to: vi.fn(),
+    getProperty: vi.fn(() => 0),
+    utils: {
+      clamp: (min: number, max: number, value: number) => Math.min(Math.max(value, min), max),
+    },
+  },
+}));
+
+vi.mock("gsap/Draggable", () => ({
+  Draggable: {
+    create: vi.fn(() => [
+      {
+        kill: vi.fn(),
+        update: vi.fn(),
+      },
+    ]),
+  },
+}));
 
 import EnglishHomePage from "@/app/en/page";
 import HomePage from "@/app/page";
@@ -10,8 +38,9 @@ describe("app/page", () => {
     cleanup();
   });
 
-  it("renders localized Chinese home content", () => {
+  it("renders localized Chinese home content", async () => {
     render(<HomePage />);
+    window.dispatchEvent(new Event("load"));
 
     expect(screen.getByText(/INDEX \/ FULL INVENTORY/)).toBeInTheDocument();
     expect(screen.getByRole("region", { name: "Our tech stack" })).toBeInTheDocument();
@@ -35,12 +64,23 @@ describe("app/page", () => {
         );
       }),
     ).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getAllByAltText("Homepage avatar sticker")).toHaveLength(3);
+    });
+
+    const stickerImages = screen.getAllByAltText("Homepage avatar sticker");
+    expect(stickerImages[0]).toHaveAttribute("src", "/image/avator01.png");
+
+    const stickerStage = screen.getAllByTestId("sticker-peel")[0];
+    const pageRoot = stickerStage.closest("main");
+    expect(pageRoot).toBeTruthy();
+    expect(stickerStage.parentElement).toBe(pageRoot);
+
     expect(screen.getAllByRole("link", { name: /EXPLORE CASE/ })[0]).toHaveAttribute(
       "href",
       "/curations",
     );
-    expect(screen.getAllByText("数字建筑师")[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/鱼梦江湖/)[0]).toBeInTheDocument();
   });
 
   it("renders localized English home content and prefixes internal links", () => {

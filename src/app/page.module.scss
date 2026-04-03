@@ -2,6 +2,7 @@
    BASE & TYPOGRAPHY
    ========================================= */
 .page {
+  position: relative;
   min-height: 100vh;
   background-color: var(--c-bg);
   color: var(--c-ink-strong);
@@ -12,6 +13,7 @@
 }
 
 .frame {
+  position: relative;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
@@ -61,13 +63,21 @@
 
 .heroTitle {
   margin: 8vh 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 4rem);
   font-size: clamp(3.2rem, 14vw, 12rem);
   line-height: 0.84;
   letter-spacing: -0.065em;
   color: var(--c-ink-strong);
+}
+
+.heroTitleCopy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .heroTitlePrimary {
@@ -80,7 +90,8 @@
 }
 
 .heroTitleAccentWrap {
-  width: clamp(18rem, 74vw, 64rem);
+  width: 100%;
+  max-width: clamp(18rem, 74vw, 64rem);
   height: clamp(4rem, 8vw, 8.6rem);
   margin-top: -0.08em;
   padding-left: 0.38em;
@@ -641,6 +652,7 @@
   .heroTitle {
     font-size: clamp(2.2rem, 12vw, 4rem);
     line-height: 0.88;
+    grid-template-columns: 1fr;
   }
 
   .heroTitleAccent {

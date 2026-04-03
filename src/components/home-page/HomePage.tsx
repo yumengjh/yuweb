@@ -1,13 +1,15 @@
+// cspell:words avator
 import Link from "next/link";
 // cspell:words Compressa
 
 import { HeroSummaryRotating } from "@/components/home-page/HeroSummaryRotating";
 import { Marquee, type MarqueeDirection } from "@/components/common/marquee/Marquee";
+// import SplashCursor from "@/components/SplashCursor/SplashCursor";
+import { StickerPeel } from "@/components/sticker-peel";
 import { TechLogoLoop } from "@/components/home-page/TechLogoLoop";
 import { TextPressure } from "@/components/common/text-pressure/TextPressure";
 import { createTranslator, getLocaleValue, localizeHref, type SiteLocale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site-config";
-
 import styles from "@/app/page.module.scss";
 
 const heroTitleAccentTuning = {
@@ -149,6 +151,96 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
 
   return (
     <main className={styles.page}>
+      {/* <SplashCursor /> */}
+      <StickerPeel imageSrc="/image/avator01.png" alt="Homepage avatar sticker" />
+      <StickerPeel
+        imageSrc="/image/66af996a9e55f1ee29f117ab.png"
+        alt="Homepage avatar sticker"
+        config={{
+          responsiveConfigs: [
+            {
+              name: "desktop",
+              minWidth: 1025,
+              overrides: {
+                width: 168, // 大小
+                rotate: 1, // 整体角度
+                peelBackHoverPct: 28, // 悬停时折起程度
+                peelBackActivePct: 42, // 按下时折起程度
+                initialPosition: {
+                  x: 200, // 初始位置 x
+                  y: 400, // 初始位置 y
+                },
+              },
+            },
+            {
+              name: "mobile",
+              maxWidth: 767,
+              overrides: {
+                width: 96,
+                rotate: 10,
+                peelBackHoverPct: 24,
+                peelBackActivePct: 36,
+                initialPosition: {
+                  x: 300,
+                  y: 300,
+                },
+              },
+            },
+          ],
+        }}
+      />
+      <StickerPeel
+        imageSrc="/image/react-bits-sticker-DuQtTs-F.png"
+        alt="Homepage avatar sticker"
+        config={{
+          responsiveConfigs: [
+            {
+              name: "desktop",
+              minWidth: 1025,
+              overrides: {
+                width: 168, // 大小
+                rotate: 10, // 整体角度
+                peelBackHoverPct: 28, // 悬停时折起程度
+                peelBackActivePct: 42, // 按下时折起程度
+                initialPosition: {
+                  x: 1450, // 初始位置 x
+                  y: 380, // 初始位置 y
+                },
+              },
+            },
+            {
+              name: "mobile",
+              maxWidth: 767,
+              overrides: {
+                width: 96,
+                // TODO: 旋转角度会影响贴纸的边缘被裁切，目前先调整为一个较小的角度，后续可以考虑增加一个参数来微调贴纸的位置以适配旋转
+                rotate: 20,
+                peelBackHoverPct: 24,
+                peelBackActivePct: 36,
+                initialPosition: {
+                  x: 30,
+                  y: 310,
+                },
+              },
+            },
+            {
+              name: "tablet",
+              minWidth: 768,
+              maxWidth: 1024,
+              overrides: {
+                width: 140,
+                rotate: 1,
+                peelBackHoverPct: 28,
+                peelBackActivePct: 36,
+                initialPosition: {
+                  x: 30,
+                  y: 310,
+                },
+              },
+            },
+          ],
+        }}
+      />
       <div className={styles.frame}>
         <section className={styles.hero}>
           <header className={styles.heroTop}>
@@ -157,18 +249,20 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </header>
 
           <div className={styles.heroTitle}>
-            <h1 className={styles.heroTitlePrimary}>{t(homePage.hero.title)}</h1>
-            <div className={styles.heroTitleAccentWrap}>
-              <TextPressure
-                text={t(homePage.hero.titleAccent)}
-                className={styles.heroTitleAccent}
-                fontUrl="/fonts/CompressaPRO-GX.woff2"
-                stroke
-                textColor="transparent"
-                strokeColor="var(--c-ink-strong)"
-                renderTitleAs="div"
-                {...heroTitleAccentTuning}
-              />
+            <div className={styles.heroTitleCopy}>
+              <h1 className={styles.heroTitlePrimary}>{t(homePage.hero.title)}</h1>
+              <div className={styles.heroTitleAccentWrap}>
+                <TextPressure
+                  text={t(homePage.hero.titleAccent)}
+                  className={styles.heroTitleAccent}
+                  fontUrl="/fonts/CompressaPRO-GX.woff2"
+                  stroke
+                  textColor="transparent"
+                  strokeColor="var(--c-ink-strong)"
+                  renderTitleAs="div"
+                  {...heroTitleAccentTuning}
+                />
+              </div>
             </div>
           </div>
 
@@ -216,7 +310,7 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
-        {/* {renderMarquee(homePage.marquees.afterPhilosophy)} */}
+        {renderMarquee(homePage.marquees.afterPhilosophy)}
 
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
