@@ -4,6 +4,11 @@ import { RoutePlaceholderPage } from "@/components/route-placeholder/RoutePlaceh
 import { buildRouteMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildRouteMetadata("en-US", "notes");
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return [{ docId: "placeholder" }];
+}
 
 export default async function EnglishNoteDocPage({
   params,
