@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  cursor: pointer;
+  cursor: var(--cursor-pointer), pointer;
 }
 
 .triggerLabel {

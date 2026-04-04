@@ -19,7 +19,8 @@ import styles from "./TopNavigationBar.module.scss";
 
 // ─── Duration constants ───────────────────────────────────────────────────────
 
-const DESKTOP_DROPDOWN_CLOSE_DURATION_MS = 520;
+const DESKTOP_DROPDOWN_CLOSE_DURATION_MS = 400;
+const ENABLE_HOVER_SWITCH_AFTER_OPEN = true;
 // ─── Menu content types ───────────────────────────────────────────────────────
 
 export type MenuEntry = {
@@ -377,6 +378,10 @@ function getMobileMenuGroups(item: NavigationItem): MenuGroup[] {
   return item.href ? [{ entries: [{ title: `查看${item.label}`, href: item.href }] }] : [];
 }
 
+function DesktopNavLabel({ label }: { label: string }) {
+  return <span className={styles.navLabelHighlight}>{label}</span>;
+}
+
 // ─── MenuEntryLink ────────────────────────────────────────────────────────────
 
 function MenuEntryLink({
@@ -503,6 +508,7 @@ export function TopNavigationBar({
   const shellRef = useRef<HTMLDivElement | null>(null);
 
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastHoverSwitchedKeyRef = useRef<NavigationKey | null>(null);
 
   const openFrameRef = useRef<number | null>(null);
   const dropdownReadyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -582,6 +588,7 @@ export function TopNavigationBar({
     clearCloseTimer();
     clearOpenFrame();
     clearDropdownReadyTimer();
+    lastHoverSwitchedKeyRef.current = null;
     dropdownScrollReadyRef.current = false;
     dropdownWheelDeltaRef.current = 0;
     setOpenKey(null);
@@ -600,12 +607,30 @@ export function TopNavigationBar({
   ]);
 
   const toggleMenu = (key: NavigationKey) => {
+    if (openKey === key && lastHoverSwitchedKeyRef.current === key) {
+      lastHoverSwitchedKeyRef.current = null;
+      return;
+    }
+
+    lastHoverSwitchedKeyRef.current = null;
+
     if (openKey === key) {
       closeMenu();
       return;
     }
     openMenu(key);
   };
+
+  const handleDesktopTriggerPointerEnter = useCallback(
+    (key: NavigationKey) => {
+      if (!ENABLE_HOVER_SWITCH_AFTER_OPEN) return;
+      if (!isDropdownOpen) return;
+      if (openKey === key) return;
+      lastHoverSwitchedKeyRef.current = key;
+      openMenu(key);
+    },
+    [isDropdownOpen, openKey, openMenu],
+  );
 
   const toggleMobileMenu = useCallback(() => {
     setIsMenuOpen((prev) => {
@@ -767,7 +792,7 @@ export function TopNavigationBar({
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        {item.label}
+                        <DesktopNavLabel label={item.label} />
                       </a>
                     </div>
                   );
@@ -775,7 +800,7 @@ export function TopNavigationBar({
                 return (
                   <div key={item.key} className={styles.navItem}>
                     <Link className={linkClassName} href={href} onClick={closeAll}>
-                      {item.label}
+                      <DesktopNavLabel label={item.label} />
                     </Link>
                   </div>
                 );
@@ -793,17 +818,18 @@ export function TopNavigationBar({
                     )}
                     type="button"
                     onClick={() => toggleMenu(item.key)}
+                    onPointerEnter={() => handleDesktopTriggerPointerEnter(item.key)}
                   >
-                    <span>{item.label}</span>
+                    <DesktopNavLabel label={item.label} />
                     <span aria-hidden="true" className={styles.navTriggerIcon}>
-                      <svg fill="none" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M2.25 4.5 6 8.25 9.75 4.5"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1.2"
-                        />
+                      <svg
+                        fill="none"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="m19.75 8.75-7.25 7-7.25-7" />
                       </svg>
                     </span>
                   </button>

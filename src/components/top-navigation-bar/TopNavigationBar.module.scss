@@ -1,6 +1,21 @@
 .bar {
-  --nav-drawer-ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --nav-drawer-duration: 0.52s;
+  --nav-drawer-ease: linear(
+    0,
+    0.000659 3.28%,
+    0.009978 12.63%,
+    0.040909 22.98%,
+    0.10916 34.09%,
+    0.242391 43.18%,
+    0.665276 53.79%,
+    0.858581 62.88%,
+    0.943552 73.74%,
+    0.979685 83.33%,
+    0.997176 93.43%,
+    1
+  );
+  --nav-drawer-duration: 0.4s;
+  --nav-underline-duration: 0.25s;
+  --nav-underline-ease: ease;
   --nav-ink: var(--c-ink-strong);
   --nav-muted: color-mix(in srgb, var(--c-ink-soft) 80%, #8da0aa 20%);
   --nav-muted-soft: color-mix(in srgb, var(--c-ink-softer) 76%, #a7b2b9 24%);
@@ -86,25 +101,22 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 0;
+  gap: 2px;
+  padding: 8px;
   border: 0;
   background: transparent;
   color: var(--nav-ink);
   font-family: var(--nav-font-ui);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
-  line-height: 24px;
-  cursor: pointer;
+  line-height: 25.2px;
+  cursor: var(--cursor-pointer), pointer;
   transition: color 0.18s ease;
 
   @media (hover: hover) {
-    &:not(.navTriggerActive):not(.navTriggerOpen):hover {
-      color: var(--nav-muted);
-    }
-
-    &:not(.navTriggerOpen):hover::after {
-      transform: scaleX(1);
+    &:not(.navTriggerOpen):hover .navLabelHighlight::after {
+      opacity: 1;
+      transform: translateY(0) scaleY(1);
     }
   }
 
@@ -112,22 +124,6 @@
     outline: 2px solid var(--c-ink-strong);
     outline-offset: 6px;
   }
-
-  &::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border-bottom: 1px solid currentcolor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--nav-drawer-duration) var(--nav-drawer-ease);
-  }
-}
-
-.navTriggerActive::after {
-  transform: scaleX(1);
 }
 
 .navTriggerActive,
@@ -135,17 +131,29 @@
   color: var(--nav-ink);
 }
 
+.navTriggerActive .navLabelHighlight::after,
+.navTriggerOpen .navLabelHighlight::after {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
 .navTriggerIcon {
   display: inline-flex;
-  width: 11px;
-  height: 11px;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
   color: currentcolor;
   transform-origin: center;
-  transition: transform var(--nav-drawer-duration) var(--nav-drawer-ease);
+  transition: transform 0.25s ease;
 
   svg {
+    display: block;
     width: 100%;
     height: 100%;
+  }
+
+  path {
+    stroke: var(--nav-ink);
   }
 }
 
@@ -157,22 +165,19 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 6px 0;
+  padding: 8px;
   color: var(--nav-ink);
   font-family: var(--nav-font-ui);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 25.2px;
   text-decoration: none;
   transition: color 0.18s ease;
 
   @media (hover: hover) {
-    &:not(.navLinkActive):hover {
-      color: var(--nav-muted);
-    }
-
-    &:hover::after {
-      transform: scaleX(1);
+    &:hover .navLabelHighlight::after {
+      opacity: 1;
+      transform: translateY(0) scaleY(1);
     }
   }
 
@@ -180,6 +185,20 @@
     outline: 2px solid var(--c-ink-strong);
     outline-offset: 6px;
   }
+}
+
+.navLinkActive {
+  color: var(--nav-ink);
+}
+
+.navLinkActive .navLabelHighlight::after {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
+.navLabelHighlight {
+  position: relative;
+  display: inline-block;
 
   &::after {
     content: "";
@@ -187,18 +206,14 @@
     right: 0;
     bottom: 0;
     left: 0;
-    border-bottom: 1px solid currentcolor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
-  }
-}
-
-.navLinkActive {
-  color: var(--nav-ink);
-
-  &::after {
-    transform: scaleX(1);
+    height: 1px;
+    background: currentcolor;
+    opacity: 0;
+    transform: translateY(3px) scaleY(0);
+    transform-origin: left center;
+    transition:
+      transform var(--nav-underline-duration) var(--nav-underline-ease),
+      opacity var(--nav-underline-duration) var(--nav-underline-ease);
   }
 }
 
@@ -232,8 +247,8 @@
   top: 0;
   right: 0;
   left: 0;
-  border-top: 1px solid var(--nav-line);
-  border-bottom: 1px solid var(--nav-line);
+  border-top: 0;
+  border-bottom: 0;
   background: var(--nav-surface-solid);
   transform: translateY(-100%);
   transition: transform var(--nav-drawer-duration) var(--nav-drawer-ease);
@@ -247,7 +262,7 @@
 .desktopDropdownContent {
   width: min(calc(100% - 96px), 1320px);
   margin: 0 auto;
-  padding: 38px 0 46px;
+  padding: 40px 0;
 }
 
 /* ── Groups & grid ─────────────────────────────────────────────────────────── */
@@ -277,7 +292,7 @@
 .desktopDropdownGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 36px 64px;
+  gap: 48px 60px;
 }
 
 .desktopDropdownItem {
@@ -302,9 +317,9 @@
   display: block;
   margin: 0;
   font-family: var(--nav-font-ui);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.35;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32.4px;
   transition: opacity 0.18s ease;
 }
 
@@ -313,8 +328,8 @@
   margin: 8px 0 0;
   color: var(--nav-muted);
   font-family: var(--nav-font-ui);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 25.2px;
 }
 
 /* ── Measure layer ─────────────────────────────────────────────────────────── */
@@ -331,8 +346,8 @@
 
 .desktopDropdownMeasurePanel {
   width: min(100vw, 1600px);
-  border-top: 1px solid var(--nav-line);
-  border-bottom: 1px solid var(--nav-line);
+  border-top: 0;
+  border-bottom: 0;
   background: var(--nav-surface-solid);
 }
 
@@ -351,7 +366,7 @@
   z-index: 25;
   pointer-events: none;
   opacity: 0;
-  background: rgb(28 25 23 / 8%);
+  background: rgb(0 0 0 / 25%);
   transition: opacity 0.25s ease-out;
 }
 
@@ -394,7 +409,7 @@
   display: none;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: var(--cursor-pointer), pointer;
 
   &:focus-visible {
     outline: 2px solid var(--nav-ink);
@@ -505,7 +520,7 @@
   border: 0;
   background: transparent;
   color: var(--nav-muted);
-  cursor: pointer;
+  cursor: var(--cursor-pointer), pointer;
   transition: color 0.2s ease;
 
   @media (hover: hover) {

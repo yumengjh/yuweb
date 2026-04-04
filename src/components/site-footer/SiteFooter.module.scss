@@ -91,7 +91,7 @@
   border: 1px solid var(--c-border);
   background: var(--c-surface-paper);
   box-shadow: var(--c-shadow-soft);
-  cursor: pointer;
+  cursor: var(--cursor-pointer), pointer;
   color: var(--c-ink-strong);
   font-family: var(--font-geist-mono), monospace;
   font-size: 13px;

@@ -1,4 +1,6 @@
 ﻿import userEvent from "@testing-library/user-event";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@/test/render";
@@ -130,6 +132,51 @@ describe("TopNavigationBar", () => {
     });
   });
 
+  it("桌面端关闭状态下悬浮其他导航项不会直接打开菜单", async () => {
+    const user = userEvent.setup();
+
+    render(<TopNavigationBar items={items} labels={labels} />);
+
+    const aboutButton = screen.getByRole("button", { name: /关于/ });
+    const panelId = aboutButton.getAttribute("aria-controls");
+    const panel = panelId ? document.getElementById(panelId) : null;
+
+    expect(panel).not.toBeNull();
+
+    await user.hover(aboutButton);
+
+    expect(aboutButton).toHaveAttribute("aria-expanded", "false");
+    expect(panel).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("桌面端点击打开后，悬浮其他导航项会自动切换菜单", async () => {
+    const user = userEvent.setup();
+
+    render(<TopNavigationBar items={items} labels={labels} />);
+
+    const aboutButton = screen.getByRole("button", { name: /关于/ });
+    const stackButton = screen.getByRole("button", { name: /技术栈/ });
+    const panelId = aboutButton.getAttribute("aria-controls");
+    const panel = panelId ? document.getElementById(panelId) : null;
+
+    expect(panel).not.toBeNull();
+
+    await user.click(aboutButton);
+
+    await waitFor(() => {
+      expect(aboutButton).toHaveAttribute("aria-expanded", "true");
+      expect(within(panel as HTMLElement).getByText("起点与来源")).toBeInTheDocument();
+    });
+
+    await user.hover(stackButton);
+
+    await waitFor(() => {
+      expect(aboutButton).toHaveAttribute("aria-expanded", "false");
+      expect(stackButton).toHaveAttribute("aria-expanded", "true");
+      expect(within(panel as HTMLElement).getByText("前端系统")).toBeInTheDocument();
+    });
+  });
+
   it("直接链接和多级导航在激活与展开时应用正确的下划线状态", async () => {
     const user = userEvent.setup();
 
@@ -168,6 +215,140 @@ describe("TopNavigationBar", () => {
     });
   });
 
+  it("一级导航文字使用独立高亮包装以支持贴字下划线动画", () => {
+    render(
+      <TopNavigationBar
+        items={[
+          { key: "direct", label: "直接", href: "/direct" },
+          {
+            key: "nested",
+            label: "多级",
+            href: "/nested",
+            menu: {
+              kind: "entries",
+              entries: [{ title: "查看多级", href: "/nested" }],
+            },
+          },
+        ]}
+        labels={labels}
+      />,
+    );
+
+    const directLink = screen.getByRole("link", { name: "直接" });
+    const nestedButton = screen.getByRole("button", { name: /多级/ });
+
+    const directHighlight = directLink.querySelector(`.${styles.navLabelHighlight}`);
+    const nestedHighlight = nestedButton.querySelector(`.${styles.navLabelHighlight}`);
+
+    expect(directHighlight).not.toBeNull();
+    expect(directHighlight).toHaveTextContent("直接");
+    expect(nestedHighlight).not.toBeNull();
+    expect(nestedHighlight).toHaveTextContent("多级");
+  });
+
+  it("桌面下拉样式保留抽屉式位移开合", () => {
+    const stylesheetPath = path.resolve(
+      process.cwd(),
+      "src/components/top-navigation-bar/TopNavigationBar.module.scss",
+    );
+    const stylesheet = readFileSync(stylesheetPath, "utf8");
+
+    expect(stylesheet).toContain("transform: translateY(-100%);");
+    expect(stylesheet).toContain(".desktopDropdownPanelOpen");
+    expect(stylesheet).toContain("transform: translateY(0);");
+  });
+
+  it("桌面一级导航使用接近 Figma 的字号", () => {
+    const stylesheetPath = path.resolve(
+      process.cwd(),
+      "src/components/top-navigation-bar/TopNavigationBar.module.scss",
+    );
+    const stylesheet = readFileSync(stylesheetPath, "utf8");
+
+    expect(stylesheet).toContain("font-size: 18px;");
+    expect(stylesheet).toContain("line-height: 25.2px;");
+  });
+
+  it("桌面一级导航保持 Figma 的 8px 热区且 hover 不变色", () => {
+    const stylesheetPath = path.resolve(
+      process.cwd(),
+      "src/components/top-navigation-bar/TopNavigationBar.module.scss",
+    );
+    const stylesheet = readFileSync(stylesheetPath, "utf8");
+
+    expect(stylesheet).toContain("padding: 8px;");
+    expect(stylesheet).not.toContain(
+      "&:not(.navTriggerActive):not(.navTriggerOpen):hover {\n      color: var(--nav-muted);",
+    );
+    expect(stylesheet).not.toContain(
+      "&:not(.navLinkActive):hover {\n      color: var(--nav-muted);",
+    );
+  });
+
+  it("桌面导航的 hover 自动切换能力由组件内部变量控制，箭头尺寸与间距对齐 Figma", () => {
+    const stylesheetPath = path.resolve(
+      process.cwd(),
+      "src/components/top-navigation-bar/TopNavigationBar.module.scss",
+    );
+    const componentPath = path.resolve(
+      process.cwd(),
+      "src/components/top-navigation-bar/TopNavigationBar.tsx",
+    );
+    const stylesheet = readFileSync(stylesheetPath, "utf8");
+    const componentSource = readFileSync(componentPath, "utf8");
+
+    expect(componentSource).toContain("const ENABLE_HOVER_SWITCH_AFTER_OPEN = true;");
+    expect(stylesheet).toContain("gap: 2px;");
+    expect(stylesheet).toContain("width: 20px;");
+    expect(stylesheet).toContain("height: 20px;");
+  });
+
+  it("桌面导航箭头使用新的 Figma 风格 SVG 路径", () => {
+    const componentPath = path.resolve(
+      process.cwd(),
+      "src/components/top-navigation-bar/TopNavigationBar.tsx",
+    );
+    const componentSource = readFileSync(componentPath, "utf8");
+
+    expect(componentSource).toContain('viewBox="0 0 24 24"');
+    expect(componentSource).toContain('d="m19.75 8.75-7.25 7-7.25-7"');
+    expect(componentSource).not.toContain('stroke="#000"');
+  });
+
+  it("桌面抽屉使用 Figma 采样得到的约 0.4s 时长与自定义缓动", () => {
+    const stylesheetPath = path.resolve(
+      process.cwd(),
+      "src/components/top-navigation-bar/TopNavigationBar.module.scss",
+    );
+    const componentPath = path.resolve(
+      process.cwd(),
+      "src/components/top-navigation-bar/TopNavigationBar.tsx",
+    );
+    const stylesheet = readFileSync(stylesheetPath, "utf8");
+    const componentSource = readFileSync(componentPath, "utf8");
+
+    expect(stylesheet).toContain("--nav-drawer-duration: 0.4s;");
+    expect(stylesheet).toContain("--nav-drawer-ease:");
+    expect(stylesheet).toContain("linear(");
+    expect(componentSource).toContain("const DESKTOP_DROPDOWN_CLOSE_DURATION_MS = 400;");
+  });
+
+  it("桌面展开菜单使用更接近 Figma 的内容密度与遮罩层", () => {
+    const stylesheetPath = path.resolve(
+      process.cwd(),
+      "src/components/top-navigation-bar/TopNavigationBar.module.scss",
+    );
+    const stylesheet = readFileSync(stylesheetPath, "utf8");
+
+    expect(stylesheet).toContain("padding: 40px 0;");
+    expect(stylesheet).toContain("gap: 48px 60px;");
+    expect(stylesheet).toContain("font-size: 24px;");
+    expect(stylesheet).toContain("line-height: 32.4px;");
+    expect(stylesheet).toContain("font-size: 18px;");
+    expect(stylesheet).toContain("line-height: 25.2px;");
+    expect(stylesheet).toContain("background: rgb(0 0 0 / 25%);");
+  });
+
   it("支持展开自定义 component 菜单内容", async () => {
     const user = userEvent.setup();
 
@@ -196,5 +377,18 @@ describe("TopNavigationBar", () => {
       expect(journeyButton).toHaveAttribute("aria-expanded", "true");
       expect(screen.getAllByText("这里是自定义旅程菜单").length).toBeGreaterThan(0);
     });
+  });
+
+  it("全局样式为桌面端提供自定义箭头与 pointer 光标", () => {
+    const stylesheetPath = path.resolve(process.cwd(), "src/app/globals.scss");
+    const stylesheet = readFileSync(stylesheetPath, "utf8");
+
+    expect(stylesheet).toContain("@media (hover: hover) and (pointer: fine)");
+    expect(stylesheet).toContain("--cursor-default");
+    expect(stylesheet).toContain("--cursor-pointer");
+    expect(stylesheet).toContain("cursor: var(--cursor-default), auto;");
+    expect(stylesheet).toContain("cursor: var(--cursor-pointer), pointer;");
+    expect(stylesheet).toContain("width%3D%2224%22");
+    expect(stylesheet).toContain("height%3D%2224%22");
   });
 });
