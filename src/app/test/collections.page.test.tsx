@@ -5,7 +5,7 @@ import { createTranslator } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site-config";
 import { cleanup, render, screen } from "@/test/render";
 
-import CollectionsPage from "@/app/collections/page";
+import CollectionsPage from "@/app/(zh)/collections/page";
 
 describe("app/collections/page", () => {
   beforeEach(() => {

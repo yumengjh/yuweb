@@ -1,13 +1,16 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { render, screen } from "@/test/render";
+import { cleanup, render, screen } from "@/test/render";
 
 import { AppShell } from "@/components/app-shell/AppShell";
 
+let pathnameMock = "/about";
+const pushMock = vi.fn();
+
 vi.mock("next/navigation", () => ({
-  usePathname: () => "/about",
+  usePathname: () => pathnameMock,
   useRouter: () => ({
-    push: vi.fn(),
+    push: pushMock,
   }),
 }));
 
@@ -26,7 +29,30 @@ Object.defineProperty(window, "matchMedia", {
   })),
 });
 
+afterEach(() => {
+  cleanup();
+  document.documentElement.lang = "zh-CN";
+  document.documentElement.dataset.locale = "";
+});
+
 describe("AppShell", () => {
+  it("keeps document lang untouched during client renders", () => {
+    pathnameMock = "/en/about";
+    document.documentElement.lang = "zh-CN";
+    document.documentElement.dataset.locale = "";
+
+    render(
+      <AppShell>
+        <main>
+          <h1>About Body</h1>
+        </main>
+      </AppShell>,
+    );
+
+    expect(document.documentElement.lang).toBe("zh-CN");
+    expect(document.documentElement.dataset.locale).toBe("");
+  });
+
   it("renders shared navigation and footer from route config", () => {
     render(
       <AppShell>

@@ -1,7 +1,7 @@
-﻿import { createTranslator, type SiteLocale } from "@/lib/i18n";
+import { createTranslator, type SiteLocale } from "@/lib/i18n";
 import { siteConfig, type AppRouteId } from "@/lib/site-config";
 
-import styles from "@/app/blog/page.module.scss";
+import styles from "@/app/(zh)/blog/page.module.scss";
 
 export function RoutePlaceholderPage({
   locale,

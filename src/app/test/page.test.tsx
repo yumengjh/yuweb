@@ -30,8 +30,8 @@ vi.mock("gsap/Draggable", () => ({
   },
 }));
 
-import EnglishHomePage from "@/app/en/page";
-import HomePage from "@/app/page";
+import EnglishHomePage from "@/app/(en)/en/page";
+import HomePage from "@/app/(zh)/page";
 
 describe("app/page", () => {
   afterEach(() => {

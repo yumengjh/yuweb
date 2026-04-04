@@ -2,9 +2,9 @@ import { afterEach, describe, expect, it } from "vitest";
 
 import { cleanup, render, screen } from "@/test/render";
 
-import EnglishAboutPage from "@/app/en/about/page";
-import EnglishJourneyPage from "@/app/en/journey/page";
-import EnglishNotesPage from "@/app/en/notes/page";
+import EnglishAboutPage from "@/app/(en)/en/about/page";
+import EnglishJourneyPage from "@/app/(en)/en/journey/page";
+import EnglishNotesPage from "@/app/(en)/en/notes/page";
 
 describe("app/en routes", () => {
   afterEach(() => {

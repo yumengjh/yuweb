@@ -1,78 +1,12 @@
-﻿import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { ReactNode } from "react";
 
 import { AppShell } from "@/components/app-shell/AppShell";
-import { createTranslator, LOCALE_STORAGE_KEY } from "@/lib/i18n";
-import { getOgImage, siteHandle, siteUrl } from "@/lib/seo/metadata";
+import { createTranslator, LOCALE_STORAGE_KEY, type SiteLocale } from "@/lib/i18n";
+import { siteUrl } from "@/lib/seo/metadata";
 import { siteConfig } from "@/lib/site-config";
 
-import "./globals.scss";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const defaultLocale = siteConfig.i18n.defaultLocale;
-const t = createTranslator(defaultLocale);
-const defaultOgImage = getOgImage(defaultLocale);
-
-export const metadata: Metadata = {
-  metadataBase: siteUrl,
-  title: t(siteConfig.identity.name),
-  description: t(siteConfig.identity.description),
-  applicationName: siteConfig.identity.brandLatin,
-  authors: [
-    {
-      name: t(siteConfig.identity.name),
-      url: siteUrl,
-    },
-  ],
-  creator: siteHandle,
-  publisher: siteConfig.identity.brandLatin,
-  referrer: "origin-when-cross-origin",
-  alternates: {
-    languages: {
-      "zh-CN": "/",
-      "en-US": "/en/",
-      "x-default": "/",
-    },
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-  openGraph: {
-    type: "website",
-    url: "/",
-    siteName: siteConfig.identity.brandLatin,
-    title: t(siteConfig.identity.name),
-    description: t(siteConfig.identity.description),
-    locale: "zh_CN",
-    images: [defaultOgImage],
-  },
-  twitter: {
-    card: "summary_large_image",
-    creator: siteHandle,
-    title: t(siteConfig.identity.name),
-    description: t(siteConfig.identity.description),
-    images: [defaultOgImage.url],
-  },
-};
-
-function getStructuredData() {
+function getStructuredData(locale: SiteLocale) {
+  const t = createTranslator(locale);
   const siteName = t(siteConfig.identity.name);
   const description = t(siteConfig.identity.description);
 
@@ -83,7 +17,7 @@ function getStructuredData() {
       name: siteName,
       url: siteUrl.toString(),
       description,
-      inLanguage: siteConfig.i18n.supportedLocales,
+      inLanguage: locale,
       publisher: {
         "@type": "Person",
         name: siteName,
@@ -224,23 +158,23 @@ function getBootScript() {
   `;
 }
 
-export default function RootLayout({
+export function SiteDocument({
   children,
+  locale,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
+  locale: SiteLocale;
 }>) {
   return (
-    <html lang={defaultLocale} suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: getStructuredData(),
-          }}
-          type="application/ld+json"
-        />
-        <script dangerouslySetInnerHTML={{ __html: getBootScript() }} />
-        <AppShell>{children}</AppShell>
-      </body>
-    </html>
+    <body className="font-geist-sans font-geist-mono antialiased">
+      <script
+        dangerouslySetInnerHTML={{
+          __html: getStructuredData(locale),
+        }}
+        type="application/ld+json"
+      />
+      <script dangerouslySetInnerHTML={{ __html: getBootScript() }} />
+      <AppShell>{children}</AppShell>
+    </body>
   );
 }

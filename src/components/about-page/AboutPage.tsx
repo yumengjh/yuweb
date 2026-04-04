@@ -8,7 +8,7 @@ import Lenis from "lenis";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, useGLTF, useAnimations, Center } from "@react-three/drei";
 import * as THREE from "three";
-import styles from "@/app/about/page.module.scss";
+import styles from "@/app/(zh)/about/page.module.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
