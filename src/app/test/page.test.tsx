@@ -1,4 +1,6 @@
 // cspell:words avator
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { cleanup, render, screen, waitFor } from "@/test/render";
@@ -8,14 +10,57 @@ vi.mock("@/components/SplashCursor/SplashCursor", () => ({
 }));
 
 vi.mock("gsap", () => ({
-  gsap: {
+  default: {
     registerPlugin: vi.fn(),
     set: vi.fn(),
     to: vi.fn(),
+    fromTo: vi.fn(() => ({
+      scrollTrigger: { kill: vi.fn() },
+      kill: vi.fn(),
+    })),
+    context: vi.fn((callback?: () => void) => {
+      callback?.();
+      return { revert: vi.fn() };
+    }),
+    ticker: {
+      add: vi.fn(),
+      remove: vi.fn(),
+      lagSmoothing: vi.fn(),
+    },
     getProperty: vi.fn(() => 0),
     utils: {
       clamp: (min: number, max: number, value: number) => Math.min(Math.max(value, min), max),
     },
+  },
+  gsap: {
+    registerPlugin: vi.fn(),
+    set: vi.fn(),
+    to: vi.fn(),
+    fromTo: vi.fn(() => ({
+      scrollTrigger: { kill: vi.fn() },
+      kill: vi.fn(),
+    })),
+    context: vi.fn((callback?: () => void) => {
+      callback?.();
+      return { revert: vi.fn() };
+    }),
+    ticker: {
+      add: vi.fn(),
+      remove: vi.fn(),
+      lagSmoothing: vi.fn(),
+    },
+    getProperty: vi.fn(() => 0),
+    utils: {
+      clamp: (min: number, max: number, value: number) => Math.min(Math.max(value, min), max),
+    },
+  },
+}));
+
+vi.mock("gsap/ScrollTrigger", () => ({
+  ScrollTrigger: {
+    update: vi.fn(),
+    refresh: vi.fn(),
+    getAll: vi.fn(() => []),
   },
 }));
 
@@ -27,6 +72,14 @@ vi.mock("gsap/Draggable", () => ({
         update: vi.fn(),
       },
     ]),
+  },
+}));
+
+vi.mock("lenis", () => ({
+  default: class MockLenis {
+    on = vi.fn();
+    raf = vi.fn();
+    destroy = vi.fn();
   },
 }));
 
@@ -81,6 +134,9 @@ describe("app/page", () => {
       "href",
       "/curations",
     );
+
+    expect(screen.getAllByRole("heading", { level: 2 }).length).toBeGreaterThan(1);
+    expect(screen.getAllByRole("heading", { level: 3 }).length).toBeGreaterThan(3);
   });
 
   it("renders localized English home content and prefixes internal links", () => {
@@ -93,5 +149,54 @@ describe("app/page", () => {
     );
     expect(screen.getAllByText("digital architect")[0]).toBeInTheDocument();
     expect(screen.getByText("Lead Architect")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Space, Logic, and Digital Order.", level: 2 }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "In the context of a digital architect, the screen is not merely a flat canvas but a physical environment that can be organized and reasoned about. Whitespace is not absence; it is a load-bearing material that defines rhythm and hierarchy.",
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it("keeps the home page free of text-animation component hookups", () => {
+    const homePageSource = readFileSync(
+      path.resolve(process.cwd(), "src/components/home-page/HomePage.tsx"),
+      "utf8",
+    );
+
+    expect(homePageSource).not.toContain("<SplitText");
+    expect(homePageSource).not.toContain("<ScrollRevealText");
+  });
+
+  it("renders the philosophy section from the original paragraph list", () => {
+    const homePageSource = readFileSync(
+      path.resolve(process.cwd(), "src/components/home-page/HomePage.tsx"),
+      "utf8",
+    );
+
+    expect(homePageSource).toContain("homePage.philosophy.paragraphs.map");
+    expect(homePageSource).toContain(
+      "<h2 className={styles.statementTitle}>{t(homePage.philosophy.title)}</h2>",
+    );
+  });
+
+  it("does not enable Lenis-based damped scrolling through the home page component", () => {
+    const homePageSource = readFileSync(
+      path.resolve(process.cwd(), "src/components/home-page/HomePage.tsx"),
+      "utf8",
+    );
+
+    expect(homePageSource).not.toContain("HomeSmoothScroll");
+  });
+
+  it("keeps the philosophy copy in the original responsive two-column layout", () => {
+    const stylesSource = readFileSync(
+      path.resolve(process.cwd(), "src/app/page.module.scss"),
+      "utf8",
+    );
+
+    expect(stylesSource).toContain(".statementText");
+    expect(stylesSource).toContain("grid-template-columns: 1fr 1fr;");
   });
 });

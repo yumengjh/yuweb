@@ -72,7 +72,7 @@ describe("i18n helpers", () => {
     const zhT = createTranslator("zh-CN");
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-    expect(zhT(nav.about.label)).toBe("关于");
+    expect(zhT(nav.about.label)).toBe("我的故事");
     expect(t(theme.aria, "en-US", { mode: "Auto" })).toBe("Toggle theme, current mode Auto");
     expect(hasMessage(nav.about.label, "en-US")).toBe(true);
     expect(hasMessage("missing.key" as never, "en-US")).toBe(false);
