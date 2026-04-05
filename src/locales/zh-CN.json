@@ -56,7 +56,7 @@
       "line3": "2026 / DESIGN & CODE"
     },
     "about": {
-      "label": "关于",
+      "label": "我的故事",
       "group": {
         "start": "开始",
         "aboutMe": "关于我",
@@ -92,7 +92,7 @@
       }
     },
     "notes": {
-      "label": "笔记",
+      "label": "灵感日志",
       "recent": {
         "title": "最近更新",
         "description": "最近记下的内容、正在延展的问题和新的观察。"
@@ -119,7 +119,7 @@
       }
     },
     "projects": {
-      "label": "项目",
+      "label": "我的作品",
       "group": {
         "inProgress": "进行中",
         "archive": "归档",
@@ -155,7 +155,7 @@
       }
     },
     "collections": {
-      "label": "收藏",
+      "label": "收藏夹",
       "books": {
         "title": "书籍",
         "description": "留下来的书、反复翻看的部分，以及它们为何重要。"
@@ -182,7 +182,7 @@
       }
     },
     "journey": {
-      "label": "旅程",
+      "label": "我的足迹",
       "nodesLabel": "节点",
       "recentLabel": "最近",
       "recentSummary": "这里保留的不只是经历，还有那些逐渐形成、又不断被修正的判断。",
