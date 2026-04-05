@@ -15,6 +15,10 @@ export type AppRouteId =
   | "projects"
   | "collections";
 
+export type AppSystemRouteId = "notFound";
+
+export type AppRouteConfigId = AppRouteId | AppSystemRouteId;
+
 export type SiteFooterDomainRule = {
   exact?: string[];
   suffix?: string[];
@@ -41,12 +45,17 @@ export type AppRouteLayoutConfig = {
   activeNavigationKey?: string;
 };
 
-export type AppRouteConfig = {
-  id: AppRouteId;
-  pathname: string;
-  match: "exact" | "prefix";
-  layout: AppRouteLayoutConfig;
-};
+export type AppRouteConfig =
+  | {
+      id: AppRouteId;
+      pathname: string;
+      match: "exact" | "prefix";
+      layout: AppRouteLayoutConfig;
+    }
+  | {
+      id: AppSystemRouteId;
+      layout: AppRouteLayoutConfig;
+    };
 
 export type SiteNavigationEntryConfig = {
   href: string;

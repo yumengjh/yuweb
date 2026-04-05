@@ -1,5 +1,15 @@
-﻿import { appRoutes, fallbackRoute } from "../data/app-routes.data";
-import type { AppRouteConfig, AppRouteId, SiteFooterDomainRule } from "../types/site-config.types";
+﻿import { appRoutes, fallbackRoute, notFoundRoute } from "../data/app-routes.data";
+import type {
+  AppRouteConfig,
+  AppRouteConfigId,
+  SiteFooterDomainRule,
+} from "../types/site-config.types";
+
+function isPathnameRoute(
+  route: AppRouteConfig,
+): route is Extract<AppRouteConfig, { pathname: string }> {
+  return "pathname" in route;
+}
 
 export function normalizeHostname(hostname?: string | null): string {
   if (!hostname) {
@@ -34,7 +44,7 @@ export function matchesDomainRule(
   );
 }
 
-export function getRouteConfigById(id: AppRouteId): AppRouteConfig {
+export function getRouteConfigById(id: AppRouteConfigId): AppRouteConfig {
   return appRoutes.find((route) => route.id === id) ?? fallbackRoute;
 }
 
@@ -43,7 +53,8 @@ export function getRouteConfigByPathname(pathname: string): AppRouteConfig {
     return fallbackRoute;
   }
 
-  const exactMatch = appRoutes.find(
+  const pathnameRoutes = appRoutes.filter(isPathnameRoute);
+  const exactMatch = pathnameRoutes.find(
     (route) => route.match === "exact" && route.pathname === pathname,
   );
 
@@ -51,11 +62,11 @@ export function getRouteConfigByPathname(pathname: string): AppRouteConfig {
     return exactMatch;
   }
 
-  const prefixMatch = appRoutes.find(
+  const prefixMatch = pathnameRoutes.find(
     (route) =>
       route.match === "prefix" &&
       (pathname === route.pathname || pathname.startsWith(`${route.pathname}/`)),
   );
 
-  return prefixMatch ?? fallbackRoute;
+  return prefixMatch ?? notFoundRoute;
 }

@@ -24,6 +24,8 @@ describe("site-config", () => {
     expect(getRouteConfigByPathname("/projects/demo")).toMatchObject({ id: "projects" });
 
     expect(getRouteConfigByPathname("/collections/archive")).toMatchObject({ id: "collections" });
+
+    expect(getRouteConfigByPathname("/missing-page")).toMatchObject({ id: "notFound" });
   });
 
   it("exposes shared site behavior config and message-key based structures", () => {

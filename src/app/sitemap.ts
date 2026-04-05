@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 
 import { supportedLocales } from "@/lib/locale-registry";
 import { getLocalizedMetadataPath, siteUrl } from "@/lib/seo/metadata";
@@ -12,7 +12,9 @@ function toAbsoluteUrl(pathname: string) {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const routePaths = [...new Set(appRoutes.map((route) => route.pathname))];
+  const routePaths = [
+    ...new Set(appRoutes.filter((route) => "pathname" in route).map((route) => route.pathname)),
+  ];
 
   return routePaths.flatMap((pathname) =>
     supportedLocales.map((locale) => ({

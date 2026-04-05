@@ -1,6 +1,6 @@
 ﻿import type { AppRouteConfig } from "../types/site-config.types";
 
-export const appRoutes: AppRouteConfig[] = [
+const pathnameRoutes: AppRouteConfig[] = [
   {
     id: "home",
     pathname: "/",
@@ -111,4 +111,18 @@ export const appRoutes: AppRouteConfig[] = [
   },
 ];
 
-export const fallbackRoute = appRoutes[0];
+// 缺点：这里只能覆盖“未知 pathname 触发的 404”导航；若后续在已匹配页面内主动调用 notFound()，仍需显式切到 notFound 配置。
+export const notFoundRoute: AppRouteConfig = {
+  id: "notFound",
+  layout: {
+    showNavigation: true,
+    showFooter: true,
+    fixedNavigation: true,
+    closeNavigationOnScroll: false,
+    activeNavigationKey: undefined,
+  },
+};
+
+export const appRoutes: AppRouteConfig[] = [...pathnameRoutes, notFoundRoute];
+
+export const fallbackRoute = pathnameRoutes[0];
