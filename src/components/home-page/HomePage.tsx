@@ -11,6 +11,7 @@ import { TextPressure } from "@/components/common/text-pressure/TextPressure";
 import { createTranslator, getLocaleValue, localizeHref, type SiteLocale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site-config";
 import styles from "@/app/page.module.scss";
+import { HomeSmoothScroll } from "@/components/home-page/HomeSmoothScroll";
 
 const heroTitleAccentTuning = {
   minFontSize: 48,
@@ -152,6 +153,7 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
   return (
     <main className={styles.page}>
       {/* <SplashCursor /> */}
+      <HomeSmoothScroll />
       <StickerPeel imageSrc="/image/avator01.png" alt="Homepage avatar sticker" />
       <StickerPeel
         imageSrc="/image/66af996a9e55f1ee29f117ab.png"
