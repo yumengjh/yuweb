@@ -181,13 +181,14 @@ describe("app/page", () => {
     );
   });
 
-  it("does not enable Lenis-based damped scrolling through the home page component", () => {
+  it("enables Lenis-based damped scrolling through the home page component", () => {
     const homePageSource = readFileSync(
       path.resolve(process.cwd(), "src/components/home-page/HomePage.tsx"),
       "utf8",
     );
 
-    expect(homePageSource).not.toContain("HomeSmoothScroll");
+    expect(homePageSource).toContain("import { HomeSmoothScroll }");
+    expect(homePageSource).toContain("<HomeSmoothScroll />");
   });
 
   it("keeps the philosophy copy in the original responsive two-column layout", () => {

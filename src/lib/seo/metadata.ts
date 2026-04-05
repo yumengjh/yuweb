@@ -137,3 +137,14 @@ export function buildNotFoundMetadata(locale: SiteLocale): Metadata {
     },
   };
 }
+export function buildGlobalNotFoundMetadata(): Metadata {
+  return {
+    metadataBase: siteUrl,
+    title: `404 | ${siteConfig.identity.brandLatin}`,
+    description: "Page not found / 页面未找到",
+    robots: {
+      index: false,
+      follow: false,
+    },
+  };
+}
