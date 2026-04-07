@@ -2,6 +2,8 @@
    BASE & TYPOGRAPHY
    ========================================= */
 .page {
+  --home-eyebrow-size: clamp(0.68rem, 0.64rem + 0.2vw, 0.72rem);
+
   position: relative;
   min-height: 100vh;
   background-color: var(--c-bg);
@@ -30,12 +32,19 @@
 .capIndex,
 .projectYear,
 .projectSys,
-.actionLink,
 .gearCategory,
 .gearSpec,
 .bookId,
 .bookYear,
-.bookHeader,
+.bookHeader {
+  font-family: var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  font-size: var(--home-eyebrow-size);
+  letter-spacing: 0.05em;
+  color: var(--c-ink-soft);
+}
+
+.actionLink,
 .sectionFooterLink {
   font-family: var(--font-geist-mono), monospace;
   text-transform: uppercase;
@@ -649,6 +658,10 @@
 }
 
 @media (max-width: 768px) {
+  .page {
+    --home-eyebrow-size: 0.68rem;
+  }
+
   .heroTitle {
     font-size: clamp(2.2rem, 12vw, 4rem);
     line-height: 0.88;
