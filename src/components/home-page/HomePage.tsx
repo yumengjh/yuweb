@@ -8,6 +8,7 @@ import { Marquee, type MarqueeDirection } from "@/components/common/marquee/Marq
 import { StickerPeel } from "@/components/sticker-peel";
 import { TechLogoLoop } from "@/components/home-page/TechLogoLoop";
 import { TextPressure } from "@/components/common/text-pressure/TextPressure";
+import { FlowingMenu, type FlowingMenuItem } from "@/components/FlowingMenu";
 import { createTranslator, getLocaleValue, localizeHref, type SiteLocale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site-config";
 import styles from "@/app/page.module.scss";
@@ -134,6 +135,16 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
   const t = createTranslator(locale);
   const homePage = siteConfig.homePage;
   const heroSummaryCopy = heroSummaryRotatingCopy[locale] ?? heroSummaryRotatingCopy["en-US"];
+  const archiveLink = localizeHref("/collections", locale);
+  const archiveFlowItems: FlowingMenuItem[] = homePage.books.map((book) => ({
+    link: archiveLink,
+    text: book.title,
+    meta: {
+      author: book.author,
+      year: book.year,
+      id: book.id,
+    },
+  }));
   const renderMarquee = (config: (typeof homePage.marquees)[keyof typeof homePage.marquees]) => {
     const items = getLocaleValue<string[]>(locale, config.itemsPath) ?? [];
 
@@ -412,24 +423,21 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
             <span className={styles.sectionTitle}>{t(homePage.sectionTitles.archive)}</span>
             <div className={styles.sectionLine}></div>
           </div>
-          <div className={styles.bookListFull}>
-            <div className={styles.bookHeader}>
-              <span>{t(homePage.table.refId)}</span>
-              <span>{t(homePage.table.title)}</span>
-              <span>{t(homePage.table.author)}</span>
-              <span>{t(homePage.table.year)}</span>
-            </div>
-            {homePage.books.map((book) => (
-              <div key={book.id} className={styles.bookRow}>
-                <span className={styles.bookId}>{book.id}</span>
-                <span className={styles.bookTitle}>{book.title}</span>
-                <span className={styles.bookAuthor}>{book.author}</span>
-                <span className={styles.bookYear}>{book.year}</span>
-              </div>
-            ))}
+          <div className={styles.archiveFlowingMenu}>
+            <FlowingMenu
+              items={archiveFlowItems}
+              speed={15}
+              textColor="var(--c-ink-strong)"
+              bgColor="var(--c-bg)"
+              marqueeBgColor="var(--c-ink-strong)"
+              marqueeTextColor="var(--c-bg)"
+              borderColor="var(--c-border-soft)"
+              contentMode="text"
+              separator={t(homePage.marquees.afterArchive.separator)}
+            />
           </div>
-          <div className={styles.centerLinkWrap}>
-            <Link href={localizeHref("/library", locale)} className={styles.sectionFooterLink}>
+          <div className={`${styles.centerLinkWrap} ${styles.archiveLinkWrap}`}>
+            <Link href={archiveLink} className={styles.sectionFooterLink}>
               {t(homePage.links.completeLibrary)} <ArrowIcon />
             </Link>
           </div>

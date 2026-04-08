@@ -134,6 +134,10 @@ describe("app/page", () => {
       "href",
       "/curations",
     );
+    expect(screen.getByRole("link", { name: "EXPLORE COMPLETE LIBRARY" })).toHaveAttribute(
+      "href",
+      "/collections",
+    );
 
     expect(screen.getAllByRole("heading", { level: 2 }).length).toBeGreaterThan(1);
     expect(screen.getAllByRole("heading", { level: 3 }).length).toBeGreaterThan(3);
@@ -146,6 +150,10 @@ describe("app/page", () => {
     expect(screen.getAllByRole("link", { name: /EXPLORE CASE/ })[0]).toHaveAttribute(
       "href",
       "/en/curations",
+    );
+    expect(screen.getByRole("link", { name: "EXPLORE COMPLETE LIBRARY" })).toHaveAttribute(
+      "href",
+      "/en/collections",
     );
     expect(screen.getAllByText("digital architect")[0]).toBeInTheDocument();
     expect(screen.getByText("Lead Architect")).toBeInTheDocument();

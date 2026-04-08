@@ -217,6 +217,10 @@
   margin-top: 6vh;
 }
 
+.archiveLinkWrap {
+  margin-top: 2.6vh;
+}
+
 .sectionFooterLink {
   display: inline-flex;
   align-items: center;
@@ -511,52 +515,16 @@
 }
 
 /* =========================================
-   [05] BOOKS (全宽表格)
+   [05] READING ARCHIVE (Flowing Menu)
    ========================================= */
-.bookListFull {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--c-border-strong);
-}
-
-.bookHeader,
-.bookRow {
-  display: grid;
-  grid-template-columns: 80px 2.5fr 1.5fr 60px;
-  gap: 16px;
-  padding: 24px 24px;
-  border-bottom: 1px solid var(--c-border-soft);
-}
-
-.bookHeader {
-  padding: 16px 24px;
-  color: var(--c-ink-softer);
-}
-.bookRow {
-  transition:
-    padding-left 0.3s ease,
-    background 0.3s ease;
-  @media (hover: hover) {
-    &:hover {
-      background: var(--c-surface-paper);
-      padding-left: 32px;
-      .bookTitle {
-        color: var(--c-ink-strong);
-      }
-    }
-  }
-}
-.bookTitle {
-  font-weight: 500;
-  font-size: 1.05rem;
-  color: var(--c-ink-strong);
-}
-.bookAuthor {
-  color: var(--c-ink-soft);
-  font-size: 0.9rem;
-}
-.bookYear {
-  text-align: right;
+.archiveFlowingMenu {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100dvw;
+  max-width: none;
+  margin-left: -50dvw;
+  margin-right: -50dvw;
 }
 
 /* =========================================
@@ -697,23 +665,6 @@
     aspect-ratio: 16 / 9;
   }
 
-  .bookHeader {
-    display: none;
-  }
-  .bookRow {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 20px 0;
-    .bookYear,
-    .bookId {
-      display: inline-block;
-    }
-    .bookYear {
-      text-align: left;
-      margin-top: 4px;
-    }
-  }
-
   .expItemFull {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -728,5 +679,9 @@
     .listAction {
       display: none;
     }
+  }
+
+  .archiveLinkWrap {
+    margin-top: 2vh;
   }
 }
