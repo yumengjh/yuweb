@@ -37,7 +37,9 @@
   width: 100%;
   backdrop-filter: blur(10px);
   background: var(--nav-surface);
-  transition: background 0.22s ease;
+  transition:
+    background 0.22s ease,
+    backdrop-filter 0.22s ease;
 
   &::after {
     content: "";
@@ -48,7 +50,11 @@
     z-index: 20;
     height: 1px;
     background: var(--nav-line);
+    opacity: 1;
     pointer-events: none;
+    transition:
+      opacity 0.22s ease,
+      background 0.22s ease;
   }
 }
 
@@ -57,6 +63,15 @@
   top: 0;
   right: 0;
   left: 0;
+}
+
+.barAtTopTransparent {
+  backdrop-filter: none;
+  background: transparent;
+
+  &::after {
+    opacity: 0;
+  }
 }
 
 .barDropdownOpen {

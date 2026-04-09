@@ -58,11 +58,78 @@ const items = [
   },
 ];
 
+function setWindowScrollY(value: number) {
+  Object.defineProperty(window, "scrollY", {
+    value,
+    writable: true,
+    configurable: true,
+  });
+}
+
 afterEach(() => {
+  setWindowScrollY(0);
   cleanup();
 });
 
 describe("TopNavigationBar", () => {
+  it("固定导航在页面顶部时使用透明样式", async () => {
+    setWindowScrollY(0);
+
+    render(<TopNavigationBar fixed items={items} labels={labels} />);
+
+    const header = screen.getByRole("banner");
+    await waitFor(() => {
+      expect(header).toHaveClass(styles.barAtTopTransparent);
+      expect(header).not.toHaveClass(styles.barDropdownOpen);
+    });
+  });
+
+  it("固定导航离开顶部后恢复实底样式", async () => {
+    setWindowScrollY(0);
+
+    render(<TopNavigationBar fixed items={items} labels={labels} />);
+
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass(styles.barAtTopTransparent);
+
+    setWindowScrollY(120);
+    fireEvent.scroll(window);
+
+    await waitFor(() => {
+      expect(header).not.toHaveClass(styles.barAtTopTransparent);
+    });
+  });
+
+  it("非固定导航在顶部时不启用透明样式", async () => {
+    setWindowScrollY(0);
+
+    render(<TopNavigationBar items={items} labels={labels} />);
+
+    const header = screen.getByRole("banner");
+    await waitFor(() => {
+      expect(header).not.toHaveClass(styles.barAtTopTransparent);
+    });
+  });
+
+  it("顶部透明态在菜单展开后会被实底样式覆盖", async () => {
+    setWindowScrollY(0);
+    const user = userEvent.setup();
+
+    render(<TopNavigationBar fixed items={items} labels={labels} />);
+
+    const header = screen.getByRole("banner");
+    const aboutButton = screen.getByRole("button", { name: /关于/ });
+
+    expect(header).toHaveClass(styles.barAtTopTransparent);
+
+    await user.click(aboutButton);
+
+    await waitFor(() => {
+      expect(header).not.toHaveClass(styles.barAtTopTransparent);
+      expect(header).toHaveClass(styles.barDropdownOpen);
+    });
+  });
+
   it("桌面端点击导航项时会展开、切换菜单并支持点击外部收起", async () => {
     const user = userEvent.setup();
 

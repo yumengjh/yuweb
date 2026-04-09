@@ -21,6 +21,7 @@ import styles from "./TopNavigationBar.module.scss";
 
 const DESKTOP_DROPDOWN_CLOSE_DURATION_MS = 400;
 const ENABLE_HOVER_SWITCH_AFTER_OPEN = true;
+const TOP_SCROLL_THRESHOLD_PX = 1;
 // ─── Menu content types ───────────────────────────────────────────────────────
 
 export type MenuEntry = {
@@ -500,6 +501,7 @@ export function TopNavigationBar({
   const [displayKey, setDisplayKey] = useState<NavigationKey | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mobileOpenKey, setMobileOpenKey] = useState<NavigationKey | null>(null);
+  const [isAtTop, setIsAtTop] = useState(true);
   // Mobile drawer shell state (mirrors desktop logic)
 
   const [headerHeight, setHeaderHeight] = useState(72);
@@ -521,6 +523,7 @@ export function TopNavigationBar({
   const activeItem = items.find((i) => i.key === displayKey) ?? null;
   const isDropdownOpen = openKey !== null;
   const isDropdownVisible = activeItem !== null;
+  const isTopTransparentActive = fixed && isAtTop && !isDropdownVisible && !isMenuOpen;
 
   const setShellHeight = useCallback((px: number) => {
     if (shellRef.current) shellRef.current.style.height = `${px}px`;
@@ -655,6 +658,21 @@ export function TopNavigationBar({
     };
   }, [isMenuOpen]);
 
+  // ── Top scroll state for fixed nav surface ──────────────────────────────────
+
+  useEffect(() => {
+    if (!fixed) return;
+
+    const updateTopState = () => {
+      const nextIsAtTop = window.scrollY <= TOP_SCROLL_THRESHOLD_PX;
+      setIsAtTop((previous) => (previous === nextIsAtTop ? previous : nextIsAtTop));
+    };
+
+    updateTopState();
+    window.addEventListener("scroll", updateTopState, { passive: true });
+    return () => window.removeEventListener("scroll", updateTopState);
+  }, [fixed]);
+
   // ── Keyboard esc ───────────────────────────────────────────────────────────
 
   useEffect(() => {
@@ -765,7 +783,8 @@ export function TopNavigationBar({
         className={cn(
           styles.bar,
           fixed && styles.barFixed,
-          isDropdownVisible && styles.barDropdownOpen,
+          isTopTransparentActive && styles.barAtTopTransparent,
+          (isDropdownVisible || isMenuOpen) && styles.barDropdownOpen,
         )}
         data-name="Top Navigation Bar"
       >
