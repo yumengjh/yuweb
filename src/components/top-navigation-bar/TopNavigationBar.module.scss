@@ -16,30 +16,36 @@
   --nav-drawer-duration: 0.4s;
   --nav-underline-duration: 0.25s;
   --nav-underline-ease: ease;
+
   --nav-ink: var(--c-ink-strong);
-  --nav-muted: color-mix(in srgb, var(--c-ink-soft) 80%, #8da0aa 20%);
-  --nav-muted-soft: color-mix(in srgb, var(--c-ink-softer) 76%, #a7b2b9 24%);
-  --nav-line: color-mix(in srgb, var(--c-border) 82%, #aeb8bf 18%);
-  --nav-line-soft: color-mix(in srgb, var(--c-border) 58%, transparent);
-  --nav-surface: var(--c-surface-paper);
+  --nav-muted: var(--c-ink-soft);
+  --nav-muted-soft: var(--c-ink-softer);
+  --nav-line: var(--c-border);
+  --nav-line-soft: var(--c-border-soft);
+
+  /* 关键：默认就定义为“滚动后的玻璃态” */
+  --nav-surface: var(--c-surface-paper-a70);
   --nav-surface-solid: var(--c-surface-paper);
-  --nav-surface-soft: var(--c-surface-paper);
+  --nav-surface-soft: var(--c-bg-a80);
+
   --nav-font-ui:
     var(--font-geist-sans), "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --nav-font-mono: var(--font-geist-mono), monospace;
 
-  /* Mobile drawer durations */
   --mobile-drawer-duration: 0.42s;
   --mobile-drawer-ease: cubic-bezier(0.32, 0, 0.12, 1);
 
   position: relative;
   z-index: 30;
   width: 100%;
-  backdrop-filter: blur(10px);
   background: var(--nav-surface);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
   transition:
     background 0.22s ease,
-    backdrop-filter 0.22s ease;
+    backdrop-filter 0.22s ease,
+    -webkit-backdrop-filter 0.22s ease,
+    box-shadow 0.22s ease;
 
   &::after {
     content: "";
@@ -49,7 +55,7 @@
     left: 0;
     z-index: 20;
     height: 1px;
-    background: var(--nav-line);
+    background: color-mix(in srgb, var(--c-border) 88%, transparent);
     opacity: 1;
     pointer-events: none;
     transition:
@@ -57,7 +63,6 @@
       background 0.22s ease;
   }
 }
-
 .barFixed {
   position: fixed;
   top: 0;
@@ -66,8 +71,10 @@
 }
 
 .barAtTopTransparent {
-  backdrop-filter: none;
   background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
 
   &::after {
     opacity: 0;
@@ -75,7 +82,13 @@
 }
 
 .barDropdownOpen {
-  background: var(--nav-surface-solid);
+  background: var(--c-surface-paper-a70);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+
+  &::after {
+    opacity: 1;
+  }
 }
 
 .barInner {
@@ -264,7 +277,9 @@
   left: 0;
   border-top: 0;
   border-bottom: 0;
-  background: var(--nav-surface-solid);
+  background: color-mix(in srgb, var(--c-surface-paper) 92%, transparent);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
   transform: translateY(-100%);
   transition: transform var(--nav-drawer-duration) var(--nav-drawer-ease);
   will-change: transform;
@@ -363,7 +378,7 @@
   width: min(100vw, 1600px);
   border-top: 0;
   border-bottom: 0;
-  background: var(--nav-surface-solid);
+  background: var(--c-surface-paper);
 }
 
 /* ── Desktop overlay backdrop ──────────────────────────────────────────────── */
@@ -479,8 +494,9 @@
   z-index: 28;
   pointer-events: none;
   visibility: hidden;
-  background: var(--nav-surface-solid);
-  backdrop-filter: blur(12px);
+  background: var(--c-surface-paper-a70);
+  backdrop-filter: saturate(150%) blur(16px);
+  -webkit-backdrop-filter: saturate(150%) blur(16px);
   opacity: 0;
   transform: translateY(-12px);
   transition:
