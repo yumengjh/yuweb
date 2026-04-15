@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { cleanup, render, screen, waitFor } from "@/test/render";
+import { cleanup, render, screen } from "@/test/render";
 
 vi.mock("@/components/SplashCursor/SplashCursor", () => ({
   default: () => null,
@@ -91,83 +91,34 @@ describe("app/page", () => {
     cleanup();
   });
 
-  it("renders localized Chinese home content", async () => {
+  it("renders current localized Chinese home content", () => {
     render(<HomePage />);
-    window.dispatchEvent(new Event("load"));
 
-    expect(screen.getByText(/INDEX \/ FULL INVENTORY/)).toBeInTheDocument();
-    expect(screen.getByRole("region", { name: "Our tech stack" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "React" })).toHaveAttribute(
-      "href",
-      "https://react.dev/",
-    );
-    expect(screen.getByRole("link", { name: "Vue" })).toHaveAttribute("href", "https://vuejs.org/");
-    expect(screen.getByRole("link", { name: "OpenAI" })).toHaveAttribute(
-      "href",
-      "https://openai.com/",
-    );
-    expect(screen.getByRole("link", { name: "VS Code" })).toHaveAttribute(
-      "href",
-      "https://code.visualstudio.com/",
-    );
-    expect(
-      screen.getByText((_, element) => {
-        return (
-          element?.textContent === "YUMENGJH." && element.className.includes("text-pressure-title")
-        );
-      }),
-    ).toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(screen.getAllByAltText("Homepage avatar sticker")).toHaveLength(3);
-    });
-
-    const stickerImages = screen.getAllByAltText("Homepage avatar sticker");
-    expect(stickerImages[0]).toHaveAttribute("src", "/image/avator01.png");
-
-    const stickerStage = screen.getAllByTestId("sticker-peel")[0];
-    const pageRoot = stickerStage.closest("main");
-    expect(pageRoot).toBeTruthy();
-    expect(stickerStage.parentElement).toBe(pageRoot);
-
-    expect(screen.getAllByRole("link", { name: /EXPLORE CASE/ })[0]).toHaveAttribute(
-      "href",
-      "/curations",
-    );
-    expect(screen.getByRole("link", { name: "EXPLORE COMPLETE LIBRARY" })).toHaveAttribute(
-      "href",
-      "/collections",
-    );
-
-    expect(screen.getAllByRole("heading", { level: 2 }).length).toBeGreaterThan(1);
-    expect(screen.getAllByRole("heading", { level: 3 }).length).toBeGreaterThan(3);
+    expect(screen.getByText("INDEX / FULL INVENTORY")).toBeInTheDocument();
+    expect(screen.getByText("GUANGZHOU, CN")).toBeInTheDocument();
+    expect(screen.getByText("CURRENT ROLE IDENTIFICATION //")).toBeInTheDocument();
+    expect(screen.getByText(/开放合作 \/ Available/)).toBeInTheDocument();
+    expect(screen.getByText(/逻辑先行，留白承重/)).toBeInTheDocument();
+    expect(screen.getByTestId("home-grid-motion")).toBeInTheDocument();
   });
 
-  it("renders localized English home content and prefixes internal links", () => {
+  it("renders current localized English home content", () => {
     render(<EnglishHomePage />);
 
-    expect(screen.getByText("Open for Collaboration")).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /EXPLORE CASE/ })[0]).toHaveAttribute(
-      "href",
-      "/en/curations",
-    );
-    expect(screen.getByRole("link", { name: "EXPLORE COMPLETE LIBRARY" })).toHaveAttribute(
-      "href",
-      "/en/collections",
-    );
-    expect(screen.getAllByText("digital architect")[0]).toBeInTheDocument();
-    expect(screen.getByText("Lead Architect")).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { name: "Space, Logic, and Digital Order.", level: 2 }),
-    ).toBeInTheDocument();
+    expect(screen.getByText("INDEX / FULL INVENTORY")).toBeInTheDocument();
+    expect(screen.getByText("GUANGZHOU, CN")).toBeInTheDocument();
+    expect(screen.getByText(/Open for Collaboration/)).toBeInTheDocument();
+    expect(screen.getByText("CURRENT ROLE IDENTIFICATION //")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "In the context of a digital architect, the screen is not merely a flat canvas but a physical environment that can be organized and reasoned about. Whitespace is not absence; it is a load-bearing material that defines rhythm and hierarchy.",
+        "Logic first, whitespace load-bearing. Every line of code or pixel aligned to structure, rhythm, and stability.",
       ),
     ).toBeInTheDocument();
+    expect(screen.getByText("Design & Code")).toBeInTheDocument();
+    expect(screen.getByTestId("home-grid-motion")).toBeInTheDocument();
   });
 
-  it("keeps the home page free of text-animation component hookups", () => {
+  it("keeps the home page free of old text-animation component hookups", () => {
     const homePageSource = readFileSync(
       path.resolve(process.cwd(), "src/components/home-page/HomePage.tsx"),
       "utf8",
@@ -177,19 +128,7 @@ describe("app/page", () => {
     expect(homePageSource).not.toContain("<ScrollRevealText");
   });
 
-  it("renders the philosophy section from the original paragraph list", () => {
-    const homePageSource = readFileSync(
-      path.resolve(process.cwd(), "src/components/home-page/HomePage.tsx"),
-      "utf8",
-    );
-
-    expect(homePageSource).toContain("homePage.philosophy.paragraphs.map");
-    expect(homePageSource).toContain(
-      "<h2 className={styles.statementTitle}>{t(homePage.philosophy.title)}</h2>",
-    );
-  });
-
-  it("enables Lenis-based damped scrolling through the home page component", () => {
+  it("keeps Lenis smooth scrolling mounted on the home page", () => {
     const homePageSource = readFileSync(
       path.resolve(process.cwd(), "src/components/home-page/HomePage.tsx"),
       "utf8",
@@ -199,13 +138,14 @@ describe("app/page", () => {
     expect(homePageSource).toContain("<HomeSmoothScroll />");
   });
 
-  it("keeps the philosophy copy in the original responsive two-column layout", () => {
+  it("defines the grid motion background styles in the home page stylesheet", () => {
     const stylesSource = readFileSync(
       path.resolve(process.cwd(), "src/app/page.module.scss"),
       "utf8",
     );
 
-    expect(stylesSource).toContain(".statementText");
-    expect(stylesSource).toContain("grid-template-columns: 1fr 1fr;");
+    expect(stylesSource).toContain(".gridMotionContainer");
+    expect(stylesSource).toContain("transform: rotate(-15deg);");
+    expect(stylesSource).toContain("--home-frame-top");
   });
 });

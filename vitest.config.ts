@@ -1,7 +1,7 @@
 import path from "node:path";
 
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vitest/config";
+import { configDefaults, defineConfig } from "vitest/config";
 
 /**
  * Vitest 配置。
@@ -24,6 +24,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
+    exclude: [...configDefaults.exclude, ".claude/**", ".omx/**"],
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],
