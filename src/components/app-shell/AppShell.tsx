@@ -209,8 +209,6 @@ export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname);
   const route = getRouteConfigByPathname(stripLocalePrefix(pathname));
-  const shouldRenderFixedOffset =
-    route.layout.showNavigation && route.layout.fixedNavigation && route.id !== "home";
 
   return (
     <>
@@ -226,7 +224,9 @@ export function AppShell({ children }: { children: ReactNode }) {
         />
       )}
 
-      {shouldRenderFixedOffset && <div aria-hidden="true" className={styles.fixedOffset} />}
+      {route.layout.showNavigation && route.layout.fixedNavigation && (
+        <div aria-hidden="true" className={styles.fixedOffset} />
+      )}
 
       {children}
 
