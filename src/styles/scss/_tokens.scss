@@ -20,6 +20,19 @@
   --c-border-soft: rgb(15 23 42 / 10%);
   --c-bg-a50: rgb(255 255 255 / 50%);
   --c-bg-a80: rgb(255 255 255 / 80%);
+
+  /* Pop Art & New Brutalism Tokens */
+  --pop-yellow: #f4e85c;
+  --pop-pink: #f56e9f;
+  --pop-cyan: #5cdbf4;
+  --pop-purple: #b388ff;
+  --pop-green: #00ff88;
+  --brutal-border: 3px solid var(--c-ink-strong);
+  --brutal-border-sm: 2px solid var(--c-ink-strong);
+  --brutal-shadow: 4px 4px 0px var(--c-ink-strong);
+  --brutal-shadow-hover: 2px 2px 0px var(--c-ink-strong);
+  --brutal-shadow-l: 6px 6px 0px var(--c-ink-strong);
+  --brutal-radius: 4px;
   --c-primary: hsl(var(--hue-base) 100% 55%);
   --c-primary-soft: rgb(255 255 255 / 0%);
   --c-accent: hsl(180deg 70% 60%);

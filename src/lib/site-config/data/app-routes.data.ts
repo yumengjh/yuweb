@@ -1,4 +1,4 @@
-﻿import type { AppRouteConfig } from "../types/site-config.types";
+import type { AppRouteConfig } from "../types/site-config.types";
 
 const pathnameRoutes: AppRouteConfig[] = [
   {
@@ -107,6 +107,18 @@ const pathnameRoutes: AppRouteConfig[] = [
       fixedNavigation: false,
       closeNavigationOnScroll: true,
       activeNavigationKey: "collections",
+    },
+  },
+  {
+    id: "travel",
+    pathname: "/travel",
+    match: "prefix",
+    layout: {
+      showNavigation: true,
+      showFooter: true,
+      fixedNavigation: true,
+      closeNavigationOnScroll: true,
+      activeNavigationKey: "travel",
     },
   },
 ];

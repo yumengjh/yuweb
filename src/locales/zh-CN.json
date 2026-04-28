@@ -41,6 +41,10 @@
     "collections": {
       "title": "收藏",
       "description": "书籍、文章、素材与参考体系的长期留存。"
+    },
+    "travel": {
+      "title": "旅途足迹",
+      "description": "探索世界，记录美好。这里是我在世界各地留下的足迹与瞬间。"
     }
   },
   "nav": {
@@ -232,6 +236,9 @@
     },
     "blog": {
       "label": "博客"
+    },
+    "travel": {
+      "label": "游记足迹"
     }
   },
   "footer": {

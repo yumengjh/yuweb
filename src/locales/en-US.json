@@ -41,6 +41,10 @@
     "collections": {
       "title": "Collections",
       "description": "A long-term archive of books, articles, materials, and reference systems."
+    },
+    "travel": {
+      "title": "Travel",
+      "description": "Exploring the world, recording memories. A collection of footprints and moments from across the globe."
     }
   },
   "nav": {
@@ -232,6 +236,9 @@
     },
     "blog": {
       "label": "Blog"
+    },
+    "travel": {
+      "label": "Travel"
     }
   },
   "footer": {

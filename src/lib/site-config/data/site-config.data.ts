@@ -81,6 +81,10 @@ export const siteConfig = {
       title: route.collections.title,
       description: route.collections.description,
     },
+    travel: {
+      title: route.travel.title,
+      description: route.travel.description,
+    },
   } as const satisfies Record<AppRouteId, { title: MessageToken; description: MessageToken }>,
   topNavigationBar: {
     labels: {
@@ -253,65 +257,70 @@ export const siteConfig = {
           ],
         },
       },
+      // {
+      //   key: "collections",
+      //   label: nav.collections.label,
+      //   href: "/collections",
+      //   menu: {
+      //     kind: "entries",
+      //     entries: [
+      //       {
+      //         title: nav.collections.books.title,
+      //         description: nav.collections.books.description,
+      //         href: "/collections#books",
+      //       },
+      //       {
+      //         title: nav.collections.articles.title,
+      //         description: nav.collections.articles.description,
+      //         href: "/collections#articles",
+      //       },
+      //       {
+      //         title: nav.collections.materialLibrary.title,
+      //         description: nav.collections.materialLibrary.description,
+      //         href: "/collections#material-library",
+      //       },
+      //       {
+      //         title: nav.collections.referenceSystem.title,
+      //         description: nav.collections.referenceSystem.description,
+      //         href: "/collections#reference-system",
+      //       },
+      //       {
+      //         title: nav.collections.toolkit.title,
+      //         description: nav.collections.toolkit.description,
+      //         href: "/collections#toolkit",
+      //       },
+      //       {
+      //         title: nav.collections.viewPage.title,
+      //         description: nav.collections.viewPage.description,
+      //         href: "/collections",
+      //       },
+      //     ],
+      //   },
+      // },
+      // {
+      //   key: "journey",
+      //   label: nav.journey.label,
+      //   href: "/journey",
+      //   menu: {
+      //     kind: "component",
+      //     contentId: "journey",
+      //   },
+      //   mobileMenu: [
+      //     {
+      //       label: nav.journey.label,
+      //       entries: [
+      //         { title: nav.journey.milestones.title, href: "/journey#milestones" },
+      //         { title: nav.journey.inProgress.title, href: "/journey#in-progress" },
+      //         { title: nav.journey.timeline.title, href: "/journey#timeline" },
+      //         { title: nav.journey.viewPageLabel, href: "/journey" },
+      //       ],
+      //     },
+      //   ],
+      // },
       {
-        key: "collections",
-        label: nav.collections.label,
-        href: "/collections",
-        menu: {
-          kind: "entries",
-          entries: [
-            {
-              title: nav.collections.books.title,
-              description: nav.collections.books.description,
-              href: "/collections#books",
-            },
-            {
-              title: nav.collections.articles.title,
-              description: nav.collections.articles.description,
-              href: "/collections#articles",
-            },
-            {
-              title: nav.collections.materialLibrary.title,
-              description: nav.collections.materialLibrary.description,
-              href: "/collections#material-library",
-            },
-            {
-              title: nav.collections.referenceSystem.title,
-              description: nav.collections.referenceSystem.description,
-              href: "/collections#reference-system",
-            },
-            {
-              title: nav.collections.toolkit.title,
-              description: nav.collections.toolkit.description,
-              href: "/collections#toolkit",
-            },
-            {
-              title: nav.collections.viewPage.title,
-              description: nav.collections.viewPage.description,
-              href: "/collections",
-            },
-          ],
-        },
-      },
-      {
-        key: "journey",
-        label: nav.journey.label,
-        href: "/journey",
-        menu: {
-          kind: "component",
-          contentId: "journey",
-        },
-        mobileMenu: [
-          {
-            label: nav.journey.label,
-            entries: [
-              { title: nav.journey.milestones.title, href: "/journey#milestones" },
-              { title: nav.journey.inProgress.title, href: "/journey#in-progress" },
-              { title: nav.journey.timeline.title, href: "/journey#timeline" },
-              { title: nav.journey.viewPageLabel, href: "/journey" },
-            ],
-          },
-        ],
+        key: "travel",
+        label: nav.travel.label,
+        href: "/travel",
       },
     ] as const satisfies SiteNavigationItemConfig[],
     componentContent: {
