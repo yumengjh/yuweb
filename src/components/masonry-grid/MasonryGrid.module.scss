@@ -1,0 +1,47 @@
+.list {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.itemWrapper {
+  position: absolute;
+  will-change: transform, width, height, opacity;
+  padding: 8px;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+}
+
+.itemImg {
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px; // Slightly less rounded for brutalist feel
+  border: 2px solid var(--c-ink-strong); // Brutalist border
+  box-shadow: 4px 4px 0px var(--c-ink-strong); // Hard shadow
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 2px 2px 0px var(--c-ink-strong);
+  }
+}
+
+.colorOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(var(--c-accent-primary-rgb), 0.5),
+    rgba(var(--c-accent-secondary-rgb), 0.5)
+  );
+  opacity: 0;
+  pointer-events: none;
+  border-radius: inherit;
+}
