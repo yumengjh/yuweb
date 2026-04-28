@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 import { createTranslator, localizeHref, type SiteLocale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site-config";
@@ -13,7 +13,7 @@ function ArrowLeftIcon() {
       xmlns="http://www.w3.org/2000/svg"
       className={styles.iconArrow}
     >
-      <path d="M11 6H1M1 6L5 2M1 6L5 10" fill="none" stroke="currentColor" strokeWidth="1" />
+      <path d="M11 6H1M1 6L5 2M1 6L5 10" fill="none" stroke="currentColor" strokeWidth="2" />
     </svg>
   );
 }

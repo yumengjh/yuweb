@@ -15,12 +15,28 @@ export const metadata: Metadata = buildGlobalNotFoundMetadata();
 function getGlobalNotFoundBootScript() {
   return `
     (() => {
+      const root = document.documentElement;
       const pathname = window.location.pathname || "/";
       const locale = pathname === "/en" || pathname.startsWith("/en/") ? "en-US" : "zh-CN";
-      const root = document.documentElement;
 
       root.lang = locale;
       root.dataset.locale = locale;
+
+      const applyTheme = () => {
+        const themeKey = "site-theme-mode";
+        const savedTheme = window.localStorage.getItem(themeKey);
+        const themeMode =
+          savedTheme === "light" || savedTheme === "dark" || savedTheme === "auto" ? savedTheme : "auto";
+        const prefersDark =
+          typeof window.matchMedia === "function" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const resolvedTheme = themeMode === "auto" ? (prefersDark ? "dark" : "light") : themeMode;
+
+        root.dataset.theme = themeMode;
+        root.classList.toggle("dark", resolvedTheme === "dark");
+      };
+
+      applyTheme();
     })();
   `;
 }
@@ -28,7 +44,7 @@ function getGlobalNotFoundBootScript() {
 export default function GlobalNotFound() {
   return (
     <html lang={defaultLocale} data-locale={defaultLocale} suppressHydrationWarning>
-      <body className="font-geist-sans font-geist-mono antialiased">
+      <body className="font-geist-sans font-geist-mono antialiased selection:bg-[var(--pop-yellow)] selection:text-black">
         <script dangerouslySetInnerHTML={{ __html: getGlobalNotFoundBootScript() }} />
         <GlobalNotFoundBoundary />
       </body>

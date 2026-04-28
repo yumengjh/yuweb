@@ -11,13 +11,15 @@
   -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
+  background-image: radial-gradient(var(--c-border-soft) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
 }
 
 .frame {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 4vh 4vw 6vh;
+  padding: 8vh 48px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -29,9 +31,8 @@
 .actionLink {
   font-family: var(--font-geist-mono), monospace;
   text-transform: uppercase;
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
-  color: var(--c-ink-soft);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
 }
 
 /* =========================================
@@ -41,60 +42,85 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex: 1; /* 让内容在纵向上有呼吸感 */
-  padding: 8vh 0;
-  border-bottom: 1px solid var(--c-border-soft);
+  flex: 1;
+  padding: 4vh 0;
 }
 
 .heroTop {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 2vh;
+
+  span {
+    background: var(--c-ink-strong);
+    color: var(--c-bg);
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
 }
 
 .heroTitle {
-  margin: 8vh 0;
-  font-size: clamp(6rem, 16vw, 15rem); /* 比首页更大的字号，极具压迫感 */
-  font-weight: 300;
-  line-height: 0.85;
-  letter-spacing: -0.04em;
+  margin: 4vh 0;
+  font-size: clamp(5rem, 15vw, 12rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
   color: var(--c-ink-strong);
+  text-transform: uppercase;
 
   .heroTitleIndent {
     display: block;
-    padding-left: 15vw; /* 错位感 */
+    padding-left: 10vw;
+    color: var(--pop-pink);
+    -webkit-text-stroke: 2px var(--c-ink-strong);
+    filter: drop-shadow(4px 4px 0px var(--c-ink-strong));
   }
 }
 
 .heroBottom {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 2vw;
-  align-items: end;
+  gap: 40px;
+  align-items: start;
+  margin-top: 4vh;
 }
 
 .heroMeta {
-  grid-column: 1 / 5;
+  grid-column: 1 / 6;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 
   p {
     margin: 0;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid var(--c-border-soft);
-    padding-bottom: 6px;
+    align-items: center;
+    border: var(--brutal-border-sm);
+    background: var(--c-surface-paper);
+    box-shadow: var(--brutal-shadow);
+    padding: 12px 20px;
+    border-radius: 4px;
 
     span {
       color: var(--c-ink-strong);
-      font-family: var(--font-geist-sans), sans-serif;
+      font-weight: 800;
+      font-family: var(--font-geist-mono), monospace;
+      background: var(--pop-yellow);
+      padding: 2px 8px;
+      border: 1px solid var(--c-ink-strong);
+    }
+
+    &:nth-child(2) span {
+      background: var(--pop-cyan);
     }
   }
 }
 
 .heroSummaryWrap {
-  grid-column: 8 / 13;
+  grid-column: 7 / 13;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -103,72 +129,77 @@
 
 .heroSummary {
   margin: 0;
-  font-size: clamp(1rem, 1.2vw, 1.2rem);
-  line-height: 1.8;
-  font-weight: 400;
+  font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+  line-height: 1.6;
+  font-weight: 600;
   color: var(--c-ink-strong);
+  background: var(--c-surface-paper);
+  border: var(--brutal-border-sm);
+  padding: 24px;
+  box-shadow: var(--brutal-shadow-l);
+  border-radius: 8px;
 }
 
 .actionLink {
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  background: var(--pop-purple);
   color: var(--c-ink-strong);
   text-decoration: none;
-  font-weight: 500;
-  border-bottom: 1px solid var(--c-ink-strong);
-  padding-bottom: 4px;
-  transition: opacity 0.3s ease;
+  font-weight: 800;
+  border: var(--brutal-border-sm);
+  padding: 12px 24px;
+  box-shadow: var(--brutal-shadow);
+  border-radius: 4px;
+  transition: all 0.15s ease-out;
 
   @media (hover: hover) {
     &:hover {
-      opacity: 0.6;
-      .iconArrow {
-        transform: translateX(-4px); /* 向左滑动的返回暗示 */
-      }
+      transform: translate(2px, 2px);
+      box-shadow: var(--brutal-shadow-hover);
+      background: var(--pop-yellow);
     }
   }
 
   .iconArrow {
-    width: 14px;
-    height: 14px;
-    transition: transform 0.3s ease;
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5;
   }
 }
 
 /* =========================================
-   VISUAL SECTION (纯 CSS 坐标系丢失艺术)
+   VISUAL SECTION
    ========================================= */
 .visualSection {
-  padding: 6vh 0 0;
+  padding: 8vh 0 0;
 }
 
 .errorVisual {
   width: 100%;
-  height: 240px; /* 扁长的画幅，像监控面板 */
-  background: var(--c-surface-paper);
-  border: 1px solid var(--c-border-soft);
+  height: 200px;
+  background: var(--pop-cyan);
+  border: var(--brutal-border);
+  box-shadow: var(--brutal-shadow-l);
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 12px;
 }
 
-/* 破裂的网格 */
 .artGrid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(var(--c-border-soft) 1px, transparent 1px),
-    linear-gradient(90deg, var(--c-border-soft) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.4;
-  mask-image: radial-gradient(circle at center, transparent 10%, black 60%);
-  -webkit-mask-image: radial-gradient(circle at center, transparent 10%, black 60%);
+    linear-gradient(var(--c-ink-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-ink-strong) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.15;
 }
 
-/* 寻址十字线 */
 .artCrosshair {
   position: absolute;
   width: 100%;
@@ -178,74 +209,67 @@
   &::after {
     content: "";
     position: absolute;
-    background: var(--c-ink-soft);
-    opacity: 0.3;
+    background: var(--c-ink-strong);
   }
 
   &::before {
     top: 50%;
     left: 0;
     width: 100%;
-    height: 1px;
+    height: 2px;
   }
 
   &::after {
     top: 0;
     left: 50%;
-    width: 1px;
+    width: 2px;
     height: 100%;
   }
 }
 
-/* 闪烁的空缺坐标点 */
 .artCirclePulse {
-  width: 60px;
-  height: 60px;
-  border: 1px dashed var(--c-ink-strong);
+  width: 80px;
+  height: 80px;
+  border: 3px dashed var(--c-ink-strong);
+  background: var(--pop-yellow);
   border-radius: 50%;
   position: relative;
-  animation: pulseRotate 8s linear infinite;
+  z-index: 2;
+  box-shadow: var(--brutal-shadow);
+  animation: pulseRotate 10s linear infinite;
 
   &::after {
-    content: "";
+    content: "404";
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 4px;
-    height: 4px;
-    background: var(--c-ink-strong);
-    border-radius: 50%;
-    animation: blink 2s ease-in-out infinite;
+    font-family: var(--font-geist-mono);
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--c-ink-strong);
   }
 }
 
 @keyframes pulseRotate {
   0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
+    transform: rotate(0deg) scale(1);
   }
   50% {
-    opacity: 0;
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
   }
 }
 
 /* =========================================
-   RESPONSIVE (适配移动端 & 平板)
+   RESPONSIVE
    ========================================= */
 @media (max-width: 1024px) {
   .heroBottom {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 32px;
   }
 
   .heroMeta {
@@ -254,18 +278,23 @@
 
   .heroSummaryWrap {
     grid-column: 1 / -1;
-    max-width: 600px;
+    width: 100%;
   }
 }
 
 @media (max-width: 768px) {
+  .frame {
+    padding: 4vh 24px;
+  }
+
   .heroTitle {
+    font-size: clamp(4rem, 20vw, 6rem);
     .heroTitleIndent {
       padding-left: 0;
     }
   }
 
   .errorVisual {
-    height: 180px;
+    height: 160px;
   }
 }
