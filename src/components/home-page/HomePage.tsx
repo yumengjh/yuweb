@@ -16,7 +16,7 @@ import { HomeSmoothScroll } from "@/components/home-page/HomeSmoothScroll";
 
 const heroTitleAccentTuning = {
   minFontSize: 48,
-  strokeWidth: 2.4,
+  strokeWidth: 2.8,
   widthRange: [78, 188] as const,
   weightRange: [820, 900] as const,
   italicRange: [0.02, 0.8] as const,
@@ -270,7 +270,7 @@ export function HomePage({ locale }: { locale: SiteLocale }) {
                   className={styles.heroTitleAccent}
                   fontUrl="/fonts/CompressaPRO-GX.woff2"
                   stroke
-                  textColor="transparent"
+                  textColor="var(--c-surface-paper)"
                   strokeColor="var(--c-ink-strong)"
                   renderTitleAs="div"
                   {...heroTitleAccentTuning}

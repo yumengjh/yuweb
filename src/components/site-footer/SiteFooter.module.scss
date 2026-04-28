@@ -2,7 +2,9 @@
   width: min(100%, 1280px);
   margin: 0 auto;
   padding: 36px 40px 48px;
-  border-top: 1px solid color-mix(in srgb, var(--c-border) 84%, transparent);
+  border-top: var(--brutal-border);
+  background-image: radial-gradient(var(--c-border) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
 }
 
 .footerInner {
@@ -23,11 +25,18 @@
 }
 
 .brandTitle {
-  color: var(--c-ink-strong);
+  display: inline-block;
+  color: var(--c-bg);
+  background: var(--c-ink-strong);
+  padding: 6px 12px;
+  border: var(--brutal-border-sm);
+  box-shadow: 2px 2px 0px var(--c-ink-strong);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 12px;
-  letter-spacing: 0.18em;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  transform: rotate(-2deg);
 }
 
 .brandSummary {
@@ -58,24 +67,26 @@
 .nav a {
   color: var(--c-ink-strong);
   font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
   text-decoration: none;
+  padding: 4px 8px;
+  border: 2px solid transparent;
+  transition: all 0.15s ease-out;
 }
 
 .themeToggle,
-.languageToggle,
-.nav a {
-  transition:
-    opacity 0.18s ease,
-    color 0.18s ease,
-    transform 0.18s ease,
-    background-color 0.18s ease,
-    border-color 0.18s ease;
+.languageToggle {
+  transition: all 0.15s ease-out;
 }
 
 @media (hover: hover) {
   .nav a:hover {
-    color: var(--c-ink-soft);
-    opacity: 0.72;
+    color: var(--c-ink-strong);
+    background: var(--pop-yellow);
+    border: var(--brutal-border-sm);
+    box-shadow: 2px 2px 0px var(--c-ink-strong);
+    transform: translate(-2px, -2px);
   }
 }
 
@@ -88,21 +99,25 @@
   min-width: 168px;
   min-height: 48px;
   padding: 12px 18px;
-  border: 1px solid var(--c-border);
+  border: var(--brutal-border);
   background: var(--c-surface-paper);
-  box-shadow: var(--c-shadow-soft);
+  box-shadow: var(--brutal-shadow);
+  border-radius: var(--brutal-radius);
   cursor: var(--cursor-pointer), pointer;
   color: var(--c-ink-strong);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 700;
   line-height: 1.35;
+  text-transform: uppercase;
   text-align: left;
 }
 
 .metaSection {
   margin-top: 24px;
   padding-top: 18px;
-  border-top: 1px solid color-mix(in srgb, var(--c-border) 70%, transparent);
+  border-top: var(--brutal-border-sm);
+  border-top-style: dashed;
 }
 
 .metaList {
@@ -145,16 +160,13 @@
 
 .metaLink {
   text-decoration: none;
-  transition:
-    opacity 0.18s ease,
-    color 0.18s ease,
-    transform 0.18s ease,
-    background-color 0.18s ease,
-    border-color 0.18s ease;
+  padding: 0 4px;
+  transition: all 0.15s ease-out;
 }
 
 .metaLink .metaText {
   color: inherit;
+  font-weight: 700;
 }
 
 .metaLabel {
@@ -166,14 +178,21 @@
 }
 
 @media (hover: hover) {
-  .themeToggle:hover,
+  .themeToggle:hover {
+    transform: translate(2px, 2px);
+    box-shadow: var(--brutal-shadow-hover);
+    background: var(--pop-cyan);
+  }
+
   .languageToggle:hover {
-    background: color-mix(in srgb, var(--c-surface-paper) 96%, var(--c-ink-strong) 4%);
+    transform: translate(2px, 2px);
+    box-shadow: var(--brutal-shadow-hover);
+    background: var(--pop-pink);
   }
 
   .metaLink:hover {
-    color: var(--c-ink-soft);
-    opacity: 0.72;
+    color: var(--c-ink-strong);
+    background: var(--pop-green);
   }
 }
 
