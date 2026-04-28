@@ -1,4 +1,4 @@
-import type { MessageToken } from "@/lib/i18n-keys";
+﻿import type { MessageToken } from "@/lib/i18n-keys";
 import type { LocaleMode, SiteLocale } from "@/lib/locale-registry";
 
 export type { LocaleMode, SiteLocale };

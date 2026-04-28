@@ -24,6 +24,18 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
+    exclude: [
+      "node_modules",
+      "dist",
+      ".idea",
+      ".git",
+      ".cache",
+      ".claude/**",
+      ".gemini/**",
+      ".omx/**",
+      ".superpowers/**",
+      "rotating-scene-navigator (2)/**",
+    ],
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],

@@ -1,4 +1,4 @@
-﻿import userEvent from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
@@ -332,7 +332,7 @@ describe("TopNavigationBar", () => {
     );
     const stylesheet = readFileSync(stylesheetPath, "utf8");
 
-    expect(stylesheet).toContain("font-size: 18px;");
+    expect(stylesheet).toContain("font-size: 16px;");
     expect(stylesheet).toContain("line-height: 25.2px;");
   });
 
@@ -343,7 +343,7 @@ describe("TopNavigationBar", () => {
     );
     const stylesheet = readFileSync(stylesheetPath, "utf8");
 
-    expect(stylesheet).toContain("padding: 8px;");
+    expect(stylesheet).toContain("padding: 6px 16px;");
     expect(stylesheet).not.toContain(
       "&:not(.navTriggerActive):not(.navTriggerOpen):hover {\n      color: var(--nav-muted);",
     );
@@ -365,7 +365,7 @@ describe("TopNavigationBar", () => {
     const componentSource = readFileSync(componentPath, "utf8");
 
     expect(componentSource).toContain("const ENABLE_HOVER_SWITCH_AFTER_OPEN = true;");
-    expect(stylesheet).toContain("gap: 2px;");
+    expect(stylesheet).toContain("gap: 6px;");
     expect(stylesheet).toContain("width: 20px;");
     expect(stylesheet).toContain("height: 20px;");
   });
@@ -408,11 +408,11 @@ describe("TopNavigationBar", () => {
     const stylesheet = readFileSync(stylesheetPath, "utf8");
 
     expect(stylesheet).toContain("padding: 40px 0;");
-    expect(stylesheet).toContain("gap: 48px 60px;");
-    expect(stylesheet).toContain("font-size: 24px;");
-    expect(stylesheet).toContain("line-height: 32.4px;");
-    expect(stylesheet).toContain("font-size: 18px;");
-    expect(stylesheet).toContain("line-height: 25.2px;");
+    expect(stylesheet).toContain("gap: 24px 32px;");
+    expect(stylesheet).toContain("font-size: 20px;");
+    expect(stylesheet).toContain("line-height: 1.2;");
+    expect(stylesheet).toContain("font-size: 14px;");
+    expect(stylesheet).toContain("line-height: 1.5;");
     expect(stylesheet).toContain("background: rgb(0 0 0 / 25%);");
   });
 

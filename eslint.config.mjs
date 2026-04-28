@@ -18,7 +18,8 @@ const eslintConfig = defineConfig([
     "coverage/**",
     ".pnpm-store/**",
     ".husky/_/**",
-    "next-env.d.ts",
+    "**/next-env.d.ts",
+    "rotating-scene-navigator (2)/**",
   ]),
   eslintConfigPrettier,
 ]);
