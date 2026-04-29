@@ -277,12 +277,13 @@
   border-top: 0;
   border-bottom: var(--brutal-border);
   background: var(--c-surface-paper);
-  // box-shadow: 0 12px 0px var(--c-ink-strong);
   background-image: radial-gradient(var(--nav-line-soft) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
   transform: translateY(-100%);
-  transition: transform var(--nav-drawer-duration) var(--nav-drawer-ease);
-  will-change: transform;
+  transition:
+    transform var(--nav-drawer-duration) var(--nav-drawer-ease),
+    height var(--nav-drawer-duration) var(--nav-drawer-ease);
+  will-change: transform, height;
 }
 
 .desktopDropdownPanelOpen {
@@ -293,6 +294,18 @@
   width: min(calc(100% - 96px), 1320px);
   margin: 0 auto;
   padding: 40px 0;
+}
+
+.desktopDropdownTrack {
+  display: flex;
+  width: 100%;
+  transition: transform var(--nav-drawer-duration) var(--nav-drawer-ease);
+  will-change: transform;
+}
+
+.desktopDropdownPanelItem {
+  flex: 0 0 100%;
+  width: 100%;
 }
 
 /* ── Groups & grid ─────────────────────────────────────────────────────────── */

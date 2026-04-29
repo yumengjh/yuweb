@@ -69,94 +69,8 @@ function toMenuContent(
   }
 
   if (content.kind === "component") {
-    const journeyMenu = siteConfig.topNavigationBar.componentContent.journey;
-    const journeyEntries = journeyMenu.entries.map((entry) => ({
-      href: localizeHref(entry.href, locale),
-      title: t(entry.title),
-    }));
-    const viewJourneyHref = localizeHref("/journey", locale);
-    const JourneyMenu = () => (
-      <div style={{ display: "flex", gap: 48 }}>
-        <div>
-          <p
-            style={{
-              margin: "0 0 6px",
-              fontSize: 12,
-              letterSpacing: "0.1em",
-              opacity: 0.5,
-            }}
-          >
-            {t(journeyMenu.nodesLabel)}
-          </p>
-
-          {journeyEntries.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              style={{
-                display: "block",
-                padding: "8px 0",
-                fontSize: 16,
-                color: "var(--c-ink-strong)",
-                textDecoration: "none",
-              }}
-            >
-              {item.title}
-            </Link>
-          ))}
-        </div>
-
-        <div
-          style={{
-            width: 1,
-            background: "var(--c-border)",
-            alignSelf: "stretch",
-          }}
-        />
-
-        <div style={{ maxWidth: 260 }}>
-          <p
-            style={{
-              margin: "0 0 8px",
-              fontSize: 12,
-              letterSpacing: "0.1em",
-              opacity: 0.5,
-            }}
-          >
-            {t(journeyMenu.recentLabel)}
-          </p>
-          <p
-            style={{
-              margin: 0,
-              fontSize: 15,
-              lineHeight: 1.6,
-              opacity: 0.72,
-            }}
-          >
-            {t(journeyMenu.recentSummary)}
-          </p>
-
-          <Link
-            href={viewJourneyHref}
-            style={{
-              display: "inline-block",
-              marginTop: 14,
-              fontSize: 13,
-              color: "var(--c-ink-strong)",
-              textDecoration: "underline",
-              textUnderlineOffset: 3,
-            }}
-          >
-            {t(journeyMenu.viewPageLabel)}
-          </Link>
-        </div>
-      </div>
-    );
-
-    return {
-      kind: "component",
-      component: JourneyMenu,
-    };
+    // Component-based menus are currently not in use after streamlining.
+    return undefined;
   }
 
   return {
@@ -221,6 +135,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           items={buildNavigationItems(locale)}
           labels={buildNavigationLabels(locale)}
           mobileFooterLines={buildMobileFooterLines(locale)}
+          transitionConfig={siteConfig.topNavigationBar.transition}
         />
       )}
 

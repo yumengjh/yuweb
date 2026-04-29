@@ -479,6 +479,11 @@ type TopNavigationBarProps = {
     closeMenuLabel: string;
   };
   mobileFooterLines?: string[];
+  transitionConfig?: {
+    duration?: number;
+    enableHorizontal?: boolean;
+    easing?: "smooth" | "snappy" | "linear" | "in-out" | "out" | "in" | "default";
+  };
 };
 
 const defaultLabels = {
@@ -496,12 +501,25 @@ export function TopNavigationBar({
   brandHref = "/",
   labels = defaultLabels,
   mobileFooterLines = [],
+  transitionConfig = { duration: 400, enableHorizontal: true, easing: "smooth" },
 }: TopNavigationBarProps) {
   const [openKey, setOpenKey] = useState<NavigationKey | null>(null);
+  const easingMap = {
+    smooth: "cubic-bezier(0.32, 0, 0.12, 1)",
+    snappy: "cubic-bezier(0.2, 1, 0.3, 1)",
+    linear: "linear",
+    "in-out": "ease-in-out",
+    out: "ease-out",
+    in: "ease-in",
+    default: "ease",
+  };
+  const selectedEasing = easingMap[transitionConfig.easing || "smooth"] || easingMap.smooth;
+
   const [displayKey, setDisplayKey] = useState<NavigationKey | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mobileOpenKey, setMobileOpenKey] = useState<NavigationKey | null>(null);
   const [isAtTop, setIsAtTop] = useState(true);
+  const [shouldAnimateTrack, setShouldAnimateTrack] = useState(false);
   // Mobile drawer shell state (mirrors desktop logic)
 
   const [headerHeight, setHeaderHeight] = useState(72);
@@ -520,7 +538,9 @@ export function TopNavigationBar({
   const panelHeightsRef = useRef<Record<string, number>>({});
   const desktopMenuId = useId();
 
+  const menuItems = items.filter((i) => !!i.menu);
   const activeItem = items.find((i) => i.key === displayKey) ?? null;
+  const activeIndex = menuItems.findIndex((i) => i.key === displayKey);
   const isDropdownOpen = openKey !== null;
   const isDropdownVisible = activeItem !== null;
   const isTopTransparentActive = fixed && isAtTop && !isDropdownVisible && !isMenuOpen;
@@ -558,6 +578,7 @@ export function TopNavigationBar({
       dropdownWheelDeltaRef.current = 0;
 
       if (openKey !== null) {
+        setShouldAnimateTrack(true);
         dropdownScrollReadyRef.current = true;
         if (shellRef.current) shellRef.current.style.transition = "none";
         flushSync(() => {
@@ -588,6 +609,7 @@ export function TopNavigationBar({
 
   const closeMenu = useCallback(() => {
     if (openKey === null && displayKey === null) return;
+    setShouldAnimateTrack(false);
     clearCloseTimer();
     clearOpenFrame();
     clearDropdownReadyTimer();
@@ -599,7 +621,7 @@ export function TopNavigationBar({
     closeTimerRef.current = setTimeout(() => {
       setDisplayKey(null);
       closeTimerRef.current = null;
-    }, DESKTOP_DROPDOWN_CLOSE_DURATION_MS);
+    }, transitionConfig.duration);
   }, [
     clearCloseTimer,
     clearDropdownReadyTimer,
@@ -607,6 +629,7 @@ export function TopNavigationBar({
     displayKey,
     openKey,
     setShellHeight,
+    transitionConfig.duration,
   ]);
 
   const toggleMenu = (key: NavigationKey) => {
@@ -709,13 +732,13 @@ export function TopNavigationBar({
     dropdownReadyTimerRef.current = setTimeout(() => {
       dropdownScrollReadyRef.current = true;
       dropdownReadyTimerRef.current = null;
-    }, DESKTOP_DROPDOWN_CLOSE_DURATION_MS);
+    }, transitionConfig.duration);
     return () => {
       clearDropdownReadyTimer();
       dropdownScrollReadyRef.current = false;
       dropdownWheelDeltaRef.current = 0;
     };
-  }, [clearDropdownReadyTimer, isDropdownOpen]);
+  }, [clearDropdownReadyTimer, isDropdownOpen, transitionConfig.duration]);
 
   useEffect(() => {
     if (!isDropdownOpen || !closeOnScroll) return;
@@ -787,6 +810,12 @@ export function TopNavigationBar({
           (isDropdownVisible || isMenuOpen) && styles.barDropdownOpen,
         )}
         data-name="Top Navigation Bar"
+        style={
+          {
+            "--nav-drawer-duration": `${transitionConfig.duration}ms`,
+            "--nav-drawer-ease": selectedEasing,
+          } as React.CSSProperties
+        }
       >
         <div className={styles.barInner}>
           <Link className={styles.brand} href={brandHref} onClick={closeAll}>
@@ -907,20 +936,31 @@ export function TopNavigationBar({
           id={desktopMenuId}
           role="region"
         >
-          {activeItem && activeItem.menu && (
-            <div key={activeItem.key} className={styles.desktopDropdownViewport}>
+          <div className={styles.desktopDropdownViewport}>
+            <div
+              className={cn(
+                styles.desktopDropdownPanel,
+                isDropdownOpen && styles.desktopDropdownPanelOpen,
+              )}
+            >
               <div
-                className={cn(
-                  styles.desktopDropdownPanel,
-                  isDropdownOpen && styles.desktopDropdownPanelOpen,
-                )}
+                className={styles.desktopDropdownTrack}
+                style={{
+                  transform: activeIndex >= 0 ? `translateX(-${activeIndex * 100}%)` : undefined,
+                  transition:
+                    transitionConfig.enableHorizontal && shouldAnimateTrack ? undefined : "none",
+                }}
               >
-                <div className={styles.desktopDropdownContent}>
-                  <MenuContentRenderer content={activeItem.menu} onClose={closeMenu} />
-                </div>
+                {menuItems.map((item) => (
+                  <div key={item.key} className={styles.desktopDropdownPanelItem}>
+                    <div className={styles.desktopDropdownContent}>
+                      <MenuContentRenderer content={item.menu!} onClose={closeMenu} />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          )}
+          </div>
         </div>
       </header>
 
