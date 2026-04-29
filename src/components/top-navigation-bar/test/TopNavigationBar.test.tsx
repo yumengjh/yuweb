@@ -397,7 +397,9 @@ describe("TopNavigationBar", () => {
     expect(stylesheet).toContain("--nav-drawer-duration: 0.4s;");
     expect(stylesheet).toContain("--nav-drawer-ease:");
     expect(stylesheet).toContain("linear(");
-    expect(componentSource).toContain("const DESKTOP_DROPDOWN_CLOSE_DURATION_MS = 400;");
+    expect(componentSource).toContain("transitionConfig");
+    expect(componentSource).toContain("--nav-drawer-duration");
+    expect(componentSource).toContain("--nav-drawer-ease");
   });
 
   it("桌面展开菜单使用更接近 Figma 的内容密度与遮罩层", () => {

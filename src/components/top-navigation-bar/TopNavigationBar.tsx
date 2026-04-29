@@ -19,7 +19,6 @@ import styles from "./TopNavigationBar.module.scss";
 
 // ─── Duration constants ───────────────────────────────────────────────────────
 
-const DESKTOP_DROPDOWN_CLOSE_DURATION_MS = 400;
 const ENABLE_HOVER_SWITCH_AFTER_OPEN = true;
 const TOP_SCROLL_THRESHOLD_PX = 1;
 // ─── Menu content types ───────────────────────────────────────────────────────

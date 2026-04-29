@@ -19,7 +19,6 @@ import type {
   SiteFooterLinkConfig,
   SiteFooterMetaItemConfig,
   SiteLocale,
-  SiteNavigationEntryConfig,
   SiteNavigationItemConfig,
 } from "../types/site-config.types";
 
