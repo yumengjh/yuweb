@@ -1,4 +1,4 @@
-﻿import type { AppRouteConfig } from "../types/site-config.types";
+import type { AppRouteConfig } from "../types/site-config.types";
 
 const pathnameRoutes: AppRouteConfig[] = [
   {
