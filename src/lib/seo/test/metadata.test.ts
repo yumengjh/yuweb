@@ -19,21 +19,21 @@ describe("seo metadata helpers", () => {
   });
 
   it("builds language alternates for both locales", () => {
-    expect(getLanguageAlternates("/journey")).toEqual({
-      "zh-CN": "/journey/",
-      "en-US": "/en/journey/",
-      "x-default": "/journey/",
+    expect(getLanguageAlternates("/about")).toEqual({
+      "zh-CN": "/about/",
+      "en-US": "/en/about/",
+      "x-default": "/about/",
     });
   });
 
   it("adds canonical and large-image social metadata for home and route pages", () => {
     const homeMetadata = buildHomeMetadata("zh-CN");
-    const routeMetadata = buildRouteMetadata("en-US", "blog");
+    const routeMetadata = buildRouteMetadata("en-US", "projects");
     const enOgImage = getOgImage("en-US");
 
     expect(homeMetadata.alternates?.canonical).toBe("/");
-    expect(routeMetadata.alternates?.canonical).toBe("/en/blog/");
-    expect(routeMetadata.openGraph?.url).toBe("/en/blog/");
+    expect(routeMetadata.alternates?.canonical).toBe("/en/projects/");
+    expect(routeMetadata.openGraph?.url).toBe("/en/projects/");
     expect(homeMetadata.openGraph?.locale).toBe("zh_CN");
     expect(routeMetadata.openGraph?.images).toEqual([enOgImage]);
     expect(routeMetadata.twitter).toMatchObject({

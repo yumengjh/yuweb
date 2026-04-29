@@ -17,13 +17,11 @@ describe("site-config", () => {
 
     expect(getRouteConfigByPathname("/about")).toMatchObject({ id: "about" });
 
-    expect(getRouteConfigByPathname("/blog/post-1")).toMatchObject({ id: "blog" });
-
     expect(getRouteConfigByPathname("/notes")).toMatchObject({ id: "notes" });
 
     expect(getRouteConfigByPathname("/projects/demo")).toMatchObject({ id: "projects" });
 
-    expect(getRouteConfigByPathname("/collections/archive")).toMatchObject({ id: "collections" });
+    expect(getRouteConfigByPathname("/travel")).toMatchObject({ id: "travel" });
 
     expect(getRouteConfigByPathname("/missing-page")).toMatchObject({ id: "notFound" });
   });
@@ -39,26 +37,26 @@ describe("site-config", () => {
 
     expect(siteConfig.topNavigationBar.items[0].label).toBe("nav.about.label");
 
-    expect(siteConfig.topNavigationBar.items[1].label).toBe("nav.notes.label");
+    expect(siteConfig.topNavigationBar.items[1].label).toBe("nav.projects.label");
 
     expect(siteConfig.footer.links[0].label).toBe("nav.about.label");
 
     expect(zhT(siteConfig.identity.name)).toBe("鱼梦江湖(@yumengjh)");
 
-    expect(enT(siteConfig.routeMeta.journey.title)).toBe("Journey");
+    expect(enT(siteConfig.routeMeta.about.title)).toBe("About");
 
     expect(enT(siteConfig.routeMeta.notes.title)).toBe("Notes");
 
-    expect(getRouteConfigById("journey").layout).toMatchObject({
+    expect(getRouteConfigById("about").layout).toMatchObject({
       showNavigation: true,
 
       showFooter: true,
 
       fixedNavigation: false,
 
-      closeNavigationOnScroll: true,
+      closeNavigationOnScroll: false,
 
-      activeNavigationKey: "journey",
+      activeNavigationKey: "about",
     });
   });
 

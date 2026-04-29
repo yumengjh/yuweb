@@ -87,6 +87,12 @@ export const siteConfig = {
     },
   } as const satisfies Record<AppRouteId, { title: MessageToken; description: MessageToken }>,
   topNavigationBar: {
+    transition: {
+      duration: 250,
+      enableHorizontal: true,
+      easing: "smooth",
+      // 可选: "smooth", "snappy", "linear", "in-out", "out", "in", "default"
+    } as const,
     labels: {
       navAriaLabel: nav.aria.primary,
       desktopMenuAriaLabel: nav.aria.desktopMenu,
@@ -102,97 +108,22 @@ export const siteConfig = {
         label: nav.about.label,
         href: "/about",
         menu: {
-          kind: "groups",
-          groups: [
-            {
-              label: nav.about.group.start,
-              entries: [
-                {
-                  title: nav.about.startFromHere.title,
-                  description: nav.about.startFromHere.description,
-                  href: "/about#start",
-                },
-                {
-                  title: nav.about.thisSite.title,
-                  description: nav.about.thisSite.description,
-                  href: "/about#site",
-                },
-              ],
-            },
-            {
-              label: nav.about.group.aboutMe,
-              entries: [
-                {
-                  title: nav.about.current.title,
-                  description: nav.about.current.description,
-                  href: "/about#now",
-                },
-                {
-                  title: nav.about.learning.title,
-                  description: nav.about.learning.description,
-                  href: "/about#learning",
-                },
-                {
-                  title: nav.about.fields.title,
-                  description: nav.about.fields.description,
-                  href: "/about#fields",
-                },
-              ],
-            },
-            {
-              label: nav.about.group.explore,
-              entries: [
-                {
-                  title: nav.about.stack.title,
-                  description: nav.about.stack.description,
-                  href: "/about#stack",
-                },
-                {
-                  title: nav.about.viewPage.title,
-                  description: nav.about.viewPage.description,
-                  href: "/about",
-                },
-              ],
-            },
-          ],
-        },
-      },
-      {
-        key: "notes",
-        label: nav.notes.label,
-        href: "/notes",
-        menu: {
           kind: "entries",
           entries: [
             {
-              title: nav.notes.recent.title,
-              description: nav.notes.recent.description,
-              href: "/notes#recent",
+              title: nav.about.current.title,
+              description: nav.about.current.description,
+              href: "/about#now",
             },
             {
-              title: nav.notes.tech.title,
-              description: nav.notes.tech.description,
-              href: "/notes#tech",
+              title: nav.about.thisSite.title,
+              description: nav.about.thisSite.description,
+              href: "/about#site",
             },
             {
-              title: nav.notes.learning.title,
-              description: nav.notes.learning.description,
-              href: "/notes#learning",
-            },
-            {
-              title: nav.notes.fragments.title,
-              description: nav.notes.fragments.description,
-              href: "/notes#fragments",
-            },
-            {
-              title: nav.notes.qa.title,
-              description: nav.notes.qa.description,
-              href: "/notes#qa",
-            },
-            {
-              title: nav.notes.viewPage.title,
-              description: nav.notes.viewPage.description,
-              href: "/notes",
+              title: nav.about.viewPage.title,
+              description: nav.about.viewPage.description,
+              href: "/about",
             },
           ],
         },
@@ -202,140 +133,37 @@ export const siteConfig = {
         label: nav.projects.label,
         href: "/projects",
         menu: {
-          kind: "groups",
-          groups: [
+          kind: "entries",
+          entries: [
             {
-              label: nav.projects.group.inProgress,
-              entries: [
-                {
-                  title: nav.projects.inProgress.title,
-                  description: nav.projects.inProgress.description,
-                  href: "/projects#in-progress",
-                },
-                {
-                  title: nav.projects.experiments.title,
-                  description: nav.projects.experiments.description,
-                  href: "/projects#experiments",
-                },
-              ],
+              title: nav.projects.featured.title,
+              description: nav.projects.featured.description,
+              href: "/projects#featured",
             },
             {
-              label: nav.projects.group.archive,
-              entries: [
-                {
-                  title: nav.projects.featured.title,
-                  description: nav.projects.featured.description,
-                  href: "/projects#featured",
-                },
-                {
-                  title: nav.projects.opensource.title,
-                  description: nav.projects.opensource.description,
-                  href: "/projects#opensource",
-                },
-              ],
+              title: nav.projects.inProgress.title,
+              description: nav.projects.inProgress.description,
+              href: "/projects#in-progress",
             },
             {
-              label: nav.projects.group.abandoned,
-              entries: [
-                {
-                  title: nav.projects.abandonedIdeas.title,
-                  description: nav.projects.abandonedIdeas.description,
-                  href: "/projects#abandoned-ideas",
-                },
-                {
-                  title: nav.projects.failures.title,
-                  description: nav.projects.failures.description,
-                  href: "/projects#failures",
-                },
-                {
-                  title: nav.projects.viewPage.title,
-                  description: nav.projects.viewPage.description,
-                  href: "/projects",
-                },
-              ],
+              title: nav.projects.viewPage.title,
+              description: nav.projects.viewPage.description,
+              href: "/projects",
             },
           ],
         },
       },
-      // {
-      //   key: "collections",
-      //   label: nav.collections.label,
-      //   href: "/collections",
-      //   menu: {
-      //     kind: "entries",
-      //     entries: [
-      //       {
-      //         title: nav.collections.books.title,
-      //         description: nav.collections.books.description,
-      //         href: "/collections#books",
-      //       },
-      //       {
-      //         title: nav.collections.articles.title,
-      //         description: nav.collections.articles.description,
-      //         href: "/collections#articles",
-      //       },
-      //       {
-      //         title: nav.collections.materialLibrary.title,
-      //         description: nav.collections.materialLibrary.description,
-      //         href: "/collections#material-library",
-      //       },
-      //       {
-      //         title: nav.collections.referenceSystem.title,
-      //         description: nav.collections.referenceSystem.description,
-      //         href: "/collections#reference-system",
-      //       },
-      //       {
-      //         title: nav.collections.toolkit.title,
-      //         description: nav.collections.toolkit.description,
-      //         href: "/collections#toolkit",
-      //       },
-      //       {
-      //         title: nav.collections.viewPage.title,
-      //         description: nav.collections.viewPage.description,
-      //         href: "/collections",
-      //       },
-      //     ],
-      //   },
-      // },
-      // {
-      //   key: "journey",
-      //   label: nav.journey.label,
-      //   href: "/journey",
-      //   menu: {
-      //     kind: "component",
-      //     contentId: "journey",
-      //   },
-      //   mobileMenu: [
-      //     {
-      //       label: nav.journey.label,
-      //       entries: [
-      //         { title: nav.journey.milestones.title, href: "/journey#milestones" },
-      //         { title: nav.journey.inProgress.title, href: "/journey#in-progress" },
-      //         { title: nav.journey.timeline.title, href: "/journey#timeline" },
-      //         { title: nav.journey.viewPageLabel, href: "/journey" },
-      //       ],
-      //     },
-      //   ],
-      // },
+      {
+        key: "notes",
+        label: nav.notes.label,
+        href: "/notes",
+      },
       {
         key: "travel",
         label: nav.travel.label,
         href: "/travel",
       },
     ] as const satisfies SiteNavigationItemConfig[],
-    componentContent: {
-      journey: {
-        nodesLabel: nav.journey.nodesLabel,
-        recentLabel: nav.journey.recentLabel,
-        recentSummary: nav.journey.recentSummary,
-        viewPageLabel: nav.journey.viewPageLabel,
-        entries: [
-          { title: nav.journey.milestones.title, href: "/journey#milestones" },
-          { title: nav.journey.inProgress.title, href: "/journey#in-progress" },
-          { title: nav.journey.timeline.title, href: "/journey#timeline" },
-        ] as const satisfies SiteNavigationEntryConfig[],
-      },
-    },
   },
   footer: {
     summary: footer.summary,
@@ -343,10 +171,9 @@ export const siteConfig = {
     metaAriaLabel: footer.aria.metadata,
     links: [
       { href: "/about", label: nav.about.label },
-      { href: "/stack", label: nav.stack.label },
-      { href: "/curations", label: nav.curations.label },
-      { href: "/journey", label: nav.journey.label },
-      { href: "/blog", label: nav.blog.label },
+      { href: "/projects", label: nav.projects.label },
+      { href: "/notes", label: nav.notes.label },
+      { href: "/travel", label: nav.travel.label },
     ] as const satisfies SiteFooterLinkConfig[],
     metaItems: [
       {
