@@ -83,6 +83,20 @@
   --ld-shadow: var(--c-bg-a50);
 
   color-scheme: dark;
+
+  // Shiki dual-theme: override inline light-theme styles with dark-theme CSS vars.
+  // Shiki outputs inline colors for light + --shiki-dark vars for dark.
+  pre.shiki {
+    background-color: var(--shiki-dark-bg) !important;
+    color: var(--shiki-dark) !important;
+
+    span {
+      color: var(--shiki-dark) !important;
+      font-style: var(--shiki-dark-font-style, inherit);
+      font-weight: var(--shiki-dark-font-weight, inherit);
+      text-decoration: var(--shiki-dark-text-decoration, inherit);
+    }
+  }
 }
 
 :root[data-theme="dark"],
