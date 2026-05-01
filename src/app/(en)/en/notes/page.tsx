@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 
 import { buildRouteMetadata } from "@/lib/seo/metadata";
-import { RoutePlaceholderPage } from "@/components/route-placeholder/RoutePlaceholderPage";
+import { getAllNotes } from "@/lib/notes/content";
+import { NotesPage } from "@/components/notes-page/NotesPage";
 
 export const metadata: Metadata = buildRouteMetadata("en-US", "notes");
 
-export default function EnglishNotesPage() {
-  return <RoutePlaceholderPage locale="en-US" routeId="notes" />;
+export default async function EnNotesPage() {
+  const staticNotes = await getAllNotes("en-US");
+  return <NotesPage staticNotes={staticNotes} locale="en-US" />;
 }
