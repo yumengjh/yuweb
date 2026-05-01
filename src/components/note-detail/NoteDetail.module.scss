@@ -61,154 +61,187 @@
 }
 
 .content {
-  font-size: 17px;
-  line-height: 1.9;
-  color: var(--c-text);
-  word-break: break-word;
+  color: #262626;
+  font-size: 16px;
+  line-height: 1.7;
+  word-wrap: break-word;
 
-  strong {
-    font-weight: 700;
-  }
-
-  // ── Headings ──
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    margin: 2.4em 0 0.6em;
-    line-height: 1.4;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
     font-weight: 700;
-
-    &:first-child {
-      margin-top: 0;
-    }
+    line-height: 1.4;
+    color: #262626;
   }
 
+  h1 {
+    font-size: 2em;
+  }
   h2 {
-    padding-left: 14px;
-    font-size: 1.5rem;
-    border-left: 3px solid var(--c-primary, #0066cc);
+    font-size: 1.5em;
   }
-
   h3 {
-    padding-left: 12px;
-    font-size: 1.25rem;
-    border-left: 2px solid var(--c-primary, #0066cc);
+    font-size: 1.25em;
+  }
+  h4 {
+    font-size: 1.1em;
+  }
+  h5 {
+    font-size: 1em;
+  }
+  h6 {
+    font-size: 1em;
+    color: #8c8c8c;
   }
 
-  // ── Paragraphs ──
   p {
-    margin: 0 0 1.1em;
+    margin: 0 0 1em;
   }
 
-  // ── Links ──
   a {
-    color: var(--c-primary, #0066cc);
+    color: #1171ee;
     text-decoration: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--c-primary, #0066cc) 40%, transparent);
-    transition: border-color 0.2s;
-
     &:hover {
-      border-bottom-color: var(--c-primary, #0066cc);
+      text-decoration: underline;
     }
   }
 
-  // ── Lists ──
+  strong {
+    font-weight: 700;
+  }
+  em {
+    font-style: italic;
+  }
+
   ul,
   ol {
-    margin: 0 0 1.2em;
-    padding-left: 1.8em;
+    margin: 0 0 1em;
+    padding-left: 2em;
   }
 
   li {
-    margin-bottom: 0.3em;
-
-    & > p {
-      margin-bottom: 0.4em;
-    }
+    margin-bottom: 0.25em;
   }
 
-  // ── Blockquotes ──
   blockquote {
-    margin: 1.4em 0;
-    padding: 12px 20px;
-    border-left: 3px solid var(--c-primary, #0066cc);
-    color: var(--c-ink-soft);
-    background: color-mix(in srgb, var(--c-primary, #0066cc) 4%, var(--c-bg));
-    border-radius: 0 6px 6px 0;
-
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    color: #595959;
+    background-color: transparent;
+    border-left: 3px solid #e8e8e8;
     p:last-child {
       margin-bottom: 0;
     }
   }
 
-  // ── Inline code ──
-  code:not(pre code) {
-    padding: 0.15em 0.45em;
-    margin: 0 2px;
-    border-radius: 4px;
-    background: color-mix(in srgb, var(--c-primary, #0066cc) 8%, var(--c-bg));
-    color: color-mix(in srgb, var(--c-primary, #0066cc) 85%, var(--c-text));
-    font-size: 0.86em;
-    font-family: var(--font-geist-mono, monospace);
-  }
-
-  // ── Code blocks (Shiki) ──
-  pre.shiki {
-    margin: 1.4em 0;
-    padding: 0;
-    border-radius: 8px;
-    border: 1px solid var(--c-border-soft, rgba(0, 0, 0, 0.06));
-    overflow-x: auto;
-    font-size: 14px;
-    line-height: 1.75;
-
-    code {
-      display: block;
-      padding: 20px 24px;
-      background: none;
-      font-size: inherit;
-      font-family: var(--font-geist-mono, monospace);
-    }
-
-    .line {
-      min-height: 1.75em;
-    }
-  }
-
-  // ── Tables ──
   table {
     width: 100%;
-    margin: 1.4em 0;
+    margin-bottom: 1.5em;
     border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    overflow-x: auto;
   }
 
   th,
   td {
-    padding: 10px 14px;
-    border: 1px solid var(--c-border-soft, rgba(0, 0, 0, 0.08));
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
     text-align: left;
-    font-size: 0.94em;
+    font-size: 14px;
+    min-width: 100px;
+    color: #262626;
   }
 
   th {
-    background: var(--c-bg-soft, rgba(0, 0, 0, 0.04));
+    background-color: #ffffff;
     font-weight: 600;
+    border-bottom: 1px solid #e8e8e8;
   }
 
-  // ── Images ──
+  code:not(pre code) {
+    padding: 2px 6px;
+    margin: 0 2px;
+    font-size: 0.9em;
+    background-color: #f2f3f5;
+    border-radius: 4px;
+    color: #262626;
+    font-family: var(
+      --font-geist-mono,
+      SFMono-Regular,
+      Consolas,
+      Liberation Mono,
+      Menlo,
+      monospace
+    );
+  }
+
+  pre.shiki,
+  pre {
+    margin: 1.5em 0;
+    padding: 16px;
+    overflow-x: auto;
+    overflow-y: visible !important;
+    max-height: none !important;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #ffffff !important;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+
+    code {
+      font-family:
+        SFMono-Regular,
+        Consolas,
+        Liberation Mono,
+        Menlo,
+        Courier,
+        monospace;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      color: inherit;
+      display: block;
+      min-width: fit-content;
+    }
+
+    .line {
+      display: flex;
+      min-height: 1.5em;
+    }
+
+    .line-number {
+      user-select: none;
+      text-align: right;
+      color: #b8b8b8;
+      padding-right: 16px;
+      margin-right: 16px;
+      min-width: 24px;
+    }
+
+    .line-content {
+      word-break: break-all;
+      white-space: pre;
+    }
+  }
+
   img {
     max-width: 100%;
-    border-radius: 8px;
+    height: auto;
+    border-radius: 4px;
+    margin: 1.5em auto;
+    display: block;
   }
 
-  // ── Horizontal rule ──
   hr {
-    margin: 2.4em 0;
+    margin: 2.5em 0;
     border: none;
-    border-top: 1px solid var(--c-border-soft, rgba(0, 0, 0, 0.08));
+    border-top: 1px solid #e8e8e8;
   }
 }
 

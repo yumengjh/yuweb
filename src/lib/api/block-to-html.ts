@@ -89,8 +89,23 @@ function renderBlock(node: ApiBlockNode): string {
     case "code": {
       const text = typeof node.payload.text === "string" ? node.payload.text : "";
       const lang = typeof node.payload.language === "string" ? node.payload.language : "";
-      const langAttr = lang ? ` class="language-${lang}"` : "";
-      return `<pre><code${langAttr}>${text}</code></pre>`;
+      const lines = text.split("\n");
+      // Remove last empty line if it exists
+      if (lines.length > 1 && lines[lines.length - 1] === "") {
+        lines.pop();
+      }
+      const linesHtml = lines
+        .map((line, i) => {
+          const escaped = line
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+          return `<div class="line"><span class="line-number">${i + 1}</span><span class="line-content">${escaped}</span></div>`;
+        })
+        .join("");
+      return `<pre class="code-block"><code class="language-${lang}">${linesHtml}</code></pre>`;
     }
 
     case "quote": {
@@ -106,6 +121,27 @@ function renderBlock(node: ApiBlockNode): string {
 
     case "divider":
       return "<hr>";
+
+    case "table": {
+      const rows = node.payload.rows;
+      if (Array.isArray(rows)) {
+        const rowsHtml = rows
+          .map((row: unknown, rowIndex: number) => {
+            if (!Array.isArray(row)) return "";
+            const cellsHtml = row
+              .map((cell: unknown) => {
+                const cellText = typeof cell === "string" ? cell : "";
+                const tag = rowIndex === 0 ? "th" : "td";
+                return `<${tag}>${renderInlineMd(cellText)}</${tag}>`;
+              })
+              .join("");
+            return `<tr>${cellsHtml}</tr>`;
+          })
+          .join("");
+        return `<table><tbody>${rowsHtml}</tbody></table>`;
+      }
+      return "";
+    }
 
     default: {
       const text = typeof node.payload.text === "string" ? node.payload.text : "";
