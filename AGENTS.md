@@ -35,7 +35,24 @@
 
 ## 提交与 Pull Request 规范
 
-提交信息遵循 Conventional Commits，并由 Commitlint 校验，例如 `feat(i18n): refine zh nav labels`、`fix(app): add shared global 404 handling`。常用类型包括 `feat`、`fix`、`docs`、`style`、`refactor`、`test`、`chore`、`types`；可选 scope 常见有 `app`、`components`、`docs`、`config`。建议使用 `pnpm commit` 进入 Commitizen 引导提交流程。
+提交信息**必须**遵循 Conventional Commits，并带上对应的 Emoji，格式由 `commitlint.config.mjs` 校验。
+
+格式示例：`✨ feat(components): add new navigation feature`
+
+常用类型及 Emoji：
+
+- `✨ feat`: 新功能
+- `🐛 fix`: 修复
+- `📚 docs`: 文档
+- `🎨 style`: 样式格式
+- `📦 refactor`: 重构
+- `🚀 perf`: 性能
+- `🧪 test`: 测试
+- `🏗️ build`: 构建/依赖
+- `🔧 chore`: 杂项/配置
+- `🧩 types`: 类型定义
+
+可选 scope 常见有 `app`、`components`、`docs`、`config`、`styles` 等。建议使用 `pnpm commit` 进入引导提交流程。
 
 PR 应包含：变更摘要、验证方式、相关 Issue 链接（如有），以及 UI 变更对应的截图或录屏。
 

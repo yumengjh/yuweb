@@ -87,9 +87,10 @@ export const siteConfig = {
   } as const satisfies Record<AppRouteId, { title: MessageToken; description: MessageToken }>,
   topNavigationBar: {
     transition: {
-      duration: 250,
-      enableHorizontal: true,
-      easing: "smooth",
+      duration: 400, // Matches the 0.4s in TopNavigationBar.module.scss
+      enableHorizontal: false,
+      easing: "snappy",
+      useNativeVariables: true,
       // 可选: "smooth", "snappy", "linear", "in-out", "out", "in", "default"
     } as const,
     labels: {

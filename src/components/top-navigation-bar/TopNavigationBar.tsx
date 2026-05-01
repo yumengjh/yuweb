@@ -482,6 +482,7 @@ type TopNavigationBarProps = {
     duration?: number;
     enableHorizontal?: boolean;
     easing?: "smooth" | "snappy" | "linear" | "in-out" | "out" | "in" | "default";
+    useNativeVariables?: boolean;
   };
 };
 
@@ -513,6 +514,13 @@ export function TopNavigationBar({
     default: "ease",
   };
   const selectedEasing = easingMap[transitionConfig.easing || "smooth"] || easingMap.smooth;
+
+  const dynamicStyles = transitionConfig.useNativeVariables
+    ? {}
+    : ({
+        "--nav-drawer-duration": `${transitionConfig.duration}ms`,
+        "--nav-drawer-ease": selectedEasing,
+      } as React.CSSProperties);
 
   const [displayKey, setDisplayKey] = useState<NavigationKey | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -809,12 +817,7 @@ export function TopNavigationBar({
           (isDropdownVisible || isMenuOpen) && styles.barDropdownOpen,
         )}
         data-name="Top Navigation Bar"
-        style={
-          {
-            "--nav-drawer-duration": `${transitionConfig.duration}ms`,
-            "--nav-drawer-ease": selectedEasing,
-          } as React.CSSProperties
-        }
+        style={dynamicStyles}
       >
         <div className={styles.barInner}>
           <Link className={styles.brand} href={brandHref} onClick={closeAll}>
