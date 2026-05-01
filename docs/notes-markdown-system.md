@@ -25,11 +25,11 @@
 
 选择了 **gray-matter + markdown-it** 方案：
 
-| 库 | 用途 |
-|---|---|
-| `gray-matter` | 解析 YAML frontmatter |
-| `markdown-it` | Markdown → HTML（VitePress 同款解析器） |
-| `@types/markdown-it` | TypeScript 类型定义 |
+| 库                   | 用途                                    |
+| -------------------- | --------------------------------------- |
+| `gray-matter`        | 解析 YAML frontmatter                   |
+| `markdown-it`        | Markdown → HTML（VitePress 同款解析器） |
+| `@types/markdown-it` | TypeScript 类型定义                     |
 
 未选择 Velite、Contentlayer 等重型框架，保持项目依赖轻量。
 
@@ -48,36 +48,36 @@ pnpm add -D @types/markdown-it
 
 ### 类型与工具层
 
-| 文件 | 职责 |
-|------|------|
-| `src/lib/notes/types.ts` | `NoteMeta`、`NoteDoc` 类型定义 |
+| 文件                       | 职责                                                        |
+| -------------------------- | ----------------------------------------------------------- |
+| `src/lib/notes/types.ts`   | `NoteMeta`、`NoteDoc` 类型定义                              |
 | `src/lib/notes/content.ts` | 文章读取工具：`getAllNotes`、`getNoteBySlug`、`getAllSlugs` |
 
 ### 组件层
 
-| 文件 | 职责 |
-|------|------|
-| `src/components/notes-page/NotesPage.tsx` | 文章列表组件（Server Component） |
-| `src/components/notes-page/NotesPage.module.scss` | 列表页样式 |
-| `src/components/note-detail/NoteDetail.tsx` | 文章详情组件（Server Component） |
+| 文件                                                | 职责                                       |
+| --------------------------------------------------- | ------------------------------------------ |
+| `src/components/notes-page/NotesPage.tsx`           | 文章列表组件（Server Component）           |
+| `src/components/notes-page/NotesPage.module.scss`   | 列表页样式                                 |
+| `src/components/note-detail/NoteDetail.tsx`         | 文章详情组件（Server Component）           |
 | `src/components/note-detail/NoteDetail.module.scss` | 文章排版样式（标题、代码块、表格、引用等） |
 
 ### 内容层
 
-| 文件 | 职责 |
-|------|------|
-| `src/content/notes/hello-world.md` | 中文示例文章 |
-| `src/content/notes/design-system.md` | 中文示例文章 |
+| 文件                                  | 职责         |
+| ------------------------------------- | ------------ |
+| `src/content/notes/hello-world.md`    | 中文示例文章 |
+| `src/content/notes/design-system.md`  | 中文示例文章 |
 | `src/content/notes/en/hello-world.md` | 英文示例文章 |
 
 ## 3.3 修改文件
 
-| 文件 | 改动说明 |
-|------|----------|
-| `src/app/(zh)/notes/page.tsx` | 替换 `RoutePlaceholderPage` 为 `<NotesPage locale="zh-CN" />` |
-| `src/app/(zh)/notes/[docId]/page.tsx` | 使用 `getAllSlugs` 生成静态参数，`getNoteBySlug` 获取文章，动态生成 metadata |
-| `src/app/(en)/en/notes/page.tsx` | 同上，英文版 |
-| `src/app/(en)/en/notes/[docId]/page.tsx` | 同上，英文版 |
+| 文件                                     | 改动说明                                                                     |
+| ---------------------------------------- | ---------------------------------------------------------------------------- |
+| `src/app/(zh)/notes/page.tsx`            | 替换 `RoutePlaceholderPage` 为 `<NotesPage locale="zh-CN" />`                |
+| `src/app/(zh)/notes/[docId]/page.tsx`    | 使用 `getAllSlugs` 生成静态参数，`getNoteBySlug` 获取文章，动态生成 metadata |
+| `src/app/(en)/en/notes/page.tsx`         | 同上，英文版                                                                 |
+| `src/app/(en)/en/notes/[docId]/page.tsx` | 同上，英文版                                                                 |
 
 ---
 

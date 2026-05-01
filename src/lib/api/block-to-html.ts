@@ -24,17 +24,13 @@ function renderInlineMd(text: string): string {
  * Detect if text is a markdown heading (e.g. "# Title", "## Subtitle").
  * Returns { level, text } if heading, null otherwise.
  */
-function extractHeading(
-  text: string
-): { level: number; text: string } | null {
+function extractHeading(text: string): { level: number; text: string } | null {
   const match = text.match(/^(#{1,6})\s+(.+)$/);
   if (!match) return null;
   return { level: match[1].length, text: match[2] };
 }
 
-function renderListItem(
-  item: Record<string, unknown> | string
-): string {
+function renderListItem(item: Record<string, unknown> | string): string {
   if (typeof item === "string") {
     return `<li>${renderInlineMd(item)}</li>`;
   }
@@ -62,17 +58,13 @@ function renderBlock(node: ApiBlockNode): string {
 
     case "heading": {
       const level =
-        typeof node.payload.level === "number"
-          ? Math.min(6, Math.max(1, node.payload.level))
-          : 1;
-      const text =
-        typeof node.payload.text === "string" ? node.payload.text : "";
+        typeof node.payload.level === "number" ? Math.min(6, Math.max(1, node.payload.level)) : 1;
+      const text = typeof node.payload.text === "string" ? node.payload.text : "";
       return `<h${level}>${renderInlineMd(text)}</h${level}>`;
     }
 
     case "paragraph": {
-      const text =
-        typeof node.payload.text === "string" ? node.payload.text : "";
+      const text = typeof node.payload.text === "string" ? node.payload.text : "";
       // Backend may store headings as paragraph with "# text" — detect and promote
       const heading = extractHeading(text);
       if (heading) {
@@ -87,9 +79,7 @@ function renderBlock(node: ApiBlockNode): string {
       const items = node.payload.items;
       if (Array.isArray(items)) {
         const itemsHtml = items
-          .map((item: Record<string, unknown> | string) =>
-            renderListItem(item)
-          )
+          .map((item: Record<string, unknown> | string) => renderListItem(item))
           .join("");
         return `<${tag}>${itemsHtml}</${tag}>`;
       }
@@ -97,24 +87,20 @@ function renderBlock(node: ApiBlockNode): string {
     }
 
     case "code": {
-      const text =
-        typeof node.payload.text === "string" ? node.payload.text : "";
-      const lang =
-        typeof node.payload.language === "string" ? node.payload.language : "";
+      const text = typeof node.payload.text === "string" ? node.payload.text : "";
+      const lang = typeof node.payload.language === "string" ? node.payload.language : "";
       const langAttr = lang ? ` class="language-${lang}"` : "";
       return `<pre><code${langAttr}>${text}</code></pre>`;
     }
 
     case "quote": {
-      const text =
-        typeof node.payload.text === "string" ? node.payload.text : "";
+      const text = typeof node.payload.text === "string" ? node.payload.text : "";
       return `<blockquote><p>${renderInlineMd(text)}</p>${childrenHtml}</blockquote>`;
     }
 
     case "image": {
       const url = typeof node.payload.url === "string" ? node.payload.url : "";
-      const caption =
-        typeof node.payload.caption === "string" ? node.payload.caption : "";
+      const caption = typeof node.payload.caption === "string" ? node.payload.caption : "";
       return `<img src="${url}" alt="${caption}">`;
     }
 
@@ -122,8 +108,7 @@ function renderBlock(node: ApiBlockNode): string {
       return "<hr>";
 
     default: {
-      const text =
-        typeof node.payload.text === "string" ? node.payload.text : "";
+      const text = typeof node.payload.text === "string" ? node.payload.text : "";
       return `<p>${renderInlineMd(text)}</p>`;
     }
   }

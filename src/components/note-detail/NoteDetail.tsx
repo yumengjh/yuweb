@@ -1,19 +1,11 @@
 import Link from "next/link";
 
 import type { SiteLocale } from "@/lib/i18n";
-import { createTranslator } from "@/lib/i18n";
 import type { NoteDoc } from "@/lib/notes/types";
 
 import styles from "./NoteDetail.module.scss";
 
-export function NoteDetail({
-  note,
-  locale,
-}: {
-  note: NoteDoc;
-  locale: SiteLocale;
-}) {
-  const t = createTranslator(locale);
+export function NoteDetail({ note, locale }: { note: NoteDoc; locale: SiteLocale }) {
   const localePrefix = locale === "en-US" ? "/en" : "";
 
   return (
@@ -39,10 +31,7 @@ export function NoteDetail({
           </div>
         </header>
 
-        <div
-          className={styles.content}
-          dangerouslySetInnerHTML={{ __html: note.content }}
-        />
+        <div className={styles.content} dangerouslySetInnerHTML={{ __html: note.content }} />
       </article>
     </main>
   );

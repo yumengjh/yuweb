@@ -49,11 +49,7 @@ export function NotesPage({
     return (
       <main className={styles.page}>
         <div className={styles.inner}>
-          <RemoteNoteView
-            docId={activeRemoteId}
-            locale={locale}
-            onBack={handleBack}
-          />
+          <RemoteNoteView docId={activeRemoteId} locale={locale} onBack={handleBack} />
         </div>
       </main>
     );
@@ -69,25 +65,17 @@ export function NotesPage({
     <main className={styles.page}>
       <div className={styles.inner}>
         <h1 className={styles.title}>{t(siteConfig.routeMeta.notes.title)}</h1>
-        <p className={styles.description}>
-          {t(siteConfig.routeMeta.notes.description)}
-        </p>
+        <p className={styles.description}>{t(siteConfig.routeMeta.notes.description)}</p>
 
         <ul className={styles.list}>
           {allNotes.map((note) => (
             <li key={`${note.source}-${note.slug}`} className={styles.card}>
               {note.source === "local" ? (
-                <Link
-                  href={`${localePrefix}/notes/${note.slug}/`}
-                  className={styles.cardLink}
-                >
+                <Link href={`${localePrefix}/notes/${note.slug}/`} className={styles.cardLink}>
                   <NoteCardContent note={note} />
                 </Link>
               ) : (
-                <a
-                  href={`#${note.slug}`}
-                  className={styles.cardLink}
-                >
+                <a href={`#${note.slug}`} className={styles.cardLink}>
                   <NoteCardContent note={note} />
                 </a>
               )}
@@ -102,9 +90,7 @@ export function NotesPage({
         )}
 
         {!loading && allNotes.length === 0 && (
-          <p className={styles.empty}>
-            {locale === "zh-CN" ? "暂无文章" : "No articles yet"}
-          </p>
+          <p className={styles.empty}>{locale === "zh-CN" ? "暂无文章" : "No articles yet"}</p>
         )}
       </div>
     </main>

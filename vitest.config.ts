@@ -35,6 +35,7 @@ export default defineConfig({
       ".omx/**",
       ".superpowers/**",
       "rotating-scene-navigator (2)/**",
+      "server-demo/**",
     ],
     coverage: {
       provider: "v8",

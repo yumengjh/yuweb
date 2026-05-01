@@ -13,7 +13,7 @@ function getNotesDir(locale: SiteLocale): string {
 }
 
 async function parseMarkdownFile(
-  filePath: string
+  filePath: string,
 ): Promise<{ meta: Omit<NoteMeta, "slug">; content: string }> {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data, content: rawContent } = matter(fileContent);
@@ -45,16 +45,13 @@ export async function getAllNotes(locale: SiteLocale): Promise<NoteMeta[]> {
       const filePath = path.join(dir, filename);
       const { meta } = await parseMarkdownFile(filePath);
       return { slug, ...meta };
-    })
+    }),
   );
 
   return notes.sort((a, b) => b.date.localeCompare(a.date));
 }
 
-export async function getNoteBySlug(
-  locale: SiteLocale,
-  slug: string
-): Promise<NoteDoc | null> {
+export async function getNoteBySlug(locale: SiteLocale, slug: string): Promise<NoteDoc | null> {
   const dir = getNotesDir(locale);
   const filePath = path.join(dir, `${slug}.md`);
 
@@ -66,9 +63,7 @@ export async function getNoteBySlug(
   return { slug, ...meta, content };
 }
 
-export async function getAllSlugs(
-  locale: SiteLocale
-): Promise<{ docId: string }[]> {
+export async function getAllSlugs(locale: SiteLocale): Promise<{ docId: string }[]> {
   const notes = await getAllNotes(locale);
   return notes.map((note) => ({ docId: note.slug }));
 }

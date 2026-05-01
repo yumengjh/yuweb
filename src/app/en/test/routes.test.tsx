@@ -27,10 +27,9 @@ describe("app/en routes", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders a coming soon placeholder for the English notes page", () => {
-    render(<EnglishNotesPage />);
+  it("renders the notes page with heading", async () => {
+    render(await EnglishNotesPage());
 
     expect(screen.getByRole("heading", { level: 1, name: "Notes" })).toBeInTheDocument();
-    expect(screen.getByText("Coming soon.")).toBeInTheDocument();
   });
 });

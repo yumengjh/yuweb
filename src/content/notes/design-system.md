@@ -11,11 +11,11 @@ excerpt: "关于 Design Token 与组件化设计的一些思考。"
 
 Design Token 是设计系统的基础原子，包括颜色、字体、间距等。
 
-| Token | 用途 | 示例 |
-|-------|------|------|
-| color | 颜色 | `--c-bg` |
-| spacing | 间距 | `--s-4` |
-| radius | 圆角 | `--r-sm` |
+| Token   | 用途 | 示例     |
+| ------- | ---- | -------- |
+| color   | 颜色 | `--c-bg` |
+| spacing | 间距 | `--s-4`  |
+| radius  | 圆角 | `--r-sm` |
 
 ## 组件层级
 

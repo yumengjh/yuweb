@@ -40,7 +40,7 @@ function getMarkdownRenderer(): Promise<MarkdownIt> {
             light: "github-light",
             dark: "github-dark",
           },
-        })
+        }),
       );
 
       return md;

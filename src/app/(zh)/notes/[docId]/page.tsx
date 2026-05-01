@@ -25,11 +25,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function NoteDocPage({
-  params,
-}: {
-  params: Promise<{ docId: string }>;
-}) {
+export default async function NoteDocPage({ params }: { params: Promise<{ docId: string }> }) {
   const { docId } = await params;
   const note = await getNoteBySlug("zh-CN", docId);
 

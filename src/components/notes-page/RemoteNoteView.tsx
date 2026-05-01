@@ -36,19 +36,14 @@ export function RemoteNoteView({
         setNote({
           slug: docId,
           title: meta.title,
-          date:
-            meta.updatedAt?.split("T")[0] ??
-            meta.createdAt?.split("T")[0] ??
-            "",
+          date: meta.updatedAt?.split("T")[0] ?? meta.createdAt?.split("T")[0] ?? "",
           tags: [],
           excerpt: meta.category ?? "",
           content: html,
         });
       } catch (e) {
         if (cancelled) return;
-        setError(
-          e instanceof Error ? e.message : "Failed to load document"
-        );
+        setError(e instanceof Error ? e.message : "Failed to load document");
       }
     }
 
@@ -100,10 +95,7 @@ export function RemoteNoteView({
           </div>
         </header>
 
-        <div
-          className={styles.content}
-          dangerouslySetInnerHTML={{ __html: note.content }}
-        />
+        <div className={styles.content} dangerouslySetInnerHTML={{ __html: note.content }} />
       </article>
     </div>
   );

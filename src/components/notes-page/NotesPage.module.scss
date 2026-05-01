@@ -34,7 +34,9 @@
   border-radius: 12px;
   background: var(--c-bg);
   border: 1px solid var(--c-border-soft, rgba(0, 0, 0, 0.08));
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
     border-color: var(--c-border-soft, rgba(0, 0, 0, 0.16));

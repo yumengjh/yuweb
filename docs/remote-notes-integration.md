@@ -37,12 +37,12 @@
 
 ### 关键设计决策
 
-| 决策 | 方案 | 原因 |
-|------|------|------|
-| 远程文档路由 | Hash 路由 `/notes/#docId` | `output: "export"` 下无法为运行时才知晓的路径生成静态 HTML |
-| 认证方式 | 客户端 JWT 直连 | 保持 SSG，不做服务端代理 |
-| 内容渲染 | Block 树 → markdown-it 渲染 | 后端 text 字段包含原始 markdown 语法 |
-| 文档过滤 | `visibility === "public" && publishedHead > 0` | 只显示已发布的公开文档 |
+| 决策         | 方案                                           | 原因                                                       |
+| ------------ | ---------------------------------------------- | ---------------------------------------------------------- |
+| 远程文档路由 | Hash 路由 `/notes/#docId`                      | `output: "export"` 下无法为运行时才知晓的路径生成静态 HTML |
+| 认证方式     | 客户端 JWT 直连                                | 保持 SSG，不做服务端代理                                   |
+| 内容渲染     | Block 树 → markdown-it 渲染                    | 后端 text 字段包含原始 markdown 语法                       |
+| 文档过滤     | `visibility === "public" && publishedHead > 0` | 只显示已发布的公开文档                                     |
 
 ---
 
@@ -220,16 +220,16 @@ interface ApiContentResponse {
 
 #### Block 类型映射
 
-| Block 类型 | payload 字段 | HTML 输出 | 说明 |
-|-----------|-------------|----------|------|
-| `root` | `{ text: "" }` | 递归 children | 根节点，不产生 HTML 标签 |
-| `heading` | `{ text, level }` | `<h1>`-`<h6>` | level 1-6 |
-| `paragraph` | `{ text }` | `<p>` | 检测 `#` 语法，自动提升为标题 |
-| `list` | `{ type, items }` | `<ol>`/`<ul>` | type: "ordered"/"unordered" |
-| `code` | `{ text, language? }` | `<pre><code>` | 代码块，不解析 markdown |
-| `quote` | `{ text }` | `<blockquote>` | 引用块 |
-| `image` | `{ url, caption? }` | `<img>` | 图片 |
-| `divider` | `{}` | `<hr>` | 分割线 |
+| Block 类型  | payload 字段          | HTML 输出      | 说明                          |
+| ----------- | --------------------- | -------------- | ----------------------------- |
+| `root`      | `{ text: "" }`        | 递归 children  | 根节点，不产生 HTML 标签      |
+| `heading`   | `{ text, level }`     | `<h1>`-`<h6>`  | level 1-6                     |
+| `paragraph` | `{ text }`            | `<p>`          | 检测 `#` 语法，自动提升为标题 |
+| `list`      | `{ type, items }`     | `<ol>`/`<ul>`  | type: "ordered"/"unordered"   |
+| `code`      | `{ text, language? }` | `<pre><code>`  | 代码块，不解析 markdown       |
+| `quote`     | `{ text }`            | `<blockquote>` | 引用块                        |
+| `image`     | `{ url, caption? }`   | `<img>`        | 图片                          |
+| `divider`   | `{}`                  | `<hr>`         | 分割线                        |
 
 #### Markdown 渲染
 
@@ -275,20 +275,20 @@ interface NoteMeta {
 }
 
 interface NoteDoc extends NoteMeta {
-  content: string;  // 渲染后的 HTML
+  content: string; // 渲染后的 HTML
 }
 
 // 新增类型
 type NoteSource = "local" | "remote";
 
 interface UnifiedNoteMeta {
-  slug: string;           // 本地: 文件名（如 "hello-world"）; 远程: docId（如 "doc_xxx"）
+  slug: string; // 本地: 文件名（如 "hello-world"）; 远程: docId（如 "doc_xxx"）
   title: string;
-  date: string;           // YYYY-MM-DD 格式
+  date: string; // YYYY-MM-DD 格式
   tags: string[];
   excerpt: string;
-  source: NoteSource;     // 来源标识
-  icon?: string;          // 远程文档的 emoji 图标
+  source: NoteSource; // 来源标识
+  icon?: string; // 远程文档的 emoji 图标
 }
 ```
 
@@ -320,11 +320,11 @@ useRemoteNotes() → { remoteNotes: UnifiedNoteMeta[], loading: boolean, error: 
 
 三种状态：
 
-| 状态 | 显示内容 |
-|------|---------|
-| Loading | 骨架屏（skeleton pulse 动画） |
-| Error | 错误信息 + 返回按钮 |
-| Loaded | 返回按钮 + 文章标题 + 日期 + 渲染内容 |
+| 状态    | 显示内容                              |
+| ------- | ------------------------------------- |
+| Loading | 骨架屏（skeleton pulse 动画）         |
+| Error   | 错误信息 + 返回按钮                   |
+| Loaded  | 返回按钮 + 文章标题 + 日期 + 渲染内容 |
 
 加载流程：
 
@@ -379,7 +379,7 @@ useEffect(() => {
     const hash = window.location.hash.slice(1);
     setActiveRemoteId(hash || null);
   }
-  onHashChange();  // 检查初始 hash
+  onHashChange(); // 检查初始 hash
   window.addEventListener("hashchange", onHashChange);
   return () => window.removeEventListener("hashchange", onHashChange);
 }, []);
@@ -437,12 +437,24 @@ export default async function ZhNotesPage() {
   "type": "root",
   "children": [
     { "type": "paragraph", "payload": { "text": "# 项目介绍" } },
-    { "type": "paragraph", "payload": { "text": "这是一个**知识库**管理系统" } },
-    { "type": "code", "payload": { "text": "console.log('hello')", "language": "javascript" } },
-    { "type": "list", "payload": { "type": "unordered", "items": [
-      { "text": "支持 `markdown` 格式" },
-      { "text": "支持**嵌套**列表" }
-    ]}}
+    {
+      "type": "paragraph",
+      "payload": { "text": "这是一个**知识库**管理系统" }
+    },
+    {
+      "type": "code",
+      "payload": { "text": "console.log('hello')", "language": "javascript" }
+    },
+    {
+      "type": "list",
+      "payload": {
+        "type": "unordered",
+        "items": [
+          { "text": "支持 `markdown` 格式" },
+          { "text": "支持**嵌套**列表" }
+        ]
+      }
+    }
   ]
 }
 ```
@@ -488,14 +500,14 @@ blockTreeToHtml(root)
 
 以下文件未做任何修改：
 
-| 文件 | 说明 |
-|------|------|
-| `next.config.ts` | 保持 `output: "export"` |
-| `src/lib/notes/content.ts` | 本地 Markdown 加载逻辑不变 |
-| `src/lib/notes/highlight.ts` | Shiki 语法高亮不变 |
-| `src/components/note-detail/NoteDetail.tsx` | 本地文档详情组件不变 |
-| `src/app/(zh)/notes/[docId]/page.tsx` | 本地文档详情页不变（SSG 预渲染） |
-| `src/app/(en)/en/notes/[docId]/page.tsx` | 英文版同上 |
+| 文件                                        | 说明                             |
+| ------------------------------------------- | -------------------------------- |
+| `next.config.ts`                            | 保持 `output: "export"`          |
+| `src/lib/notes/content.ts`                  | 本地 Markdown 加载逻辑不变       |
+| `src/lib/notes/highlight.ts`                | Shiki 语法高亮不变               |
+| `src/components/note-detail/NoteDetail.tsx` | 本地文档详情组件不变             |
+| `src/app/(zh)/notes/[docId]/page.tsx`       | 本地文档详情页不变（SSG 预渲染） |
+| `src/app/(en)/en/notes/[docId]/page.tsx`    | 英文版同上                       |
 
 ---
 

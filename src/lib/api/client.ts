@@ -67,10 +67,7 @@ async function apiRefresh(): Promise<void> {
   }
 }
 
-export async function apiFetch<T = unknown>(
-  path: string,
-  options?: RequestInit
-): Promise<T> {
+export async function apiFetch<T = unknown>(path: string, options?: RequestInit): Promise<T> {
   const token = await getAccessToken();
 
   const res = await fetch(`${API_BASE}/api/v1${path}`, {
@@ -162,12 +159,10 @@ export interface ApiDocListResponse {
 
 // ── Document APIs ──
 
-export async function fetchDocuments(
-  workspaceId?: string
-): Promise<ApiDocListResponse> {
+export async function fetchDocuments(workspaceId?: string): Promise<ApiDocListResponse> {
   const wsId = workspaceId || WORKSPACE_ID;
   return apiFetch<ApiDocListResponse>(
-    `/documents?workspaceId=${encodeURIComponent(wsId)}&sortBy=updatedAt&sortOrder=DESC&pageSize=100`
+    `/documents?workspaceId=${encodeURIComponent(wsId)}&sortBy=updatedAt&sortOrder=DESC&pageSize=100`,
   );
 }
 
@@ -175,10 +170,8 @@ export async function fetchDocument(docId: string): Promise<ApiDocument> {
   return apiFetch<ApiDocument>(`/documents/${encodeURIComponent(docId)}`);
 }
 
-export async function fetchDocumentContent(
-  docId: string
-): Promise<ApiContentResponse> {
+export async function fetchDocumentContent(docId: string): Promise<ApiContentResponse> {
   return apiFetch<ApiContentResponse>(
-    `/documents/${encodeURIComponent(docId)}/content?limit=10000`
+    `/documents/${encodeURIComponent(docId)}/content?limit=10000`,
   );
 }

@@ -20,6 +20,7 @@ const eslintConfig = defineConfig([
     ".husky/_/**",
     "**/next-env.d.ts",
     "rotating-scene-navigator (2)/**",
+    "server-demo/**",
   ]),
   eslintConfigPrettier,
 ]);

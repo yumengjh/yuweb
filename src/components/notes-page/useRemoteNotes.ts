@@ -22,16 +22,11 @@ export function useRemoteNotes() {
         if (cancelled) return;
 
         const notes: UnifiedNoteMeta[] = (data.items ?? [])
-          .filter(
-            (doc) => doc.visibility === "public" && doc.publishedHead > 0
-          )
+          .filter((doc) => doc.visibility === "public" && doc.publishedHead > 0)
           .map((doc) => ({
             slug: doc.docId,
             title: doc.title,
-            date:
-              doc.updatedAt?.split("T")[0] ??
-              doc.createdAt?.split("T")[0] ??
-              "",
+            date: doc.updatedAt?.split("T")[0] ?? doc.createdAt?.split("T")[0] ?? "",
             tags: [],
             excerpt: doc.category ?? "",
             source: "remote" as const,
@@ -42,9 +37,7 @@ export function useRemoteNotes() {
         setError(null);
       } catch (e) {
         if (cancelled) return;
-        setError(
-          e instanceof Error ? e.message : "Failed to load remote notes"
-        );
+        setError(e instanceof Error ? e.message : "Failed to load remote notes");
       } finally {
         if (!cancelled) setLoading(false);
       }
