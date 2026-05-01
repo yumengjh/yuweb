@@ -1,24 +1,41 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { RoutePlaceholderPage } from "@/components/route-placeholder/RoutePlaceholderPage";
 import { buildRouteMetadata } from "@/lib/seo/metadata";
+import { getAllSlugs, getNoteBySlug } from "@/lib/notes/content";
+import { NoteDetail } from "@/components/note-detail/NoteDetail";
 
-export const metadata: Metadata = buildRouteMetadata("en-US", "notes");
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-  return [{ docId: "placeholder" }];
+export async function generateStaticParams() {
+  return getAllSlugs("en-US");
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ docId: string }>;
+}): Promise<Metadata> {
+  const { docId } = await params;
+  const note = await getNoteBySlug("en-US", docId);
+  if (!note) return buildRouteMetadata("en-US", "notes");
+  return {
+    title: `${note.title} | Notes`,
+    description: note.excerpt,
+  };
 }
 
 export default async function EnglishNoteDocPage({
   params,
 }: {
-  params: Promise<{
-    docId: string;
-  }>;
+  params: Promise<{ docId: string }>;
 }) {
   const { docId } = await params;
-  void docId;
+  const note = await getNoteBySlug("en-US", docId);
 
-  return <RoutePlaceholderPage locale="en-US" routeId="notes" />;
+  if (!note) {
+    notFound();
+  }
+
+  return <NoteDetail note={note} locale="en-US" />;
 }

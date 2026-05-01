@@ -1,24 +1,41 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { RoutePlaceholderPage } from "@/components/route-placeholder/RoutePlaceholderPage";
 import { buildRouteMetadata } from "@/lib/seo/metadata";
+import { getAllSlugs, getNoteBySlug } from "@/lib/notes/content";
+import { NoteDetail } from "@/components/note-detail/NoteDetail";
 
-export const metadata: Metadata = buildRouteMetadata("zh-CN", "notes");
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-  return [{ docId: "placeholder" }];
+export async function generateStaticParams() {
+  return getAllSlugs("zh-CN");
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ docId: string }>;
+}): Promise<Metadata> {
+  const { docId } = await params;
+  const note = await getNoteBySlug("zh-CN", docId);
+  if (!note) return buildRouteMetadata("zh-CN", "notes");
+  return {
+    title: `${note.title} | 笔记`,
+    description: note.excerpt,
+  };
 }
 
 export default async function NoteDocPage({
   params,
 }: {
-  params: Promise<{
-    docId: string;
-  }>;
+  params: Promise<{ docId: string }>;
 }) {
   const { docId } = await params;
-  void docId;
+  const note = await getNoteBySlug("zh-CN", docId);
 
-  return <RoutePlaceholderPage locale="zh-CN" routeId="notes" />;
+  if (!note) {
+    notFound();
+  }
+
+  return <NoteDetail note={note} locale="zh-CN" />;
 }
