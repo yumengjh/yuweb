@@ -14,7 +14,17 @@ export type AppRouteId =
   | "notes"
   | "projects"
   | "collections"
-  | "travel";
+  | "travel"
+  | "photography"
+  | "design"
+  | "tools"
+  | "reading"
+  | "music"
+  | "podcast"
+  | "lab"
+  | "opensource"
+  | "friends"
+  | "guestbook";
 
 export type AppSystemRouteId = "notFound";
 
@@ -85,7 +95,7 @@ export type SiteNavigationItemConfig = {
       }
     | {
         kind: "component";
-        contentId: never;
+        contentId: string;
       };
   mobileMenu?: SiteNavigationGroupConfig[];
 };

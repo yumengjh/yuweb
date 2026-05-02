@@ -84,6 +84,46 @@ export const siteConfig = {
       title: route.travel.title,
       description: route.travel.description,
     },
+    photography: {
+      title: route.photography.title,
+      description: route.photography.description,
+    },
+    design: {
+      title: route.design.title,
+      description: route.design.description,
+    },
+    tools: {
+      title: route.tools.title,
+      description: route.tools.description,
+    },
+    reading: {
+      title: route.reading.title,
+      description: route.reading.description,
+    },
+    music: {
+      title: route.music.title,
+      description: route.music.description,
+    },
+    podcast: {
+      title: route.podcast.title,
+      description: route.podcast.description,
+    },
+    lab: {
+      title: route.lab.title,
+      description: route.lab.description,
+    },
+    opensource: {
+      title: route.opensource.title,
+      description: route.opensource.description,
+    },
+    friends: {
+      title: route.friends.title,
+      description: route.friends.description,
+    },
+    guestbook: {
+      title: route.guestbook.title,
+      description: route.guestbook.description,
+    },
   } as const satisfies Record<AppRouteId, { title: MessageToken; description: MessageToken }>,
   topNavigationBar: {
     transition: {
@@ -108,22 +148,57 @@ export const siteConfig = {
         label: nav.about.label,
         href: "/about",
         menu: {
-          kind: "entries",
-          entries: [
+          kind: "groups",
+          groups: [
             {
-              title: nav.about.current.title,
-              description: nav.about.current.description,
-              href: "/about#now",
+              label: nav.about.group.start,
+              entries: [
+                {
+                  title: nav.about.startFromHere.title,
+                  description: nav.about.startFromHere.description,
+                  href: "/about/start",
+                },
+                {
+                  title: nav.about.thisSite.title,
+                  description: nav.about.thisSite.description,
+                  href: "/about/site",
+                },
+              ],
             },
             {
-              title: nav.about.thisSite.title,
-              description: nav.about.thisSite.description,
-              href: "/about#site",
+              label: nav.about.group.aboutMe,
+              entries: [
+                {
+                  title: nav.about.current.title,
+                  description: nav.about.current.description,
+                  href: "/about/now",
+                },
+                {
+                  title: nav.about.learning.title,
+                  description: nav.about.learning.description,
+                  href: "/about/learning",
+                },
+                {
+                  title: nav.about.fields.title,
+                  description: nav.about.fields.description,
+                  href: "/about/fields",
+                },
+              ],
             },
             {
-              title: nav.about.viewPage.title,
-              description: nav.about.viewPage.description,
-              href: "/about",
+              label: nav.about.group.explore,
+              entries: [
+                {
+                  title: nav.about.stack.title,
+                  description: nav.about.stack.description,
+                  href: "/about/stack",
+                },
+                {
+                  title: nav.about.viewPage.title,
+                  description: nav.about.viewPage.description,
+                  href: "/about",
+                },
+              ],
             },
           ],
         },
@@ -133,22 +208,47 @@ export const siteConfig = {
         label: nav.projects.label,
         href: "/projects",
         menu: {
-          kind: "entries",
-          entries: [
+          kind: "groups",
+          groups: [
             {
-              title: nav.projects.featured.title,
-              description: nav.projects.featured.description,
-              href: "/projects#featured",
+              label: nav.projects.group.inProgress,
+              entries: [
+                {
+                  title: nav.projects.inProgress.title,
+                  description: nav.projects.inProgress.description,
+                  href: "/projects/in-progress",
+                },
+                {
+                  title: nav.projects.experiments.title,
+                  description: nav.projects.experiments.description,
+                  href: "/projects/experiments",
+                },
+              ],
             },
             {
-              title: nav.projects.inProgress.title,
-              description: nav.projects.inProgress.description,
-              href: "/projects#in-progress",
+              label: nav.projects.group.archive,
+              entries: [
+                {
+                  title: nav.projects.featured.title,
+                  description: nav.projects.featured.description,
+                  href: "/projects/featured",
+                },
+                {
+                  title: nav.projects.opensource.title,
+                  description: nav.projects.opensource.description,
+                  href: "/projects/opensource",
+                },
+              ],
             },
             {
-              title: nav.projects.viewPage.title,
-              description: nav.projects.viewPage.description,
-              href: "/projects",
+              label: undefined,
+              entries: [
+                {
+                  title: nav.projects.viewPage.title,
+                  description: nav.projects.viewPage.description,
+                  href: "/projects",
+                },
+              ],
             },
           ],
         },
@@ -157,6 +257,64 @@ export const siteConfig = {
         key: "notes",
         label: nav.notes.label,
         href: "/notes",
+        menu: {
+          kind: "groups",
+          groups: [
+            {
+              label: undefined,
+              entries: [
+                {
+                  title: nav.notes.recent.title,
+                  description: nav.notes.recent.description,
+                  href: "/notes/recent",
+                },
+                {
+                  title: nav.notes.tech.title,
+                  description: nav.notes.tech.description,
+                  href: "/notes/tech",
+                },
+                {
+                  title: nav.notes.learning.title,
+                  description: nav.notes.learning.description,
+                  href: "/notes/learning",
+                },
+              ],
+            },
+            {
+              label: undefined,
+              entries: [
+                {
+                  title: nav.notes.fragments.title,
+                  description: nav.notes.fragments.description,
+                  href: "/notes/fragments",
+                },
+                {
+                  title: nav.notes.qa.title,
+                  description: nav.notes.qa.description,
+                  href: "/notes/qa",
+                },
+                {
+                  title: nav.notes.viewPage.title,
+                  description: nav.notes.viewPage.description,
+                  href: "/notes",
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        key: "explore",
+        label: nav.explore.label,
+        menu: {
+          kind: "component",
+          contentId: "explore-menu",
+        },
+      },
+      {
+        key: "journey",
+        label: nav.journey.label,
+        href: "/journey",
       },
       {
         key: "travel",
@@ -173,6 +331,7 @@ export const siteConfig = {
       { href: "/about", label: nav.about.label },
       { href: "/projects", label: nav.projects.label },
       { href: "/notes", label: nav.notes.label },
+      { href: "/journey", label: nav.journey.label },
       { href: "/travel", label: nav.travel.label },
     ] as const satisfies SiteFooterLinkConfig[],
     metaItems: [

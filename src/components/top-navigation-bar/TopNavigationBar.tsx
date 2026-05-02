@@ -38,7 +38,7 @@ export type MenuGroup = {
 export type MenuContent =
   | { kind: "entries"; entries: MenuEntry[] }
   | { kind: "groups"; groups: MenuGroup[] }
-  | { kind: "component"; component: ComponentType | (() => ReactNode) };
+  | { kind: "component"; component?: ComponentType | (() => ReactNode); contentId?: string };
 
 // ─── Navigation item ─────────────────────────────────────────────────────────
 
@@ -432,10 +432,23 @@ function MenuEntryLink({
 
 // ─── MenuContentRenderer ──────────────────────────────────────────────────────
 
-function MenuContentRenderer({ content, onClose }: { content: MenuContent; onClose: () => void }) {
+function MenuContentRenderer({
+  content,
+  onClose,
+  componentMap,
+}: {
+  content: MenuContent;
+  onClose: () => void;
+  componentMap?: Record<string, ComponentType>;
+}) {
   if (content.kind === "component") {
     const Comp = content.component;
-    return <Comp />;
+    if (Comp) return <Comp />;
+    if (componentMap && content.contentId && componentMap[content.contentId]) {
+      const Mapped = componentMap[content.contentId];
+      return <Mapped />;
+    }
+    return null;
   }
 
   const groups: MenuGroup[] =
@@ -484,6 +497,7 @@ type TopNavigationBarProps = {
     easing?: "smooth" | "snappy" | "linear" | "in-out" | "out" | "in" | "default";
     useNativeVariables?: boolean;
   };
+  componentMap?: Record<string, ComponentType>;
 };
 
 const defaultLabels = {
@@ -502,6 +516,7 @@ export function TopNavigationBar({
   labels = defaultLabels,
   mobileFooterLines = [],
   transitionConfig = { duration: 400, enableHorizontal: true, easing: "smooth" },
+  componentMap = {},
 }: TopNavigationBarProps) {
   const [openKey, setOpenKey] = useState<NavigationKey | null>(null);
   const easingMap = {
@@ -956,7 +971,11 @@ export function TopNavigationBar({
                 {menuItems.map((item) => (
                   <div key={item.key} className={styles.desktopDropdownPanelItem}>
                     <div className={styles.desktopDropdownContent}>
-                      <MenuContentRenderer content={item.menu!} onClose={closeMenu} />
+                      <MenuContentRenderer
+                        content={item.menu!}
+                        componentMap={componentMap}
+                        onClose={closeMenu}
+                      />
                     </div>
                   </div>
                 ))}
@@ -988,7 +1007,7 @@ export function TopNavigationBar({
               className={styles.desktopDropdownMeasurePanel}
             >
               <div className={styles.desktopDropdownContent}>
-                <MenuContentRenderer content={item.menu} onClose={() => {}} />
+                <MenuContentRenderer content={item.menu} componentMap={componentMap} onClose={() => {}} />
               </div>
             </div>
           ) : null,

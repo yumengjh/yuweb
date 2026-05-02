@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 
 import { SiteFooter } from "@/components/site-footer/SiteFooter";
+import { ExploreMenu } from "@/components/top-navigation-bar/ExploreMenu";
 import {
   TopNavigationBar,
   type MenuContent,
@@ -68,8 +69,10 @@ function toMenuContent(
   }
 
   if (content.kind === "component") {
-    // Component-based menus are currently not in use after streamlining.
-    return undefined;
+    return {
+      kind: "component",
+      contentId: content.contentId,
+    };
   }
 
   return {
@@ -135,6 +138,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           labels={buildNavigationLabels(locale)}
           mobileFooterLines={buildMobileFooterLines(locale)}
           transitionConfig={siteConfig.topNavigationBar.transition}
+          componentMap={{ "explore-menu": ExploreMenu }}
         />
       )}
 

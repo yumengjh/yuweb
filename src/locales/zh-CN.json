@@ -45,6 +45,46 @@
     "travel": {
       "title": "旅途足迹",
       "description": "探索世界，记录美好。这里是我在世界各地留下的足迹与瞬间。"
+    },
+    "photography": {
+      "title": "摄影",
+      "description": "用镜头捕捉世界，记录光影与瞬间的交汇。"
+    },
+    "design": {
+      "title": "设计",
+      "description": "视觉语言、排版系统与界面美学的持续探索。"
+    },
+    "tools": {
+      "title": "工具箱",
+      "description": "日常使用与长期收藏的工具、插件与工作流。"
+    },
+    "reading": {
+      "title": "阅读",
+      "description": "正在读、反复读和已经读完的书与长文。"
+    },
+    "music": {
+      "title": "音乐",
+      "description": "工作、思考与放松时的音乐记录与推荐。"
+    },
+    "podcast": {
+      "title": "播客",
+      "description": "值得收听的播客节目与个人音频笔记。"
+    },
+    "lab": {
+      "title": "实验室",
+      "description": "未发布的实验、原型与边界探索。"
+    },
+    "opensource": {
+      "title": "开源",
+      "description": "参与的开源项目、贡献记录与工具分享。"
+    },
+    "friends": {
+      "title": "友链",
+      "description": "志同道合的朋友与值得拜访的站点。"
+    },
+    "guestbook": {
+      "title": "留言板",
+      "description": "留下一句话，打个招呼，或者写点什么。"
     }
   },
   "nav": {
@@ -239,6 +279,87 @@
     },
     "travel": {
       "label": "游记足迹"
+    },
+    "explore": {
+      "label": "探索",
+      "group": {
+        "creative": "创意与视觉",
+        "knowledge": "知识与社区"
+      },
+      "photography": {
+        "title": "摄影",
+        "description": "用镜头捕捉世界的各个角落。"
+      },
+      "design": {
+        "title": "设计",
+        "description": "视觉语言与界面美学的持续探索。"
+      },
+      "tools": {
+        "title": "工具箱",
+        "description": "日常使用与长期收藏的工具与工作流。"
+      },
+      "reading": {
+        "title": "阅读",
+        "description": "正在读与反复读的书与长文。"
+      },
+      "music": {
+        "title": "音乐",
+        "description": "工作与思考时的音乐记录。"
+      },
+      "podcast": {
+        "title": "播客",
+        "description": "值得收听的播客节目与音频笔记。"
+      },
+      "lab": {
+        "title": "实验室",
+        "description": "未发布的实验与原型探索。"
+      },
+      "opensource": {
+        "title": "开源",
+        "description": "参与的开源项目与贡献记录。"
+      },
+      "friends": {
+        "title": "友链",
+        "description": "志同道合的朋友与值得拜访的站点。"
+      },
+      "guestbook": {
+        "title": "留言板",
+        "description": "留下一句话，打个招呼。"
+      },
+      "viewPage": {
+        "title": "查看全部",
+        "description": "浏览所有探索内容。"
+      }
+    },
+    "photography": {
+      "label": "摄影"
+    },
+    "design": {
+      "label": "设计"
+    },
+    "tools": {
+      "label": "工具箱"
+    },
+    "reading": {
+      "label": "阅读"
+    },
+    "music": {
+      "label": "音乐"
+    },
+    "podcast": {
+      "label": "播客"
+    },
+    "lab": {
+      "label": "实验室"
+    },
+    "opensource": {
+      "label": "开源"
+    },
+    "friends": {
+      "label": "友链"
+    },
+    "guestbook": {
+      "label": "留言板"
     }
   },
   "footer": {

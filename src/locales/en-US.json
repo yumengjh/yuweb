@@ -45,6 +45,46 @@
     "travel": {
       "title": "Travel",
       "description": "Exploring the world, recording memories. A collection of footprints and moments from across the globe."
+    },
+    "photography": {
+      "title": "Photography",
+      "description": "Capturing the world through the lens, where light and moments converge."
+    },
+    "design": {
+      "title": "Design",
+      "description": "An ongoing exploration of visual language, typography, and interface aesthetics."
+    },
+    "tools": {
+      "title": "Tools",
+      "description": "Tools, plugins, and workflows for daily use and long-term collection."
+    },
+    "reading": {
+      "title": "Reading",
+      "description": "Books and long reads — in progress, on repeat, and already finished."
+    },
+    "music": {
+      "title": "Music",
+      "description": "Music notes and recommendations for work, thinking, and unwinding."
+    },
+    "podcast": {
+      "title": "Podcast",
+      "description": "Worth-listening podcasts and personal audio notes."
+    },
+    "lab": {
+      "title": "Lab",
+      "description": "Unreleased experiments, prototypes, and explorations at the edge."
+    },
+    "opensource": {
+      "title": "Open Source",
+      "description": "Open-source projects, contribution records, and tool sharing."
+    },
+    "friends": {
+      "title": "Friends",
+      "description": "Like-minded friends and sites worth visiting."
+    },
+    "guestbook": {
+      "title": "Guestbook",
+      "description": "Leave a note, say hello, or write something."
     }
   },
   "nav": {
@@ -239,6 +279,87 @@
     },
     "travel": {
       "label": "Travel"
+    },
+    "explore": {
+      "label": "Explore",
+      "group": {
+        "creative": "Creative & Visual",
+        "knowledge": "Knowledge & Community"
+      },
+      "photography": {
+        "title": "Photography",
+        "description": "Capturing the world through the lens."
+      },
+      "design": {
+        "title": "Design",
+        "description": "Visual language and interface aesthetics."
+      },
+      "tools": {
+        "title": "Tools",
+        "description": "Daily tools and long-term workflows."
+      },
+      "reading": {
+        "title": "Reading",
+        "description": "Books and long reads, in progress and on repeat."
+      },
+      "music": {
+        "title": "Music",
+        "description": "Music notes for work and thinking."
+      },
+      "podcast": {
+        "title": "Podcast",
+        "description": "Worth-listening podcasts and audio notes."
+      },
+      "lab": {
+        "title": "Lab",
+        "description": "Unreleased experiments and prototypes."
+      },
+      "opensource": {
+        "title": "Open Source",
+        "description": "Open-source projects and contributions."
+      },
+      "friends": {
+        "title": "Friends",
+        "description": "Like-minded friends and sites worth visiting."
+      },
+      "guestbook": {
+        "title": "Guestbook",
+        "description": "Leave a note or say hello."
+      },
+      "viewPage": {
+        "title": "View All",
+        "description": "Browse all exploration content."
+      }
+    },
+    "photography": {
+      "label": "Photography"
+    },
+    "design": {
+      "label": "Design"
+    },
+    "tools": {
+      "label": "Tools"
+    },
+    "reading": {
+      "label": "Reading"
+    },
+    "music": {
+      "label": "Music"
+    },
+    "podcast": {
+      "label": "Podcast"
+    },
+    "lab": {
+      "label": "Lab"
+    },
+    "opensource": {
+      "label": "Open Source"
+    },
+    "friends": {
+      "label": "Friends"
+    },
+    "guestbook": {
+      "label": "Guestbook"
     }
   },
   "footer": {
