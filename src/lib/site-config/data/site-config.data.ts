@@ -131,6 +131,7 @@ export const siteConfig = {
       enableHorizontal: false,
       easing: "snappy",
       useNativeVariables: true,
+      effect: "slide", // reveal
       // 可选: "smooth", "snappy", "linear", "in-out", "out", "in", "default"
     } as const,
     labels: {

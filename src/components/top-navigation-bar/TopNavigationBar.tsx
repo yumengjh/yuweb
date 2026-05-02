@@ -496,6 +496,7 @@ type TopNavigationBarProps = {
     enableHorizontal?: boolean;
     easing?: "smooth" | "snappy" | "linear" | "in-out" | "out" | "in" | "default";
     useNativeVariables?: boolean;
+    effect?: "slide" | "reveal";
   };
   componentMap?: Record<string, ComponentType>;
 };
@@ -515,10 +516,11 @@ export function TopNavigationBar({
   brandHref = "/",
   labels = defaultLabels,
   mobileFooterLines = [],
-  transitionConfig = { duration: 400, enableHorizontal: true, easing: "smooth" },
+  transitionConfig = { duration: 400, enableHorizontal: true, easing: "smooth", effect: "slide" },
   componentMap = {},
 }: TopNavigationBarProps) {
   const [openKey, setOpenKey] = useState<NavigationKey | null>(null);
+  const effect = transitionConfig.effect || "slide";
   const easingMap = {
     smooth: "cubic-bezier(0.32, 0, 0.12, 1)",
     snappy: "cubic-bezier(0.2, 1, 0.3, 1)",
@@ -548,6 +550,7 @@ export function TopNavigationBar({
 
   const navRootRef = useRef<HTMLElement | null>(null);
   const shellRef = useRef<HTMLDivElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastHoverSwitchedKeyRef = useRef<NavigationKey | null>(null);
@@ -569,6 +572,10 @@ export function TopNavigationBar({
 
   const setShellHeight = useCallback((px: number) => {
     if (shellRef.current) shellRef.current.style.height = `${px}px`;
+  }, []);
+
+  const setPanelHeight = useCallback((px: number) => {
+    if (panelRef.current) panelRef.current.style.height = `${px}px`;
   }, []);
 
   const clearCloseTimer = useCallback(() => {
@@ -609,6 +616,7 @@ export function TopNavigationBar({
         });
         const newH = panelHeightsRef.current[key] ?? 0;
         setShellHeight(newH);
+        setPanelHeight(newH);
         if (shellRef.current) void shellRef.current.offsetHeight;
         requestAnimationFrame(() => {
           if (shellRef.current) shellRef.current.style.transition = "";
@@ -619,14 +627,27 @@ export function TopNavigationBar({
       dropdownScrollReadyRef.current = false;
       setDisplayKey(key);
       setShellHeight(0);
+      const h = panelHeightsRef.current[key] ?? 0;
+      setPanelHeight(h); // Set panel height immediately so translateY(-100%) is calculated correctly based on the target height
       openFrameRef.current = requestAnimationFrame(() => {
-        const h = panelHeightsRef.current[key] ?? 0;
-        setShellHeight(h);
-        setOpenKey(key);
+        // Use flushSync to ensure the state update (which adds the 'Open' class)
+        // happens in the same frame as the direct DOM height update.
+        flushSync(() => {
+          setShellHeight(h);
+          setOpenKey(key);
+          setShouldAnimateTrack(false);
+        });
         openFrameRef.current = null;
       });
     },
-    [clearCloseTimer, clearDropdownReadyTimer, clearOpenFrame, openKey, setShellHeight],
+    [
+      clearCloseTimer,
+      clearDropdownReadyTimer,
+      clearOpenFrame,
+      openKey,
+      setShellHeight,
+      setPanelHeight,
+    ],
   );
 
   const closeMenu = useCallback(() => {
@@ -955,8 +976,10 @@ export function TopNavigationBar({
         >
           <div className={styles.desktopDropdownViewport}>
             <div
+              ref={panelRef}
               className={cn(
                 styles.desktopDropdownPanel,
+                effect === "slide" && styles.desktopDropdownPanelSlide,
                 isDropdownOpen && styles.desktopDropdownPanelOpen,
               )}
             >
@@ -1007,7 +1030,11 @@ export function TopNavigationBar({
               className={styles.desktopDropdownMeasurePanel}
             >
               <div className={styles.desktopDropdownContent}>
-                <MenuContentRenderer content={item.menu} componentMap={componentMap} onClose={() => {}} />
+                <MenuContentRenderer
+                  content={item.menu}
+                  componentMap={componentMap}
+                  onClose={() => {}}
+                />
               </div>
             </div>
           ) : null,

@@ -279,15 +279,21 @@
   background: var(--c-surface-paper);
   background-image: radial-gradient(var(--nav-line-soft) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
+  /* Default to reveal (0), but can be overridden by .desktopDropdownPanelSlide */
+  transform: translateY(0);
+  transition: transform var(--nav-drawer-duration) var(--nav-drawer-ease);
+  will-change: transform;
+}
+
+.desktopDropdownPanelSlide {
   transform: translateY(-100%);
-  transition:
-    transform var(--nav-drawer-duration) var(--nav-drawer-ease),
-    height var(--nav-drawer-duration) var(--nav-drawer-ease);
-  will-change: transform, height;
 }
 
 .desktopDropdownPanelOpen {
+  /* Panel stays at 0, expansion is handled by the shell's height and overflow:hidden */
   transform: translateY(0);
+  transition: transform var(--nav-drawer-duration) var(--nav-drawer-ease);
+  will-change: transform;
 }
 
 .desktopDropdownContent {
