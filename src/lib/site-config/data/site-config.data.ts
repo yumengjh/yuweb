@@ -311,6 +311,78 @@ export const siteConfig = {
           kind: "component",
           contentId: "explore-menu",
         },
+        mobileMenu: [
+          {
+            label: nav.explore.group.creative,
+            entries: [
+              {
+                title: nav.explore.photography.title,
+                description: nav.explore.photography.description,
+                href: "/photography",
+              },
+              {
+                title: nav.explore.design.title,
+                description: nav.explore.design.description,
+                href: "/design",
+              },
+              {
+                title: nav.explore.tools.title,
+                description: nav.explore.tools.description,
+                href: "/tools",
+              },
+              {
+                title: nav.explore.reading.title,
+                description: nav.explore.reading.description,
+                href: "/reading",
+              },
+              {
+                title: nav.explore.music.title,
+                description: nav.explore.music.description,
+                href: "/music",
+              },
+              {
+                title: nav.explore.podcast.title,
+                description: nav.explore.podcast.description,
+                href: "/podcast",
+              },
+            ],
+          },
+          {
+            label: nav.explore.group.knowledge,
+            entries: [
+              {
+                title: nav.explore.lab.title,
+                description: nav.explore.lab.description,
+                href: "/lab",
+              },
+              {
+                title: nav.explore.opensource.title,
+                description: nav.explore.opensource.description,
+                href: "/opensource",
+              },
+              {
+                title: nav.explore.friends.title,
+                description: nav.explore.friends.description,
+                href: "/friends",
+              },
+              {
+                title: nav.explore.guestbook.title,
+                description: nav.explore.guestbook.description,
+                href: "/guestbook",
+              },
+              {
+                title: nav.explore.journey.title,
+                description: nav.explore.journey.description,
+                href: "/journey",
+              },
+              {
+                title: nav.explore.collections.title,
+                description: nav.explore.collections.description,
+                href: "/collections",
+              },
+            ],
+          },
+        ],
       },
       {
         key: "journey",

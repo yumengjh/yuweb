@@ -326,6 +326,14 @@
         "title": "Guestbook",
         "description": "Leave a note or say hello."
       },
+      "journey": {
+        "title": "Journey",
+        "description": "Experience, phases, and work in progress."
+      },
+      "collections": {
+        "title": "Collections",
+        "description": "A long-term archive of books, articles, and materials."
+      },
       "viewPage": {
         "title": "View All",
         "description": "Browse all exploration content."

@@ -326,6 +326,14 @@
         "title": "留言板",
         "description": "留下一句话，打个招呼。"
       },
+      "journey": {
+        "title": "旅程",
+        "description": "经历、阶段与仍在推进的工作。"
+      },
+      "collections": {
+        "title": "收藏",
+        "description": "书籍、文章与素材的长期留存。"
+      },
       "viewPage": {
         "title": "查看全部",
         "description": "浏览所有探索内容。"
