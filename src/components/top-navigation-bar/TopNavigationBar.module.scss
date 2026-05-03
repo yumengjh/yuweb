@@ -299,7 +299,7 @@
 .desktopDropdownContent {
   width: min(calc(100% - 96px), 1320px);
   margin: 0 auto;
-  padding: 40px 0;
+  padding: 40px 0 52px; // Increased bottom padding to clear card shadows (6px)
 }
 
 .desktopDropdownTrack {
@@ -407,17 +407,18 @@
 /* ── Measure layer ─────────────────────────────────────────────────────────── */
 
 .desktopDropdownMeasureLayer {
-  position: fixed;
-  top: -9999px;
-  left: -9999px;
-  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   overflow: hidden;
   visibility: hidden;
   pointer-events: none;
+  z-index: -1;
 }
 
 .desktopDropdownMeasurePanel {
-  width: min(100vw, 1600px);
+  width: 100%;
   border-top: 0;
   border-bottom: var(--brutal-border);
   background: var(--c-surface-paper);

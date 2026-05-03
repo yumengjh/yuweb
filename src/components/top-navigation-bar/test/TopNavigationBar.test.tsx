@@ -409,7 +409,7 @@ describe("TopNavigationBar", () => {
     );
     const stylesheet = readFileSync(stylesheetPath, "utf8");
 
-    expect(stylesheet).toContain("padding: 40px 0;");
+    expect(stylesheet).toContain("padding: 40px 0 52px;");
     expect(stylesheet).toContain("gap: 24px 32px;");
     expect(stylesheet).toContain("font-size: 20px;");
     expect(stylesheet).toContain("line-height: 1.2;");

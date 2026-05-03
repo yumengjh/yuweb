@@ -56,7 +56,11 @@ const enStrings: LocaleStrings = {
     { href: "/photography", title: "Photography", desc: "Capturing the world through the lens." },
     { href: "/design", title: "Design", desc: "Visual language and interface aesthetics." },
     { href: "/tools", title: "Tools", desc: "Daily tools and long-term workflows." },
-    { href: "/reading", title: "Reading", desc: "Books and long reads, in progress and on repeat." },
+    {
+      href: "/reading",
+      title: "Reading",
+      desc: "Books and long reads, in progress and on repeat.",
+    },
     { href: "/music", title: "Music", desc: "Music notes for work and thinking." },
     { href: "/podcast", title: "Podcast", desc: "Worth-listening podcasts and audio notes." },
     { href: "/lab", title: "Lab", desc: "Unreleased experiments and prototypes." },
@@ -64,7 +68,11 @@ const enStrings: LocaleStrings = {
     { href: "/friends", title: "Friends", desc: "Like-minded friends and sites worth visiting." },
     { href: "/guestbook", title: "Guestbook", desc: "Leave a note or say hello." },
     { href: "/journey", title: "Journey", desc: "Experience, phases, and work in progress." },
-    { href: "/collections", title: "Collections", desc: "A long-term archive of books, articles, and materials." },
+    {
+      href: "/collections",
+      title: "Collections",
+      desc: "A long-term archive of books, articles, and materials.",
+    },
   ],
 };
 

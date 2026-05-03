@@ -805,7 +805,7 @@ export function TopNavigationBar({
     const update = () => {
       const next: Record<string, number> = {};
       for (const [key, node] of Object.entries(measureRefs.current)) {
-        if (node) next[key] = node.getBoundingClientRect().height;
+        if (node) next[key] = Math.ceil(node.getBoundingClientRect().height);
       }
       panelHeightsRef.current = next;
     };
@@ -1006,6 +1006,29 @@ export function TopNavigationBar({
             </div>
           </div>
         </div>
+
+        {/* ── Desktop measure layer ── */}
+        <div aria-hidden="true" className={styles.desktopDropdownMeasureLayer}>
+          {items.map((item) =>
+            item.menu ? (
+              <div
+                key={item.key}
+                ref={(node) => {
+                  measureRefs.current[item.key] = node;
+                }}
+                className={styles.desktopDropdownMeasurePanel}
+              >
+                <div className={styles.desktopDropdownContent}>
+                  <MenuContentRenderer
+                    content={item.menu}
+                    componentMap={componentMap}
+                    onClose={() => {}}
+                  />
+                </div>
+              </div>
+            ) : null,
+          )}
+        </div>
       </header>
 
       {/* ── Desktop overlay ── */}
@@ -1016,29 +1039,6 @@ export function TopNavigationBar({
           style={{ top: `${headerHeight}px` }}
           onClick={closeMenu}
         />
-      </div>
-
-      {/* ── Desktop measure layer ── */}
-      <div aria-hidden="true" className={styles.desktopDropdownMeasureLayer}>
-        {items.map((item) =>
-          item.menu ? (
-            <div
-              key={item.key}
-              ref={(node) => {
-                measureRefs.current[item.key] = node;
-              }}
-              className={styles.desktopDropdownMeasurePanel}
-            >
-              <div className={styles.desktopDropdownContent}>
-                <MenuContentRenderer
-                  content={item.menu}
-                  componentMap={componentMap}
-                  onClose={() => {}}
-                />
-              </div>
-            </div>
-          ) : null,
-        )}
       </div>
 
       {/* Mobile overlay */}
