@@ -494,9 +494,10 @@ type TopNavigationBarProps = {
   transitionConfig?: {
     duration?: number;
     enableHorizontal?: boolean;
-    easing?: "smooth" | "snappy" | "linear" | "in-out" | "out" | "in" | "default";
+    easing?: "smooth" | "snappy" | "linear" | "in-out" | "out" | "in";
     useNativeVariables?: boolean;
     effect?: "slide" | "reveal";
+    dropdownStyle?: "offset" | "seamless";
   };
   componentMap?: Record<string, ComponentType>;
 };
@@ -516,7 +517,13 @@ export function TopNavigationBar({
   brandHref = "/",
   labels = defaultLabels,
   mobileFooterLines = [],
-  transitionConfig = { duration: 400, enableHorizontal: true, easing: "smooth", effect: "slide" },
+  transitionConfig = {
+    duration: 400,
+    enableHorizontal: true,
+    easing: "smooth",
+    effect: "slide",
+    dropdownStyle: "offset",
+  },
   componentMap = {},
 }: TopNavigationBarProps) {
   const [openKey, setOpenKey] = useState<NavigationKey | null>(null);
@@ -805,7 +812,7 @@ export function TopNavigationBar({
     const update = () => {
       const next: Record<string, number> = {};
       for (const [key, node] of Object.entries(measureRefs.current)) {
-        if (node) next[key] = Math.ceil(node.getBoundingClientRect().height);
+        if (node) next[key] = Math.ceil(node.getBoundingClientRect().height) + 2;
       }
       panelHeightsRef.current = next;
     };
@@ -842,6 +849,8 @@ export function TopNavigationBar({
     [clearCloseTimer, clearDropdownReadyTimer, clearOpenFrame],
   );
 
+  const dropdownStyle = transitionConfig.dropdownStyle || "offset";
+
   return (
     <>
       <header
@@ -852,6 +861,7 @@ export function TopNavigationBar({
           isTopTransparentActive && styles.barAtTopTransparent,
           (isDropdownVisible || isMenuOpen) && styles.barDropdownOpen,
         )}
+        data-dropdown-style={dropdownStyle}
         data-name="Top Navigation Bar"
         style={dynamicStyles}
       >

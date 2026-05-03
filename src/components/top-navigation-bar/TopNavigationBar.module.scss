@@ -248,19 +248,33 @@
 
 .desktopDropdownShell {
   position: absolute;
-  top: calc(100% + 3px);
   right: 0;
   left: 0;
   z-index: 10;
   overflow: hidden;
   height: 0;
   pointer-events: none;
+  border-bottom: 0 solid var(--c-ink-strong);
   will-change: height;
-  transition: height var(--nav-drawer-duration) var(--nav-drawer-ease);
+  transition:
+    height var(--nav-drawer-duration) var(--nav-drawer-ease),
+    border-bottom-width 0s var(--nav-drawer-duration);
+
+  [data-dropdown-style="offset"] & {
+    top: calc(100% + 3px);
+  }
+
+  [data-dropdown-style="seamless"] & {
+    top: 100%;
+  }
 }
 
 .desktopDropdownShellOpen {
   pointer-events: auto;
+  border-bottom-width: 3px;
+  transition:
+    height var(--nav-drawer-duration) var(--nav-drawer-ease),
+    border-bottom-width 0s;
 }
 
 .desktopDropdownViewport {
@@ -274,8 +288,6 @@
   top: 0;
   right: 0;
   left: 0;
-  border-top: 0;
-  border-bottom: var(--brutal-border);
   background: var(--c-surface-paper);
   background-image: radial-gradient(var(--nav-line-soft) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
